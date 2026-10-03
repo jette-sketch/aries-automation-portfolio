@@ -45,29 +45,30 @@ export function WorkflowIntakeDialog() {
           <div className="grid gap-5 sm:grid-cols-2">
             <label className="space-y-2 text-sm font-medium text-slate-200">
               <span>Name</span>
-              <input name="name" autoComplete="name" className="w-full rounded-md border border-cyan-100/20 bg-black/25 px-3 py-2.5 text-base text-white placeholder:text-slate-500 focus:border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-200/20" />
+              <input name="name" type="text" autoComplete="name" required className="w-full rounded-md border border-cyan-100/20 bg-black/25 px-3 py-2.5 text-base text-white placeholder:text-slate-500 focus:border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-200/20" />
             </label>
             <label className="space-y-2 text-sm font-medium text-slate-200">
               <span>Email</span>
-              <input name="email" type="email" autoComplete="email" className="w-full rounded-md border border-cyan-100/20 bg-black/25 px-3 py-2.5 text-base text-white placeholder:text-slate-500 focus:border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-200/20" />
+              <input name="email" type="email" autoComplete="email" required className="w-full rounded-md border border-cyan-100/20 bg-black/25 px-3 py-2.5 text-base text-white placeholder:text-slate-500 focus:border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-200/20" />
             </label>
           </div>
           <label className="block space-y-2 text-sm font-medium text-slate-200">
             <span>Company or project</span>
-            <input name="company" autoComplete="organization" className="w-full rounded-md border border-cyan-100/20 bg-black/25 px-3 py-2.5 text-base text-white placeholder:text-slate-500 focus:border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-200/20" />
+            <input name="company" type="text" autoComplete="organization" required className="w-full rounded-md border border-cyan-100/20 bg-black/25 px-3 py-2.5 text-base text-white placeholder:text-slate-500 focus:border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-200/20" />
           </label>
           <label className="block space-y-2 text-sm font-medium text-slate-200">
             <span>What process feels too manual right now?</span>
-            <textarea name="manual-process" rows={3} className="w-full resize-y rounded-md border border-cyan-100/20 bg-black/25 px-3 py-2.5 text-base text-white placeholder:text-slate-500 focus:border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-200/20" />
+            <textarea name="manual-process" rows={3} required className="w-full resize-y rounded-md border border-cyan-100/20 bg-black/25 px-3 py-2.5 text-base text-white placeholder:text-slate-500 focus:border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-200/20" />
           </label>
           <label className="block space-y-2 text-sm font-medium text-slate-200">
             <span>What tools are you currently using?</span>
-            <input name="tools" className="w-full rounded-md border border-cyan-100/20 bg-black/25 px-3 py-2.5 text-base text-white placeholder:text-slate-500 focus:border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-200/20" />
+            <input name="tools" type="text" required className="w-full rounded-md border border-cyan-100/20 bg-black/25 px-3 py-2.5 text-base text-white placeholder:text-slate-500 focus:border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-200/20" />
           </label>
           <label className="block space-y-2 text-sm font-medium text-slate-200">
             <span>What outcome do you want?</span>
-            <textarea name="desired-outcome" rows={3} className="w-full resize-y rounded-md border border-cyan-100/20 bg-black/25 px-3 py-2.5 text-base text-white placeholder:text-slate-500 focus:border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-200/20" />
+            <textarea name="desired-outcome" rows={3} required className="w-full resize-y rounded-md border border-cyan-100/20 bg-black/25 px-3 py-2.5 text-base text-white placeholder:text-slate-500 focus:border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-200/20" />
           </label>
+          <p className="text-xs leading-5 text-slate-400">All fields are required so the discovery call can be prepared properly.</p>
           <p className="text-xs leading-5 text-slate-400">Your answers are not submitted yet. This form is a preparation guide before booking.</p>
           <button type="submit" className="button-primary w-full sm:w-auto">
             Continue to Booking <ArrowUpRight size={16} />

@@ -37,7 +37,7 @@ export default function Home() {
   ];
   return (
     <main className="pb-16">
-      <section className="mx-auto max-w-7xl px-5 pb-16 pt-7 sm:px-8 lg:px-10 lg:pb-24 lg:pt-10">
+      <section className="hero-stage tech-band mx-auto max-w-7xl px-5 pb-16 pt-7 sm:px-8 lg:px-10 lg:pb-24 lg:pt-10">
         <nav className="mb-14 flex items-center justify-between border-b border-white/10 pb-4" aria-label="Portfolio navigation">
           <a href="#top" className="text-sm font-bold text-white">Jette Aries Portilla <span className="ml-1 font-normal text-cyan-200">/ Automation</span></a>
           <a href="#contact" className="hidden items-center gap-2 text-sm font-semibold text-slate-300 transition hover:text-cyan-200 sm:inline-flex">
@@ -64,14 +64,14 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="card relative overflow-hidden rounded-xl p-5 sm:p-7">
+          <div className="card cyber-panel emblem-core relative overflow-hidden rounded-xl p-5 sm:p-7">
             <div className="absolute right-0 top-0 h-32 w-32 border-b border-l border-cyan-200/15" aria-hidden="true" />
             <div className="relative flex items-end justify-between gap-4 border-b border-white/10 pb-5">
               <div>
                 <p className="eyebrow">Operating model</p>
                 <p className="mt-2 text-sm text-slate-400">Useful automation, deliberate oversight</p>
               </div>
-              <span className="font-mono text-xs text-cyan-100/75">01 — 04</span>
+              <span className="whitespace-nowrap font-mono text-xs text-cyan-100/75">01 — 04</span>
             </div>
             <div className="relative mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
               {[
@@ -96,7 +96,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="pain-points" className="border-y border-white/10 bg-[#0d1312]/90 px-5 py-14 sm:px-8 lg:px-10 lg:py-16">
+      <section id="pain-points" className="tech-band border-y border-white/10 bg-[#0d1312]/90 px-5 py-14 sm:px-8 lg:px-10 lg:py-16">
         <div className="mx-auto grid max-w-7xl gap-9 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
             <p className="eyebrow">Where work gets stuck</p>
@@ -119,7 +119,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="approach" className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
+      <section id="approach" className="tech-band mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <div>
             <p className="eyebrow">A practical approach</p>
@@ -147,7 +147,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="tools" className="border-y border-cyan-200/10 bg-[#09111b]/95 px-5 py-14 sm:px-8 lg:px-10 lg:py-18">
+      <section id="tools" className="tech-band border-y border-cyan-200/10 bg-[#09111b]/95 px-5 py-14 sm:px-8 lg:px-10 lg:py-18">
         <div className="mx-auto max-w-7xl">
           <div className="cyber-panel stack-module overflow-hidden rounded-xl p-5 sm:p-8 lg:p-10">
             <div className="relative z-10 grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start lg:gap-12">
@@ -178,7 +178,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="projects" className="border-y border-white/10 bg-[#0d1312]/90 px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
+      <section id="projects" className="tech-band border-y border-white/10 bg-[#0d1312]/90 px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="mb-9 max-w-3xl">
             <p className="eyebrow">Project proof</p>
@@ -196,7 +196,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="process" className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
+      <section id="process" className="tech-band mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
         <div className="mb-9 max-w-2xl">
           <p className="eyebrow">The first conversation</p>
           <h2 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">A useful next step, without overcomplicating it.</h2>
@@ -215,7 +215,7 @@ export default function Home() {
         </a>
       </section>
 
-      <section id="builder" className="border-y border-cyan-200/10 bg-[#0a111a]/90 px-5 py-14 sm:px-8 lg:px-10 lg:py-18">
+      <section id="builder" className="tech-band border-y border-cyan-200/10 bg-[#0a111a]/90 px-5 py-14 sm:px-8 lg:px-10 lg:py-18">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[18rem_minmax(0,1fr)] lg:items-center lg:gap-12">
           <div className="profile-frame overflow-hidden rounded-xl p-2">
             <Image
@@ -264,7 +264,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 lg:py-14">
+      <section id="contact" className="tech-band mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 lg:py-14">
         <div className="cyber-panel relative overflow-hidden rounded-xl bg-[linear-gradient(120deg,rgba(12,52,71,0.75),rgba(12,21,34,0.96)_58%,rgba(55,28,43,0.55)] p-6 sm:p-10 lg:p-12">
           <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-cyan-200/55 to-transparent" aria-hidden="true" />
           <div className="relative grid gap-10 lg:grid-cols-[minmax(0,1fr)_19rem] lg:items-end">

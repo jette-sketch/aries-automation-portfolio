@@ -1,23 +1,114 @@
-# Aries AI Automation Portfolio Starter
+# Aries Automation Portfolio
 
-A Next.js starter repository for an AI Automation Specialist portfolio.
+Professional portfolio for **Jette Aries Portilla**, an AI Automation Specialist building toward Full-Stack AI Development.
 
-## Run locally
+The site showcases production-oriented work across AI automation, SaaS systems, API integrations, databases, workflow orchestration, and full-stack application development.
+
+## Live Portfolio
+
+🌐 https://aries-automation-portfolio.vercel.app/
+
+## What This Portfolio Demonstrates
+
+- AI automation and workflow orchestration
+- SaaS system architecture
+- API and webhook integrations
+- PostgreSQL and Supabase-backed applications
+- TypeScript and Next.js development
+- Human-in-the-loop AI workflows
+- Validation, reliability, and production-oriented system design
+
+## Featured Work
+
+### DentalFlow
+
+A multi-tenant dental clinic SaaS and automation platform designed around:
+
+- Supabase PostgreSQL as the system of record
+- Supabase Auth with RBAC and RLS
+- n8n orchestration
+- API and webhook integrations
+- appointment and scheduling workflows
+- automation reliability and idempotency
+- tenant isolation and authorization controls
+- AI-assisted workflows with deterministic validation
+
+Additional projects and case studies are available on the live portfolio.
+
+## Tech Stack
+
+### Application
+
+- TypeScript
+- Next.js
+- React
+- Tailwind CSS
+
+### Backend & Data
+
+- Supabase
+- PostgreSQL
+- REST APIs
+- Webhooks
+
+### Automation & AI
+
+- n8n
+- AI APIs
+- LLM integrations
+- GoHighLevel
+- Make
+
+### Engineering
+
+- Git
+- GitHub
+- API integration
+- authentication and authorization
+- RBAC / RLS
+- validation
+- idempotency
+- workflow reliability
+
+## Run Locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open http://localhost:3000.
+Then open:
 
-## What is included
-- Data-driven project inventory
-- Portfolio homepage
-- Project cards
-- Simplified SVG workflow diagrams
-- Portfolio specification
-- Codex build prompt
+```text
+http://localhost:3000
+```
 
-## Important
-This starter intentionally uses sanitized, simplified project descriptions and diagrams. Do not publish raw workflow JSON exports or credentials.
+## Project Structure
+
+```text
+app/          Application routes and pages
+components/   Reusable UI components
+data/         Portfolio project data
+docs/         Supporting documentation
+public/       Static assets
+```
+
+## Security & Portfolio Data
+
+This repository intentionally uses sanitized project information.
+
+Production credentials, secrets, private workflow exports, sensitive customer data, and proprietary implementation details are not included.
+
+## Current Direction
+
+The portfolio is evolving alongside my transition from AI automation into full-stack AI and SaaS development, with an emphasis on systems that are:
+
+- reliable
+- secure
+- maintainable
+- observable
+- defensible in production
+
+---
+
+**Building useful systems, not just automations.**

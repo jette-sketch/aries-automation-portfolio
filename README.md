@@ -1,4 +1,4 @@
-# Aries Automation Portfolio
+
 
 Professional portfolio for **Jette Aries Portilla**, an AI Automation Specialist building toward Full-Stack AI Development.
 

@@ -35,6 +35,15 @@ A multi-tenant dental clinic SaaS and automation platform designed around:
 
 Additional projects and case studies are available on the live portfolio.
 
+## Engineering Evidence
+
+The [evidence hub](docs/evidence/README.md) summarizes engineering decisions, reported verification, and limitations. It distinguishes **Designed**, **Built**, **Tested**, **Deployed**, and **Production Verified**.
+
+- [DentalFlow](docs/evidence/dentalflow.md)
+- [Social Presence Automation](docs/evidence/social-presence.md)
+- [ClinicFlow Operations Prototype](docs/evidence/clinicflow.md)
+- [Building with Codex](docs/evidence/building-with-codex.md)
+
 ## Tech Stack
 
 ### Application

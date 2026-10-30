@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 980" role="img" aria-labelledby="title desc">
+<title id="title">Social Presence Automation architecture</title>
+<desc id="desc">Conceptual flow from candidate intake through validation, transactional audit, AI assessment, policy and authorization. Future media processing and publishing remain in progress.</desc>
+<style>
+  .mobile-label { display: none; }
+  @media (max-width: 500px) {
+    text { font-size: 29px; }
+    .desktop-label { display: none; }
+    .mobile-label { display: block; }
+    .future-label { font-size: 25px; }
+    .future-detail { font-size: 27px; }
+  }
+</style>
+<rect width="600" height="980" rx="16" fill="#070d17"/>
+<rect x="12" y="12" width="576" height="78" rx="10" fill="#0c1927" stroke="#67e8f9" stroke-opacity="0.65" stroke-width="2"/>
+<text x="300" y="61" text-anchor="middle" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="23" font-weight="600">Candidate Source</text>
+<path d="M300 93 v16 m-7 -7 7 7 7 -7" fill="none" stroke="#94a3b8" stroke-width="2"/>
+<rect x="12" y="117" width="576" height="78" rx="10" fill="#0c1927" stroke="#67e8f9" stroke-opacity="0.65" stroke-width="2"/>
+<text x="300" y="166" text-anchor="middle" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="23" font-weight="600">Typed Ingestion Boundary</text>
+<path d="M300 198 v16 m-7 -7 7 7 7 -7" fill="none" stroke="#94a3b8" stroke-width="2"/>
+<rect x="12" y="222" width="576" height="78" rx="10" fill="#0c1927" stroke="#67e8f9" stroke-opacity="0.65" stroke-width="2"/>
+<text x="300" y="271" text-anchor="middle" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="23" font-weight="600">Deterministic Validation</text>
+<path d="M300 303 v16 m-7 -7 7 7 7 -7" fill="none" stroke="#94a3b8" stroke-width="2"/>
+<rect x="12" y="327" width="576" height="78" rx="10" fill="#0c1927" stroke="#67e8f9" stroke-opacity="0.65" stroke-width="2"/>
+<text class="desktop-label" x="300" y="376" text-anchor="middle" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="23" font-weight="600">PostgreSQL State + Audit Transaction</text>
+<text class="mobile-label" x="300" y="357" text-anchor="middle" fill="#e2e8f0" font-family="Arial, sans-serif" font-weight="600"><tspan x="300">PostgreSQL State +</tspan><tspan x="300" dy="33">Audit Transaction</tspan></text>
+<path d="M300 408 v16 m-7 -7 7 7 7 -7" fill="none" stroke="#94a3b8" stroke-width="2"/>
+<rect x="12" y="432" width="576" height="78" rx="10" fill="#0c1927" stroke="#67e8f9" stroke-opacity="0.65" stroke-width="2"/>
+<text x="300" y="481" text-anchor="middle" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="23" font-weight="600">AI-Assisted Assessment</text>
+<path d="M300 513 v16 m-7 -7 7 7 7 -7" fill="none" stroke="#94a3b8" stroke-width="2"/>
+<rect x="12" y="537" width="576" height="78" rx="10" fill="#0c1927" stroke="#67e8f9" stroke-opacity="0.65" stroke-width="2"/>
+<text x="300" y="586" text-anchor="middle" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="23" font-weight="600">Schema Validation</text>
+<path d="M300 618 v16 m-7 -7 7 7 7 -7" fill="none" stroke="#94a3b8" stroke-width="2"/>
+<rect x="12" y="642" width="576" height="78" rx="10" fill="#0c1927" stroke="#67e8f9" stroke-opacity="0.65" stroke-width="2"/>
+<text class="desktop-label" x="300" y="691" text-anchor="middle" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="23" font-weight="600">Sensitive Data / Disclosure / IP Policy</text>
+<text class="mobile-label" x="300" y="672" text-anchor="middle" fill="#e2e8f0" font-family="Arial, sans-serif" font-weight="600"><tspan x="300">Sensitive Data / Disclosure /</tspan><tspan x="300" dy="33">IP Policy</tspan></text>
+<path d="M300 723 v16 m-7 -7 7 7 7 -7" fill="none" stroke="#94a3b8" stroke-width="2"/>
+<rect x="12" y="747" width="576" height="78" rx="10" fill="#0c1927" stroke="#67e8f9" stroke-opacity="0.65" stroke-width="2"/>
+<text x="300" y="796" text-anchor="middle" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="23" font-weight="600">Authorized Progression</text>
+<path d="M300 828 v16 m-7 -7 7 7 7 -7" fill="none" stroke="#94a3b8" stroke-width="2"/>
+<rect x="12" y="852" width="576" height="78" rx="10" fill="#211624" stroke="#fb7185" stroke-opacity="0.65" stroke-width="2"/>
+<text class="future-label" x="300" y="882" text-anchor="middle" fill="#fda4af" font-family="Arial, sans-serif" font-size="17" font-weight="700">Future / In Progress</text>
+<text class="future-detail" x="300" y="908" text-anchor="middle" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="20" font-weight="600">Media Processing / Publishing</text>
+</svg>

@@ -3,66 +3,217 @@ export const projects = [
     slug: 'dentalflow-saas',
     title: 'DentalFlow SaaS',
     maturity: 'flagship build',
-    summary: 'Multi-tenant dental clinic build covering patient intake, message classification, provider-aware scheduling, appointment communications, follow-up, access controls, and lifecycle records in Supabase.',
-    stack: [
-      'Supabase',
-      'n8n',
-      'Google Apps Script',
-      'Google Calendar',
-      'Gmail',
-      'Telegram',
-      'Groq',
-      'Google Sheets'
-    ],
-    pattern: 'Multi-tenant SaaS automation architecture',
-    status: 'Flagship build; active portfolio development.',
-    credibilityNote: 'Flagship portfolio build; active development does not imply a client deployment.',
+    summary: 'DentalFlow is an evolving multi-tenant clinic operations platform that began as workflow automation and is being hardened into a database-backed SaaS architecture with explicit tenant isolation, authorization, reliability controls, and human-supervised AI.',
+    stack: ['Supabase/PostgreSQL', 'n8n', 'Google integrations', 'External APIs'],
+    pattern: 'Multi-tenant SaaS architecture with database-enforced rules and workflow orchestration',
+    status: 'Active flagship development with staging and deployment hardening in progress.',
+    credibilityNote: 'Production verification is not yet claimed.',
     highlights: [
-      'Clinic-level tenant isolation and role-based access',
-      'Provider-aware appointment scheduling',
-      'Classification of patient intent, visit type, and urgency',
-      'Appointment communications and post-visit follow-up',
-      'Supabase operational records with Sheets reserved for exports'
+      'Supabase/PostgreSQL as the authoritative operational data layer',
+      'Tenant isolation and role-based authorization',
+      'Transactional reliability and human-supervised AI'
     ],
-    businessProblem:
-      'Appointment requests, provider calendars, and follow-up records can be spread across forms, inboxes, calendars, and spreadsheets. Staff then have to reconcile availability and patient state manually, increasing the risk of booking conflicts and missed follow-up.',
-    solutionOverview:
-      'The active build is designed to route each request through clinic-scoped intake, classify its intent and urgency, check provider and appointment constraints, and record lifecycle state in Supabase. Calendar updates and patient communications follow validated state changes; ambiguous scheduling cases remain with clinic staff.',
+    businessProblem: 'Clinic requests, scheduling, communications, and follow-up can span disconnected tools, making operational state and staff handoffs difficult to coordinate.',
+    solutionOverview: 'DentalFlow is evolving from connected workflows into a multi-tenant system where Supabase/PostgreSQL holds authoritative operational state, deterministic rules protect consequential actions, and n8n coordinates external integrations.',
     workflowSequence: [
-      'Capture request and normalize lead metadata',
-      'Classify intent, urgency, and appointment type',
-      'Enforce scheduling and access rules',
-      'Send confirmations and reminders',
-      'Track lifecycle updates and follow-up actions'
+      'Receive an operational request',
+      'Interpret and validate the request',
+      'Apply access and business rules',
+      'Coordinate integrations and communications',
+      'Provide operator visibility and follow-up'
     ],
     keyAutomations: [
-      'Lead intake and patient categorization',
-      'Dentist-aware appointment planning and double-booking prevention',
-      'Confirmation and reminder cycles across calendar and communication tools',
-      'Review and follow-up automation for completed bookings and missed interactions',
-      'Access-controlled record lifecycle enforcement through Supabase'
+      'Intake and request routing',
+      'Scheduling and appointment communications',
+      'Operational follow-up and reporting'
     ],
     aiUsage: [
-      'Extract appointment intent, urgency, and requested visit category from inbound messages into normalized routing fields.',
-      'Summarize the request for staff, while deterministic clinic rules and calendar state govern provider eligibility and availability.',
-      'Send missing or low-confidence details to clarification or staff review instead of inferring booking information.'
+      'AI assists with classification and interpretation of requests.',
+      'Model output is untrusted input: deterministic validation and authorization precede consequential actions, with human review where needed.'
     ],
     safetyNotes: [
-      'Derive clinic tenancy from trusted workflow context and enforce clinic isolation with Supabase row-level policies and role-based write permissions.',
-      'Send the model only scheduling fields needed for classification; exclude clinical notes and apply a defined retention policy to message content.',
-      'Recheck provider availability when committing a booking, use idempotency controls for retries, and route conflicts to staff.'
+      'Tenant isolation and role-based access are explicit architecture concerns.',
+      'Human oversight and deterministic rules govern consequential actions.',
+      'Reliability controls address failures, retries, and state integrity.'
     ],
     nextImprovements: [
-      'Expand patient lifecycle states and escalation triggers.',
-      'Connect more clinic-specific policy rules into a central decision matrix.',
-      'Add tighter reporting on missed and reopened opportunities.'
+      'Continue broader security and reliability testing.',
+      'Harden environment separation, migration readiness, monitoring, and recovery.',
+      'Verify production operational behavior before claiming production readiness.'
     ],
     implementationNotes: [
-      'Keep the operational data model canonical in Supabase and avoid using spreadsheets as the system of record.',
-      'Treat scheduling logic and human approval rules as explicit business rules instead of hidden workflow assumptions.',
-      'Sanitize patient information and limit workflow visibility to role-based access boundaries.'
+      'Keep operational state authoritative in Supabase/PostgreSQL rather than spreadsheets.',
+      'Place critical invariants close to the data and make human review explicit.'
     ],
+    engineering: {
+      evolution: [
+        { title: 'Workflow Prototype', detail: 'Initial intake, scheduling, communications, and operational automation used n8n and the Google ecosystem.' },
+        { title: 'Authoritative Data Layer', detail: 'Operational state moved toward Supabase/PostgreSQL as the system of record instead of spreadsheets.' },
+        { title: 'Tenant & Access Enforcement', detail: 'Tenant isolation, authentication, RBAC, and database-level authorization became explicit concerns.' },
+        { title: 'Reliability Hardening', detail: 'Transactional operations, auditability, retry awareness, authorization tests, rollback verification, and concurrency testing were introduced.' },
+        { title: 'Staging & Deployment Readiness', detail: 'Environment separation, persistent orchestration state, migration readiness, monitoring, recovery, and production verification are being hardened.' }
+      ],
+      evidence: [
+        'Authenticated tenant-isolation paths tested',
+        'Least-privilege authorization behavior tested',
+        'Privileged mutations protected by transactional database enforcement',
+        'Rollback behavior verified for failed protected operations',
+        'Concurrent mutation and invariant protection tested',
+        'Audit events used for successful state-changing operations',
+        'Staging orchestration state survived restart, validating persistence'
+      ],
+      loop: ['Requirement', 'Acceptance Criteria', 'Architecture', 'Codex-Assisted Implementation', 'Automated / Targeted Testing', 'Evidence Review', 'Root-Cause Fix', 'Regression Test', 'Staging / Deployment Verification'],
+      lessons: [
+        { title: 'Critical invariants belong close to the data.', detail: 'Workflow success alone does not protect authorization, tenant isolation, or state integrity.' },
+        { title: 'Sequential success does not prove concurrency safety.', detail: 'Important mutation paths require race-condition and retry testing.' },
+        { title: 'AI proposes; deterministic rules authorize and execute.', detail: 'Model output is untrusted input and is validated before consequential actions.' },
+        { title: 'Deployment evidence matters.', detail: 'A successful build does not establish production verification; persistence, recovery, monitoring, configuration, and operational behavior also need validation.' }
+      ],
+      currentState: [
+        { label: 'Designed', detail: 'Substantial architecture complete' },
+        { label: 'Built', detail: 'Substantial implementation exists' },
+        { label: 'Tested', detail: 'Core security and reliability paths have verified evidence; broader testing continues' },
+        { label: 'Staging', detail: 'Active staging and deployment hardening' },
+        { label: 'Production verified', detail: 'No' }
+      ]
+    },
     diagram: 'dentalflow-saas.svg'
+  },
+  {
+    slug: 'social-presence-automation',
+    title: 'Social Presence Automation',
+    maturity: 'engineering build',
+    summary: 'A reliability-focused content operations system that combines deterministic ingestion, transactional auditability, policy-controlled AI assessment, and explicit human or system authorization boundaries before consequential actions.',
+    stack: ['TypeScript', 'PostgreSQL', 'AI assessment', 'Deterministic policy engine'],
+    pattern: 'Deterministic content operations with AI-assisted assessment and policy enforcement',
+    status: 'Active engineering build. Core ingestion and review controls are implemented and tested; downstream media processing and publishing remain under development.',
+    credibilityNote: 'This case study describes verified engineering behavior from an active portfolio build and does not claim a completed production publishing system.',
+    highlights: [
+      'Typed and validated candidate ingestion',
+      'Idempotent duplicate handling and atomic audit recording',
+      'Structured AI assessment with strict validation',
+      'Deterministic disclosure and IP policy controls'
+    ],
+    businessProblem: 'Content automation becomes risky when duplicate events, malformed payloads, unvalidated AI output, sensitive data, disclosure obligations, or publishing actions are handled implicitly. The system makes each boundary explicit: validate, persist, assess, verify, authorize, and execute.',
+    solutionOverview: 'A typed ingestion boundary validates candidate content before persistence. PostgreSQL records candidate state with immutable audit evidence in a transaction, while idempotency and explicit conflict handling keep retries from creating duplicate consequences. AI supports assessment; deterministic validation, disclosure policy, and authorization govern progression.',
+    workflowSequence: [
+      'Receive candidate through a typed ingestion boundary',
+      'Validate input deterministically before persistence',
+      'Persist candidate state and audit evidence atomically',
+      'Assess content and validate structured model output',
+      'Evaluate sensitive-data, disclosure, and IP policy',
+      'Authorize controlled progression; downstream publishing remains future work'
+    ],
+    keyAutomations: [
+      'Idempotent candidate creation with explicit identity conflict handling',
+      'Atomic candidate state and audit persistence',
+      'Structured AI assessment with strict schema validation',
+      'Deterministic disclosure and IP policy review'
+    ],
+    aiUsage: [
+      'AI may assess content, classify context or risk, and return structured recommendations.',
+      'Model output is untrusted input: schema validation, deterministic policy, and authorization precede any consequential downstream action.'
+    ],
+    safetyNotes: [
+      'Sensitive-data scanning runs independently of model opinion; disclosure and IP policy are evaluated deterministically.',
+      'Policy failure blocks progression rather than guessing, and review state with audit evidence is persisted transactionally.',
+      'AI cannot authorize, override policy, bypass validation, or publish based on its recommendation.'
+    ],
+    nextImprovements: [
+      'Develop downstream media processing and watermark handling.',
+      'Continue controlled progression toward publishing; automated publishing is not complete.'
+    ],
+    implementationNotes: [
+      'Retries should repeat intent, not duplicate consequences.',
+      'Describe reliability principles without exposing private implementation details.'
+    ],
+    social: {
+      evidence: [
+        'Valid candidate ingestion tested',
+        'Malformed candidate rejection tested',
+        'Duplicate ingestion resolves idempotently',
+        'Conflicting reuse of the same ingestion identity fails explicitly',
+        'Candidate state and audit event commit atomically',
+        'Concurrent duplicate requests produce one canonical candidate',
+        'Structured assessment validation tested',
+        'Sensitive-data and disclosure-policy paths tested'
+      ],
+      aiFlow: ['AI assessment', 'Strict schema validation', 'Deterministic policy evaluation', 'Authorization', 'Downstream action'],
+      lessons: [
+        { title: 'Idempotency is a correctness property.', detail: 'Retries must not create duplicate business consequences.' },
+        { title: 'Audit evidence should be atomic with the state change.', detail: 'A successful state mutation without corresponding audit evidence creates an observability and accountability gap.' },
+        { title: 'AI output is untrusted input.', detail: 'Schema, values, policy, authorization, and consequences must be validated independently.' },
+        { title: 'Publishing is an execution boundary.', detail: 'Content generation or assessment does not imply permission to publish.' }
+      ],
+      currentState: [
+        { label: 'Designed', detail: 'Core architecture and policy boundaries defined' },
+        { label: 'Built', detail: 'Candidate ingestion, persistence/audit controls, and review controls implemented' },
+        { label: 'Tested', detail: 'Core ingestion, duplicate/concurrency, and review-policy paths have verified evidence' },
+        { label: 'In progress', detail: 'Media processing, watermark handling, and downstream publishing workflow' },
+        { label: 'Production verified', detail: 'No' }
+      ],
+      codexNote: 'Codex was used to accelerate implementation and inspection, while acceptance criteria, deterministic validation, transactional behavior, concurrency tests, and policy enforcement were used to establish correctness.'
+    },
+    diagram: 'social-presence-automation.svg'
+  },
+  {
+    slug: 'clinicflow-operations-prototype',
+    title: 'ClinicFlow Operations Prototype',
+    maturity: 'deployed prototype',
+    summary: 'An interactive clinic-operations prototype informed by field discovery of a walk-in-heavy reception workflow, translating paper intake, queue-number issuance, service routing, and status progression into a staff and queue-management experience.',
+    stack: ['TypeScript', 'React UI', 'Browser-local state', 'Deployed web prototype'],
+    pattern: 'Field discovery to operational prototype',
+    status: 'Frontend-only operational prototype deployed for workflow exploration with synthetic demo data.',
+    credibilityNote: 'This is not a clinical system or a production-verified deployment. It uses synthetic data and has no live clinic integrations.',
+    highlights: [
+      'Reception registration with deterministic queue-number issuance',
+      'Field-informed reception and service routing',
+      'First-come queue progression with fictional service and provider routing',
+      'Public queue view using queue numbers',
+      'Administrative follow-ups and browser-local Analytics',
+      'Interactive Guided Demo'
+    ],
+    businessProblem: 'Walk-in reception depends on manual intake, queue numbers, and routing visits to the appropriate service or provider.',
+    solutionOverview: 'A frontend-only interactive prototype translates the field-informed reception workflow into registration, deterministic queue numbers, first-come progression, fictional service and provider routing, a privacy-safe public queue preview, administrative follow-ups, browser-local Analytics, and an interactive Guided Demo.',
+    workflowSequence: ['Walk-in arrival', 'Reception registration', 'Queue number issued', 'Service / provider routing', 'Waiting queue', 'Called / in service', 'Completed', 'Administrative follow-up if needed'],
+    keyAutomations: ['Reception registration and deterministic queue-number issuance', 'First-come queue progression with fictional service/provider routing', 'Privacy-safe public queue preview showing queue numbers', 'Administrative follow-ups and browser-local Analytics', 'Interactive Guided Demo'],
+    aiUsage: [],
+    safetyNotes: ['Intended for synthetic demo use only; the prototype is frontend-only and stores demo state in the browser.', 'The public queue preview shows queue numbers rather than names.', 'This is not a clinical system or production-verified deployment; it makes no medical decisions and has no live clinic integrations.'],
+    nextImprovements: ['Continue workflow exploration with the interactive prototype.'],
+    implementationNotes: ['Frontend-only operational prototype for synthetic demo use; not production verified.'],
+    clinic: {
+      observations: [
+        { observed: 'Patients register through a manual name-list process.', requirement: 'Fast staff-assisted walk-in registration.' },
+        { observed: 'Reception issues queue numbers.', requirement: 'Deterministic queue-number generation and visible queue state.' },
+        { observed: 'One reception flow may route different visit types.', requirement: 'Service/provider routing at intake.' },
+        { observed: 'Staff need to know who is waiting, next, called, or completed.', requirement: 'Explicit operational status progression.' },
+        { observed: 'Waiting patients need visibility without exposing names publicly.', requirement: 'Public queue view displays queue numbers rather than patient names.' }
+      ],
+      surfaces: [
+        { title: 'Registration', detail: 'Fast staff-assisted walk-in registration using synthetic patient records and fictional service/provider options.' },
+        { title: 'Patient Queue', detail: 'Deterministic queue numbers progress in first-come order through operational statuses.' },
+        { title: 'Dashboard', detail: 'Staff visibility into current operational state.' },
+        { title: 'Follow-ups', detail: 'Administrative reminder and follow-up interface only.' },
+        { title: 'Public Queue Preview', detail: 'Queue-number-based waiting display without exposing patient names.' },
+        { title: 'Analytics', detail: 'Browser-local operational summaries based on synthetic demo state.' },
+        { title: 'Guided Demo', detail: 'Interactive walkthrough of registration, queue progression, follow-up, and Analytics.' }
+      ],
+      delivery: [
+        { title: 'Observe', detail: 'Understand reception behavior and constraints through field observation.' },
+        { title: 'Model', detail: 'Translate steps, actors, statuses, and routing into explicit requirements.' },
+        { title: 'Prototype', detail: 'Build registration, queue, dashboard, follow-up, browser-local Analytics, and Guided Demo experiences.' },
+        { title: 'Test the flow', detail: 'Use synthetic records to exercise registration and queue progression.' },
+        { title: 'Deploy', detail: 'Publish an interactive web prototype for workflow review and demonstration.' }
+      ],
+      currentState: [
+        { label: 'Discovered', detail: 'Core walk-in and reception workflow mapped from field observations.' },
+        { label: 'Designed', detail: 'Operational intake, queue, routing, and staff-state model represented.' },
+        { label: 'Built', detail: 'Interactive registration, queue, dashboard, and administrative follow-up prototype.' },
+        { label: 'Deployed prototype', detail: 'Interactive demo is deployed for workflow exploration.' },
+        { label: 'Production verified', detail: 'No' }
+      ]
+    },
+    diagram: 'clinicflow-operations-prototype.svg'
   },
   {
     slug: 'ai-procurement-approval-system',

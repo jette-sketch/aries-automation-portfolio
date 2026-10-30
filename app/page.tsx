@@ -3,6 +3,7 @@ import { ArrowDown, ArrowRight, ArrowUpRight, BrainCircuit, Boxes, CalendarCheck
 
 import { projects } from '@/data/projects';
 import { ProjectCard } from '@/components/ProjectCard';
+import { BuildingWithCodex } from '@/components/BuildingWithCodex';
 import { WorkflowIntakeDialog } from '@/components/WorkflowIntakeDialog';
 
 const stackGroups = [
@@ -47,21 +48,27 @@ export default function Home() {
 
         <div id="top" className="grid scroll-mt-8 gap-12 lg:grid-cols-[1.12fr_0.88fr] lg:items-center lg:gap-16">
           <div className="max-w-3xl">
-            <p className="eyebrow">AI Automation Specialist <span className="mx-2 text-white/30">/</span> Portfolio</p>
-            <h1 className="mt-6 max-w-3xl text-5xl font-semibold leading-[1.08] text-white sm:text-6xl lg:text-7xl">
-              Turn manual work into <span className="gradient-text">dependable systems.</span>
+            <p className="eyebrow">AI Automation &amp; SaaS Systems Builder</p>
+            <h1 className="mt-6 max-w-3xl text-4xl font-semibold leading-[1.08] text-white sm:text-5xl lg:text-6xl">
+              Building reliable AI systems, <span className="gradient-text">from workflow automation to production-oriented SaaS.</span>
             </h1>
             <p className="mt-7 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-              I design AI-enabled automation for operations, CRM, and customer workflows, with clear logic and people in control.
+              I use Codex, TypeScript, Supabase/PostgreSQL, APIs, and n8n to turn operational problems into tested systems with clear data rules, human oversight, failure handling, and maintainable architecture.
+            </p>
+            <p className="mt-4 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
+              I’m documenting the engineering decisions, experiments, failures, and lessons along the way so other automation builders can learn from the journey.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a href="https://cal.com/jette-aries-portilla/discovery-call" target="_blank" rel="noopener noreferrer" className="button-primary w-full sm:w-auto">
-                Book a Discovery Call <ArrowUpRight size={16} />
+              <a href="/projects/dentalflow-saas" className="button-primary w-full sm:w-auto">
+                Explore DentalFlow <ArrowDown size={16} />
               </a>
               <a href="#projects" className="button-secondary w-full sm:w-auto">
-                View Automation Projects <ArrowDown size={16} />
+                View Engineering Projects <ArrowDown size={16} />
               </a>
             </div>
+            <p className="mt-6 max-w-2xl text-sm leading-6 text-slate-400">
+              Currently building across healthcare automation, AI-assisted operations, and reliable SaaS architecture.
+            </p>
           </div>
 
           <div className="card cyber-panel emblem-core relative overflow-hidden rounded-xl p-5 sm:p-7">
@@ -195,6 +202,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <BuildingWithCodex />
 
       <section id="process" className="tech-band mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
         <div className="mb-9 max-w-2xl">

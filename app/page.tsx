@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ArrowDown, ArrowRight, ArrowUpRight, BrainCircuit, Boxes, CalendarCheck2, FileDown, Mail, Workflow } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, BrainCircuit, Boxes, CalendarCheck2, Mail, Workflow } from 'lucide-react';
 
 import { projects } from '@/data/projects';
 import { ProjectCard } from '@/components/ProjectCard';
@@ -247,9 +247,6 @@ export default function Home() {
               </div>
             </div>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a href="/resume/jette-aries-portilla-resume.pdf" download className="button-primary w-full sm:w-auto">
-                Download Resume <FileDown size={16} />
-              </a>
               <a href="mailto:jette.portilla@gmail.com" className="button-secondary w-full sm:w-auto">
                 <Mail size={16} /> Email
               </a>
@@ -294,11 +291,6 @@ export default function Home() {
                 <a href="https://github.com/jette-sketch" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-slate-200 transition hover:text-cyan-200">
                   <ArrowUpRight size={16} className="shrink-0 text-cyan-200" />
                   <span>GitHub</span>
-                </a>
-                <a href="/resume/jette-aries-portilla-resume.pdf" download className="flex items-center gap-3 text-sm text-slate-200 transition hover:text-cyan-200">
-                  <FileDown size={16} className="shrink-0 text-cyan-200" />
-                  <span>Download Resume</span>
-                  <ArrowDown size={14} className="ml-auto shrink-0" />
                 </a>
               </div>
             </address>

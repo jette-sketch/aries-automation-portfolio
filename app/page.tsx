@@ -5,6 +5,7 @@ import { projects } from '@/data/projects';
 import { ProjectCard } from '@/components/ProjectCard';
 import { BuildingWithCodex } from '@/components/BuildingWithCodex';
 import { WorkflowIntakeDialog } from '@/components/WorkflowIntakeDialog';
+import { PresenterVideo } from '@/components/PresenterVideo';
 
 const stackGroups = [
   { name: 'Automation', tools: ['n8n', 'Make.com', 'GoHighLevel', 'Zapier'] },
@@ -52,7 +53,7 @@ export default function Home() {
         </div>
         <div className="hero-visual">
           <div className="hero-orbit" aria-hidden="true"><span /><span /><span /></div>
-          <div className="hero-portrait"><Image src="/images/aries-headshot.jpg" alt="Jette Aries Portilla" width={800} height={800} priority sizes="(max-width: 768px) 70vw, 420px" /></div>
+          <PresenterVideo />
           <div className="hero-caption"><span>01 / SYSTEMS THAT WORK TOGETHER</span><strong>Thoughtful automation.<br />Built for real work.</strong><p>Connecting people, processes, data, and AI.</p></div>
         </div>
         <a className="scroll-cue" href="#approach">SCROLL TO EXPLORE <ArrowDown size={14} /></a>

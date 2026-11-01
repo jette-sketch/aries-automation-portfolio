@@ -348,3 +348,7 @@ body { background: #050c12; background-image: radial-gradient(circle at 18% 16%,
 @keyframes orbit { to { transform: rotate(360deg); } }
 @media(max-width: 800px) { .nav-links { display: none; } .reference-hero { grid-template-columns: 1fr; padding: 8rem 1.25rem 5rem; gap: 1rem; }.hero-visual { min-height: 420px; }.hero-caption { right: 0; bottom: 0; }.scroll-cue { display: none; }.project-feature { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 0; }.project-feature:nth-child(even) .project-feature-copy { order: initial; } }
 @media(prefers-reduced-motion: reduce) { .hero-orbit { animation: none; } }
+.presenter-wrap { position: relative; display: grid; place-items: center; width: min(70%, 330px); }
+.presenter-wrap .hero-portrait { width: 100%; }
+.presenter-video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.presenter-control { position: absolute; left: 50%; bottom: .9rem; transform: translateX(-50%); padding: .45rem .8rem; border: 1px solid #a5e8e6a0; border-radius: 999px; background: #06151ce6; color: #efffff; font-size: .7rem; font-weight: 600; white-space: nowrap; }

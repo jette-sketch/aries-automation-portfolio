@@ -2,14 +2,18 @@ import Image from 'next/image';
 import { ArrowDown, ArrowRight, ArrowUpRight, BrainCircuit, Boxes, CalendarCheck2, Mail, Workflow } from 'lucide-react';
 
 import { projects } from '@/data/projects';
-import { ProjectCard } from '@/components/ProjectCard';
+import { ProjectFilter } from '@/components/ProjectFilter';
+import { ProblemExplorer } from '@/components/ProblemExplorer';
+import { WorkflowDemo } from '@/components/WorkflowDemo';
+import { FAQ } from '@/components/FAQ';
 import { BuildingWithCodex } from '@/components/BuildingWithCodex';
 import { WorkflowIntakeDialog } from '@/components/WorkflowIntakeDialog';
+import { SystemsExplorer } from '@/components/SystemsExplorer';
 
 const stackGroups = [
   { name: 'Automation', tools: ['n8n', 'Make.com', 'GoHighLevel', 'Zapier'] },
-  { name: 'AI', tools: ['OpenAI', 'Gemini', 'Groq', 'CrewAI'] },
-  { name: 'Data', tools: ['Supabase', 'Airtable', 'Notion', 'Google Sheets'] },
+  { name: 'AI', tools: ['OpenAI', 'Claude', 'Gemini', 'Groq', 'CrewAI'] },
+  { name: 'Data', tools: ['Supabase', 'Neon', 'Airtable', 'Notion', 'Google Sheets'] },
   { name: 'Communication', tools: ['Gmail', 'Slack', 'Telegram'] },
   { name: 'Scheduling', tools: ['Google Calendar', 'Cal.com'] },
   { name: 'Deployment', tools: ['Vercel', 'Render', 'GitHub'] }
@@ -23,14 +27,6 @@ export default function Home() {
     { label: 'Keep people in control', detail: 'Add human review at decisions that need judgment.', icon: CalendarCheck2 },
     { label: 'Test and document', detail: 'Validate the flow and leave a system others can operate.', icon: ArrowRight }
   ];
-  const painPoints = [
-    'Manual follow-ups',
-    'Scattered CRM data',
-    'Missed leads or appointments',
-    'Repetitive admin work',
-    'Slow reporting',
-    'No clear automation workflow'
-  ];
   const processSteps = [
     { number: '01', title: 'Share your workflow', detail: 'Bring one process that takes too much time or attention.' },
     { number: '02', title: 'Identify automation opportunities', detail: 'Find repetitive steps, bottlenecks, and useful integrations.' },
@@ -38,93 +34,23 @@ export default function Home() {
   ];
   return (
     <main className="pb-16">
-      <section className="hero-stage tech-band mx-auto max-w-7xl px-5 pb-16 pt-7 sm:px-8 lg:px-10 lg:pb-24 lg:pt-10">
-        <nav className="mb-14 flex items-center justify-between border-b border-white/10 pb-4" aria-label="Portfolio navigation">
-          <a href="#top" className="text-sm font-bold text-white">Jette Aries Portilla <span className="ml-1 font-normal text-cyan-200">/ Automation</span></a>
-          <a href="#contact" className="hidden items-center gap-2 text-sm font-semibold text-slate-300 transition hover:text-cyan-200 sm:inline-flex">
-            Let&apos;s talk <ArrowUpRight size={16} />
-          </a>
-        </nav>
-
-        <div id="top" className="grid scroll-mt-8 gap-12 lg:grid-cols-[1.12fr_0.88fr] lg:items-center lg:gap-16">
-          <div className="max-w-3xl">
-            <p className="eyebrow">AI Automation &amp; SaaS Systems Builder</p>
-            <h1 className="mt-6 max-w-3xl text-4xl font-semibold leading-[1.08] text-white sm:text-5xl lg:text-6xl">
-              Building reliable AI systems, <span className="gradient-text">from workflow automation to production-oriented SaaS.</span>
-            </h1>
-            <p className="mt-7 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-              I use Codex, TypeScript, Supabase/PostgreSQL, APIs, and n8n to turn operational problems into tested systems with clear data rules, human oversight, failure handling, and maintainable architecture.
-            </p>
-            <p className="mt-4 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-              I’m documenting the engineering decisions, experiments, failures, and lessons along the way so other automation builders can learn from the journey.
-            </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a href="/projects/dentalflow-saas" className="button-primary w-full sm:w-auto">
-                Explore DentalFlow <ArrowDown size={16} />
-              </a>
-              <a href="#projects" className="button-secondary w-full sm:w-auto">
-                View Engineering Projects <ArrowDown size={16} />
-              </a>
-            </div>
-            <p className="mt-6 max-w-2xl text-sm leading-6 text-slate-400">
-              Currently building across healthcare automation, AI-assisted operations, and reliable SaaS architecture.
-            </p>
-          </div>
-
-          <div className="card cyber-panel emblem-core relative overflow-hidden rounded-xl p-5 sm:p-7">
-            <div className="absolute right-0 top-0 h-32 w-32 border-b border-l border-cyan-200/15" aria-hidden="true" />
-            <div className="relative flex items-end justify-between gap-4 border-b border-white/10 pb-5">
-              <div>
-                <p className="eyebrow">Operating model</p>
-                <p className="mt-2 text-sm text-slate-400">Useful automation, deliberate oversight</p>
-              </div>
-              <span className="whitespace-nowrap font-mono text-xs text-cyan-100/75">01 — 04</span>
-            </div>
-            <div className="relative mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {[
-                { label: 'AI workflow design', icon: BrainCircuit, tone: 'text-cyan-200' },
-                { label: 'CRM automation', icon: Boxes, tone: 'text-rose-200' },
-                { label: 'Connected operations', icon: Workflow, tone: 'text-cyan-300' },
-                { label: 'Human review checkpoints', icon: CalendarCheck2, tone: 'text-rose-300' }
-              ].map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <div key={item.label} className="min-h-28 rounded-lg bg-black/20 p-4">
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono text-xs text-slate-500">0{index + 1}</span>
-                      <Icon size={18} className={item.tone} strokeWidth={1.8} />
-                    </div>
-                    <p className="mt-5 text-sm font-semibold leading-5 text-slate-100">{item.label}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+      <nav className="portfolio-nav" aria-label="Portfolio navigation">
+        <a href="#top" className="nav-brand"><span className="brand-mark">AP</span><span>Jette Aries Portilla</span></a>
+        <div className="nav-links"><a href="#approach">Capabilities</a><a href="#tools">Tools</a><a href="#projects">Work</a><a href="#process">Process</a><a href="#builder">About</a></div>
+        <a href="#contact" className="nav-cta">Let&apos;s talk <ArrowUpRight size={14} /></a>
+      </nav>
+      <section id="top" className="reference-hero">
+        <div className="hero-copy">
+          <p className="eyebrow">AI AUTOMATION / SAAS SYSTEMS</p>
+          <h1>Building reliable AI systems, <span className="gradient-text">from workflow automation to production-oriented SaaS.</span></h1>
+          <p>I use Codex, TypeScript, Supabase/PostgreSQL, APIs, and n8n to turn operational problems into tested systems with clear data rules, human oversight, and maintainable architecture.</p>
+          <div className="hero-actions"><a href="#projects" className="button-primary">Explore my work <ArrowDown size={16} /></a><a href="#contact" className="button-secondary">Start a conversation <ArrowUpRight size={16} /></a></div>
         </div>
+        <SystemsExplorer />
+        <a className="scroll-cue" href="#approach">SCROLL TO EXPLORE <ArrowDown size={14} /></a>
       </section>
 
-      <section id="pain-points" className="tech-band border-y border-white/10 bg-[#0d1312]/90 px-5 py-14 sm:px-8 lg:px-10 lg:py-16">
-        <div className="mx-auto grid max-w-7xl gap-9 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-          <div>
-            <p className="eyebrow">Where work gets stuck</p>
-            <h2 className="mt-3 max-w-xl text-3xl font-semibold leading-tight text-white sm:text-4xl">Small manual gaps add up.</h2>
-            <p className="mt-4 max-w-lg text-sm leading-7 text-slate-300">When routine work depends on memory and disconnected tools, follow-through gets harder to trust.</p>
-          </div>
-          <div className="grid gap-x-6 sm:grid-cols-2">
-            {painPoints.map((point, index) => (
-              <div key={point} className="flex min-h-14 items-center gap-3 border-b border-white/10 py-3">
-                <span className="font-mono text-xs text-cyan-100/75">0{index + 1}</span>
-                <span className="text-sm text-slate-200">{point}</span>
-              </div>
-            ))}
-          </div>
-          <div className="lg:col-start-2">
-            <a href="https://cal.com/jette-aries-portilla/discovery-call" target="_blank" rel="noopener noreferrer" className="button-primary w-full sm:w-auto">
-              Book a Discovery Call <ArrowUpRight size={16} />
-            </a>
-          </div>
-        </div>
-      </section>
+      <ProblemExplorer />
 
       <section id="approach" className="tech-band mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
@@ -189,12 +115,10 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-9 max-w-3xl">
             <p className="eyebrow">Project proof</p>
-            <h2 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">Designed around the work, not just the tools.</h2>
+            <h2 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">Systems built around the work.</h2>
             <p className="mt-4 text-sm leading-7 text-slate-300">Explore workflow design, automation architecture, and AI-assisted operations across these systems. Each project is labeled by its current build status.</p>
           </div>
-          <div className="grid items-stretch gap-5 xl:grid-cols-2">
-            {projects.map((project) => <ProjectCard key={project.slug} project={project} />)}
-          </div>
+          <ProjectFilter projects={projects} />
           <div className="mt-9">
             <a href="https://cal.com/jette-aries-portilla/discovery-call" target="_blank" rel="noopener noreferrer" className="button-primary w-full sm:w-auto">
               Review These Systems With Me <ArrowUpRight size={16} />
@@ -203,6 +127,7 @@ export default function Home() {
         </div>
       </section>
 
+      <WorkflowDemo />
       <BuildingWithCodex />
 
       <section id="process" className="tech-band mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
@@ -270,6 +195,7 @@ export default function Home() {
         </div>
       </section>
 
+      <FAQ />
       <section id="contact" className="tech-band mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 lg:py-14">
         <div className="cyber-panel relative overflow-hidden rounded-xl bg-[linear-gradient(120deg,rgba(12,52,71,0.75),rgba(12,21,34,0.96)_58%,rgba(55,28,43,0.55)] p-6 sm:p-10 lg:p-12">
           <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-cyan-200/55 to-transparent" aria-hidden="true" />

@@ -6,9 +6,9 @@
     "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
-    "@next/third-parties": "latest",
+    "@next/third-parties": "^16.4.3",
     "lucide-react": "latest",
-    "next": "latest",
+    "next": "^16.4.3",
     "react": "latest",
     "react-dom": "latest"
   },
@@ -20,7 +20,7 @@
     "@typescript-eslint/parser": "^8.71.0",
     "autoprefixer": "latest",
     "eslint": "latest",
-    "eslint-config-next": "latest",
+    "eslint-config-next": "^16.4.3",
     "postcss": "latest",
     "tailwindcss": "latest",
     "typescript": "latest"

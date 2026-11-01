@@ -222,12 +222,11 @@ export const projects = [
     summary: 'Production-style procurement workflow design for validating requests, producing AI-assisted risk recommendations, routing human approvals, recording decisions in Supabase, and preparing spend reports.',
     stack: [
       'n8n',
-      'Jotform',
+      'Jotform (Forms & Sign)',
       'Supabase',
       'OpenAI or Groq',
       'Slack',
       'Gmail',
-      'Jotform Sign',
       'Looker Studio or Metabase'
     ],
     pattern: 'AI decision support with human approval and analytics',

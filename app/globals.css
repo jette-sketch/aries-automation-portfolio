@@ -359,3 +359,18 @@ body { background: #050c12; background-image: radial-gradient(circle at 18% 16%,
 .systems-graphic .hero-orbit { inset: 0; width: 100%; }
 .hero-caption { position: relative; right: auto; bottom: auto; align-self: center; width: min(100%, 22rem); max-width: none; margin-top: .5rem; padding: .85rem 1rem; }
 @media (max-width: 800px) { .hero-visual { min-height: 0; } .hero-caption { right: auto; bottom: auto; } }
+
+/* Interactive systems explorer */
+.systems-graphic { isolation: isolate; }
+.systems-grid { position: absolute; inset: 10%; z-index: -1; border-radius: 50%; background: repeating-linear-gradient(0deg, transparent 0 23px, #53d9e60d 24px), repeating-linear-gradient(90deg, transparent 0 23px, #53d9e60d 24px); mask-image: radial-gradient(circle, #000 20%, transparent 72%); pointer-events: none; }
+.systems-core::before { content: ''; position: absolute; left: 16%; right: 16%; height: 1px; z-index: -1; background: linear-gradient(90deg, #4adfd3, #73efff, #b88dff); box-shadow: 0 0 14px #46eed5; }
+.systems-node, .systems-center { cursor: pointer; transition: border-color .2s, box-shadow .2s, background .2s, transform .2s; }
+.systems-node { min-height: 44px; border-color: #69dfdb70; color: #d5fffa; }
+.systems-center { flex: 0 0 auto; }
+.systems-node:hover, .systems-node[aria-pressed="true"], .systems-center:hover, .systems-center[aria-pressed="true"] { border-color: #8dfff0; color: #fff; background: #123c49; box-shadow: 0 0 24px #5de8df55, inset 0 0 20px #32d9df20; }
+.systems-node:hover, .systems-center:hover { transform: translateY(-3px); }
+.systems-prompt { position: absolute; bottom: 8%; color: #9bd7d5; font: 600 .58rem/1.4 monospace; letter-spacing: .15em; }
+.systems-prompt span { color: #be9cff; }
+.systems-explorer .hero-caption { border-left: 2px solid #88f9e8; background: linear-gradient(100deg, #0a222a, #0a141de8); box-shadow: inset 0 0 0 1px #7feadd1c, 0 0 30px #24d9cd0b; }
+.systems-explorer .hero-caption strong { min-height: 2.4em; }
+@media (prefers-reduced-motion: reduce) { .systems-node, .systems-center { transition: none; } .systems-node:hover, .systems-center:hover { transform: none; } }

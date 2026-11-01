@@ -5,6 +5,7 @@ import { projects } from '@/data/projects';
 import { ProjectCard } from '@/components/ProjectCard';
 import { BuildingWithCodex } from '@/components/BuildingWithCodex';
 import { WorkflowIntakeDialog } from '@/components/WorkflowIntakeDialog';
+import { SystemsExplorer } from '@/components/SystemsExplorer';
 
 const stackGroups = [
   { name: 'Automation', tools: ['n8n', 'Make.com', 'GoHighLevel', 'Zapier'] },
@@ -50,17 +51,7 @@ export default function Home() {
           <p>I use Codex, TypeScript, Supabase/PostgreSQL, APIs, and n8n to turn operational problems into tested systems with clear data rules, human oversight, and maintainable architecture.</p>
           <div className="hero-actions"><a href="#projects" className="button-primary">Explore my work <ArrowDown size={16} /></a><a href="#contact" className="button-secondary">Start a conversation <ArrowUpRight size={16} /></a></div>
         </div>
-        <div className="hero-visual">
-          <div className="systems-graphic" aria-hidden="true">
-            <div className="hero-orbit"><span /><span /><span /></div>
-            <div className="systems-core">
-            <span className="systems-node">WORKFLOWS</span>
-            <span className="systems-center"><Workflow size={36} /><small>CONNECTED<br />SYSTEMS</small></span>
-              <span className="systems-node">DATA + AI</span>
-            </div>
-          </div>
-          <div className="hero-caption"><span>SYSTEMS THAT WORK TOGETHER</span><strong>Thoughtful automation.<br />Built for real work.</strong><p>Connecting people, processes, data, and AI.</p></div>
-        </div>
+        <SystemsExplorer />
         <a className="scroll-cue" href="#approach">SCROLL TO EXPLORE <ArrowDown size={14} /></a>
       </section>
 

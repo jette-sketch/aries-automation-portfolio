@@ -9,8 +9,8 @@ import { SystemsExplorer } from '@/components/SystemsExplorer';
 
 const stackGroups = [
   { name: 'Automation', tools: ['n8n', 'Make.com', 'GoHighLevel', 'Zapier'] },
-  { name: 'AI', tools: ['OpenAI', 'Gemini', 'Groq', 'CrewAI'] },
-  { name: 'Data', tools: ['Supabase', 'Airtable', 'Notion', 'Google Sheets'] },
+  { name: 'AI', tools: ['OpenAI', 'Claude', 'Gemini', 'Groq', 'CrewAI'] },
+  { name: 'Data', tools: ['Supabase', 'Neon', 'Airtable', 'Notion', 'Google Sheets'] },
   { name: 'Communication', tools: ['Gmail', 'Slack', 'Telegram'] },
   { name: 'Scheduling', tools: ['Google Calendar', 'Cal.com'] },
   { name: 'Deployment', tools: ['Vercel', 'Render', 'GitHub'] }

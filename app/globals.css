@@ -352,3 +352,10 @@ body { background: #050c12; background-image: radial-gradient(circle at 18% 16%,
 .systems-center small, .systems-node { color: #99e8e1; font: 600 .6rem/1.4 monospace; letter-spacing: .08em; text-align: center; }
 .systems-node { padding: .65rem; border: 1px solid #79e7db42; border-radius: 999px; background: #0b2029; }
 @media (max-width: 400px) { .systems-core { gap: .3rem; } .systems-center { width: 7rem; height: 7rem; } .systems-node { padding: .5rem; font-size: .52rem; } }
+
+/* Keep the supporting copy outside the systems illustration. */
+.hero-visual { display: flex; flex-direction: column; min-height: 0; }
+.systems-graphic { position: relative; display: grid; place-items: center; width: min(100%, 480px); aspect-ratio: 1; }
+.systems-graphic .hero-orbit { inset: 0; width: 100%; }
+.hero-caption { position: relative; right: auto; bottom: auto; align-self: center; width: min(100%, 22rem); max-width: none; margin-top: .5rem; padding: .85rem 1rem; }
+@media (max-width: 800px) { .hero-visual { min-height: 0; } .hero-caption { right: auto; bottom: auto; } }

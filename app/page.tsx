@@ -51,11 +51,13 @@ export default function Home() {
           <div className="hero-actions"><a href="#projects" className="button-primary">Explore my work <ArrowDown size={16} /></a><a href="#contact" className="button-secondary">Start a conversation <ArrowUpRight size={16} /></a></div>
         </div>
         <div className="hero-visual">
-          <div className="hero-orbit" aria-hidden="true"><span /><span /><span /></div>
-          <div className="systems-core" aria-hidden="true">
+          <div className="systems-graphic" aria-hidden="true">
+            <div className="hero-orbit"><span /><span /><span /></div>
+            <div className="systems-core">
             <span className="systems-node">WORKFLOWS</span>
             <span className="systems-center"><Workflow size={36} /><small>CONNECTED<br />SYSTEMS</small></span>
-            <span className="systems-node">DATA + AI</span>
+              <span className="systems-node">DATA + AI</span>
+            </div>
           </div>
           <div className="hero-caption"><span>01 / SYSTEMS THAT WORK TOGETHER</span><strong>Thoughtful automation.<br />Built for real work.</strong><p>Connecting people, processes, data, and AI.</p></div>
         </div>

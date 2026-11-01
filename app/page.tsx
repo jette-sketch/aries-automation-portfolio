@@ -59,7 +59,7 @@ export default function Home() {
               <span className="systems-node">DATA + AI</span>
             </div>
           </div>
-          <div className="hero-caption"><span>01 / SYSTEMS THAT WORK TOGETHER</span><strong>Thoughtful automation.<br />Built for real work.</strong><p>Connecting people, processes, data, and AI.</p></div>
+          <div className="hero-caption"><span>SYSTEMS THAT WORK TOGETHER</span><strong>Thoughtful automation.<br />Built for real work.</strong><p>Connecting people, processes, data, and AI.</p></div>
         </div>
         <a className="scroll-cue" href="#approach">SCROLL TO EXPLORE <ArrowDown size={14} /></a>
       </section>

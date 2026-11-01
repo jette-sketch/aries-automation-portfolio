@@ -38,69 +38,24 @@ export default function Home() {
   ];
   return (
     <main className="pb-16">
-      <section className="hero-stage tech-band mx-auto max-w-7xl px-5 pb-16 pt-7 sm:px-8 lg:px-10 lg:pb-24 lg:pt-10">
-        <nav className="mb-14 flex items-center justify-between border-b border-white/10 pb-4" aria-label="Portfolio navigation">
-          <a href="#top" className="text-sm font-bold text-white">Jette Aries Portilla <span className="ml-1 font-normal text-cyan-200">/ Automation</span></a>
-          <a href="#contact" className="hidden items-center gap-2 text-sm font-semibold text-slate-300 transition hover:text-cyan-200 sm:inline-flex">
-            Let&apos;s talk <ArrowUpRight size={16} />
-          </a>
-        </nav>
-
-        <div id="top" className="grid scroll-mt-8 gap-12 lg:grid-cols-[1.12fr_0.88fr] lg:items-center lg:gap-16">
-          <div className="max-w-3xl">
-            <p className="eyebrow">AI Automation &amp; SaaS Systems Builder</p>
-            <h1 className="mt-6 max-w-3xl text-4xl font-semibold leading-[1.08] text-white sm:text-5xl lg:text-6xl">
-              Building reliable AI systems, <span className="gradient-text">from workflow automation to production-oriented SaaS.</span>
-            </h1>
-            <p className="mt-7 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-              I use Codex, TypeScript, Supabase/PostgreSQL, APIs, and n8n to turn operational problems into tested systems with clear data rules, human oversight, failure handling, and maintainable architecture.
-            </p>
-            <p className="mt-4 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-              I’m documenting the engineering decisions, experiments, failures, and lessons along the way so other automation builders can learn from the journey.
-            </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a href="/projects/dentalflow-saas" className="button-primary w-full sm:w-auto">
-                Explore DentalFlow <ArrowDown size={16} />
-              </a>
-              <a href="#projects" className="button-secondary w-full sm:w-auto">
-                View Engineering Projects <ArrowDown size={16} />
-              </a>
-            </div>
-            <p className="mt-6 max-w-2xl text-sm leading-6 text-slate-400">
-              Currently building across healthcare automation, AI-assisted operations, and reliable SaaS architecture.
-            </p>
-          </div>
-
-          <div className="card cyber-panel emblem-core relative overflow-hidden rounded-xl p-5 sm:p-7">
-            <div className="absolute right-0 top-0 h-32 w-32 border-b border-l border-cyan-200/15" aria-hidden="true" />
-            <div className="relative flex items-end justify-between gap-4 border-b border-white/10 pb-5">
-              <div>
-                <p className="eyebrow">Operating model</p>
-                <p className="mt-2 text-sm text-slate-400">Useful automation, deliberate oversight</p>
-              </div>
-              <span className="whitespace-nowrap font-mono text-xs text-cyan-100/75">01 — 04</span>
-            </div>
-            <div className="relative mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {[
-                { label: 'AI workflow design', icon: BrainCircuit, tone: 'text-cyan-200' },
-                { label: 'CRM automation', icon: Boxes, tone: 'text-rose-200' },
-                { label: 'Connected operations', icon: Workflow, tone: 'text-cyan-300' },
-                { label: 'Human review checkpoints', icon: CalendarCheck2, tone: 'text-rose-300' }
-              ].map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <div key={item.label} className="min-h-28 rounded-lg bg-black/20 p-4">
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono text-xs text-slate-500">0{index + 1}</span>
-                      <Icon size={18} className={item.tone} strokeWidth={1.8} />
-                    </div>
-                    <p className="mt-5 text-sm font-semibold leading-5 text-slate-100">{item.label}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+      <nav className="portfolio-nav" aria-label="Portfolio navigation">
+        <a href="#top" className="nav-brand"><span className="brand-mark">AP</span><span>Jette Aries Portilla</span></a>
+        <div className="nav-links"><a href="#approach">Capabilities</a><a href="#tools">Tools</a><a href="#projects">Work</a><a href="#process">Process</a><a href="#builder">About</a></div>
+        <a href="#contact" className="nav-cta">Let&apos;s talk <ArrowUpRight size={14} /></a>
+      </nav>
+      <section id="top" className="reference-hero">
+        <div className="hero-copy">
+          <p className="eyebrow">AI AUTOMATION / SAAS SYSTEMS</p>
+          <h1>Building reliable AI systems, <span className="gradient-text">from workflow automation to production-oriented SaaS.</span></h1>
+          <p>I use Codex, TypeScript, Supabase/PostgreSQL, APIs, and n8n to turn operational problems into tested systems with clear data rules, human oversight, and maintainable architecture.</p>
+          <div className="hero-actions"><a href="#projects" className="button-primary">Explore my work <ArrowDown size={16} /></a><a href="#contact" className="button-secondary">Start a conversation <ArrowUpRight size={16} /></a></div>
         </div>
+        <div className="hero-visual">
+          <div className="hero-orbit" aria-hidden="true"><span /><span /><span /></div>
+          <div className="hero-portrait"><Image src="/images/aries-headshot.jpg" alt="Jette Aries Portilla" width={800} height={800} priority sizes="(max-width: 768px) 70vw, 420px" /></div>
+          <div className="hero-caption"><span>01 / SYSTEMS THAT WORK TOGETHER</span><strong>Thoughtful automation.<br />Built for real work.</strong><p>Connecting people, processes, data, and AI.</p></div>
+        </div>
+        <a className="scroll-cue" href="#approach">SCROLL TO EXPLORE <ArrowDown size={14} /></a>
       </section>
 
       <section id="pain-points" className="tech-band border-y border-white/10 bg-[#0d1312]/90 px-5 py-14 sm:px-8 lg:px-10 lg:py-16">
@@ -189,10 +144,10 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-9 max-w-3xl">
             <p className="eyebrow">Project proof</p>
-            <h2 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">Designed around the work, not just the tools.</h2>
+            <h2 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">Systems built around the work.</h2>
             <p className="mt-4 text-sm leading-7 text-slate-300">Explore workflow design, automation architecture, and AI-assisted operations across these systems. Each project is labeled by its current build status.</p>
           </div>
-          <div className="grid items-stretch gap-5 xl:grid-cols-2">
+          <div className="project-list">
             {projects.map((project) => <ProjectCard key={project.slug} project={project} />)}
           </div>
           <div className="mt-9">

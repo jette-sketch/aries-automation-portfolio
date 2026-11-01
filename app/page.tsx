@@ -2,7 +2,10 @@ import Image from 'next/image';
 import { ArrowDown, ArrowRight, ArrowUpRight, BrainCircuit, Boxes, CalendarCheck2, Mail, Workflow } from 'lucide-react';
 
 import { projects } from '@/data/projects';
-import { ProjectCard } from '@/components/ProjectCard';
+import { ProjectFilter } from '@/components/ProjectFilter';
+import { ProblemExplorer } from '@/components/ProblemExplorer';
+import { WorkflowDemo } from '@/components/WorkflowDemo';
+import { FAQ } from '@/components/FAQ';
 import { BuildingWithCodex } from '@/components/BuildingWithCodex';
 import { WorkflowIntakeDialog } from '@/components/WorkflowIntakeDialog';
 import { SystemsExplorer } from '@/components/SystemsExplorer';
@@ -23,14 +26,6 @@ export default function Home() {
     { label: 'Connect your tools', detail: 'Integrate APIs, webhooks, CRMs, and AI where useful.', icon: Boxes },
     { label: 'Keep people in control', detail: 'Add human review at decisions that need judgment.', icon: CalendarCheck2 },
     { label: 'Test and document', detail: 'Validate the flow and leave a system others can operate.', icon: ArrowRight }
-  ];
-  const painPoints = [
-    'Manual follow-ups',
-    'Scattered CRM data',
-    'Missed leads or appointments',
-    'Repetitive admin work',
-    'Slow reporting',
-    'No clear automation workflow'
   ];
   const processSteps = [
     { number: '01', title: 'Share your workflow', detail: 'Bring one process that takes too much time or attention.' },
@@ -55,28 +50,7 @@ export default function Home() {
         <a className="scroll-cue" href="#approach">SCROLL TO EXPLORE <ArrowDown size={14} /></a>
       </section>
 
-      <section id="pain-points" className="tech-band border-y border-white/10 bg-[#0d1312]/90 px-5 py-14 sm:px-8 lg:px-10 lg:py-16">
-        <div className="mx-auto grid max-w-7xl gap-9 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-          <div>
-            <p className="eyebrow">Where work gets stuck</p>
-            <h2 className="mt-3 max-w-xl text-3xl font-semibold leading-tight text-white sm:text-4xl">Small manual gaps add up.</h2>
-            <p className="mt-4 max-w-lg text-sm leading-7 text-slate-300">When routine work depends on memory and disconnected tools, follow-through gets harder to trust.</p>
-          </div>
-          <div className="grid gap-x-6 sm:grid-cols-2">
-            {painPoints.map((point, index) => (
-              <div key={point} className="flex min-h-14 items-center gap-3 border-b border-white/10 py-3">
-                <span className="font-mono text-xs text-cyan-100/75">0{index + 1}</span>
-                <span className="text-sm text-slate-200">{point}</span>
-              </div>
-            ))}
-          </div>
-          <div className="lg:col-start-2">
-            <a href="https://cal.com/jette-aries-portilla/discovery-call" target="_blank" rel="noopener noreferrer" className="button-primary w-full sm:w-auto">
-              Book a Discovery Call <ArrowUpRight size={16} />
-            </a>
-          </div>
-        </div>
-      </section>
+      <ProblemExplorer />
 
       <section id="approach" className="tech-band mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
@@ -144,9 +118,7 @@ export default function Home() {
             <h2 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">Systems built around the work.</h2>
             <p className="mt-4 text-sm leading-7 text-slate-300">Explore workflow design, automation architecture, and AI-assisted operations across these systems. Each project is labeled by its current build status.</p>
           </div>
-          <div className="project-list">
-            {projects.map((project) => <ProjectCard key={project.slug} project={project} />)}
-          </div>
+          <ProjectFilter projects={projects} />
           <div className="mt-9">
             <a href="https://cal.com/jette-aries-portilla/discovery-call" target="_blank" rel="noopener noreferrer" className="button-primary w-full sm:w-auto">
               Review These Systems With Me <ArrowUpRight size={16} />
@@ -155,6 +127,7 @@ export default function Home() {
         </div>
       </section>
 
+      <WorkflowDemo />
       <BuildingWithCodex />
 
       <section id="process" className="tech-band mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
@@ -222,6 +195,7 @@ export default function Home() {
         </div>
       </section>
 
+      <FAQ />
       <section id="contact" className="tech-band mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 lg:py-14">
         <div className="cyber-panel relative overflow-hidden rounded-xl bg-[linear-gradient(120deg,rgba(12,52,71,0.75),rgba(12,21,34,0.96)_58%,rgba(55,28,43,0.55)] p-6 sm:p-10 lg:p-12">
           <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-cyan-200/55 to-transparent" aria-hidden="true" />

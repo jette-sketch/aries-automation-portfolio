@@ -374,3 +374,15 @@ body { background: #050c12; background-image: radial-gradient(circle at 18% 16%,
 .systems-explorer .hero-caption { border-left: 2px solid #88f9e8; background: linear-gradient(100deg, #0a222a, #0a141de8); box-shadow: inset 0 0 0 1px #7feadd1c, 0 0 30px #24d9cd0b; }
 .systems-explorer .hero-caption strong { min-height: 2.4em; }
 @media (prefers-reduced-motion: reduce) { .systems-node, .systems-center { transition: none; } .systems-node:hover, .systems-center:hover { transform: none; } }
+
+.choice-button, .filter-button { min-height: 44px; padding: .7rem 1rem; border: 1px solid #84e9de40; border-radius: .5rem; color: #d8edef; background: #0a1a23; text-align: left; font-size: .85rem; transition: border-color .2s, background-color .2s; }
+.choice-button:hover, .filter-button:hover, .choice-button[aria-pressed="true"], .filter-button[aria-pressed="true"] { border-color: #8bf6e9; background: #124041; color: #fff; }
+.flow-step { padding: .65rem .75rem; border: 1px solid #80e6db38; border-radius: .45rem; background: #07141d; color: #d6ecec; font-size: .8rem; }
+.flow-step span { color: #80e9dd; font-family: monospace; }
+.project-context { margin-top: 1.25rem; padding: 1rem; border: 1px solid #9ae7de29; border-radius: .5rem; background: #081820bd; }
+.project-context p { color: #b9cbd0; font-size: .8rem; line-height: 1.65; }
+.project-context p + p { margin-top: .75rem; }
+.project-context strong { color: #a0f3e7; }
+.faq-item { padding: 1.15rem 1.25rem; }
+.faq-item summary { cursor: pointer; color: #f1fbfb; font-weight: 600; line-height: 1.5; }
+.faq-item p { max-width: 52rem; margin-top: .75rem; color: #b5c8ce; font-size: .9rem; line-height: 1.7; }

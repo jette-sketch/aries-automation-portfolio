@@ -29,6 +29,7 @@ export function ProjectCard({ project }: { project: Project }) {
         <p className="eyebrow">{project.maturity}</p>
         <h3>{project.title}</h3>
         <p>{project.summary}</p>
+        <div className="project-context"><p><strong>Problem:</strong> {project.businessProblem}</p><p><strong>Approach:</strong> {project.solutionOverview}</p></div>
         <p className="project-status"><strong>Current state:</strong> {project.status} {project.credibilityNote}</p>
         <div className="project-tools">{project.stack.map((tool) => <span key={tool}>{tool}</span>)}</div>
         <Link href={`/projects/${project.slug}`} className="button-secondary">Open case study <ArrowUpRight size={16} /></Link>

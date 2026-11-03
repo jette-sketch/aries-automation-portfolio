@@ -6,6 +6,7 @@ import { ProjectFilter } from '@/components/ProjectFilter';
 import { ProblemExplorer } from '@/components/ProblemExplorer';
 import { WorkflowDemo } from '@/components/WorkflowDemo';
 import { FAQ } from '@/components/FAQ';
+import { ClinicShowcase } from '@/components/ClinicShowcase';
 import { BuildingWithCodex } from '@/components/BuildingWithCodex';
 import { WorkflowIntakeDialog } from '@/components/WorkflowIntakeDialog';
 import { SystemsExplorer } from '@/components/SystemsExplorer';
@@ -36,21 +37,30 @@ export default function Home() {
     <main className="pb-16">
       <nav className="portfolio-nav" aria-label="Portfolio navigation">
         <a href="#top" className="nav-brand"><span className="brand-mark">AP</span><span>Jette Aries Portilla</span></a>
-        <div className="nav-links"><a href="#approach">Capabilities</a><a href="#tools">Tools</a><a href="#projects">Work</a><a href="#process">Process</a><a href="#builder">About</a></div>
+        <div className="nav-links"><a href="#capabilities">Capabilities</a><a href="#tools">Tools</a><a href="#projects">Work</a><a href="#building-with-codex">Codex</a><a href="#process">Process</a><a href="#builder">About</a></div>
         <a href="#contact" className="nav-cta">Let&apos;s talk <ArrowUpRight size={14} /></a>
       </nav>
       <section id="top" className="reference-hero">
         <div className="hero-copy">
           <p className="eyebrow">AI AUTOMATION / SAAS SYSTEMS</p>
-          <h1>Building reliable AI systems, <span className="gradient-text">from workflow automation to production-oriented SaaS.</span></h1>
+          <h1>Reliable systems for <span className="gradient-text">work that slows teams down.</span></h1>
           <p>I use Codex, TypeScript, Supabase/PostgreSQL, APIs, and n8n to turn operational problems into tested systems with clear data rules, human oversight, and maintainable architecture.</p>
-          <div className="hero-actions"><a href="#projects" className="button-primary">Explore my work <ArrowDown size={16} /></a><a href="#contact" className="button-secondary">Start a conversation <ArrowUpRight size={16} /></a></div>
+          <div className="hero-actions"><a href="#projects" className="button-primary">Explore my work <ArrowDown size={16} /></a><a href="#building-with-codex" className="button-secondary">How I build with Codex <ArrowDown size={16} /></a></div>
         </div>
         <SystemsExplorer />
         <a className="scroll-cue" href="#approach">SCROLL TO EXPLORE <ArrowDown size={14} /></a>
       </section>
 
       <ProblemExplorer />
+
+      <section id="capabilities" className="tech-band mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
+        <div className="max-w-3xl"><p className="eyebrow">What I build</p><h2 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">From disconnected work to clearer systems.</h2><p className="mt-4 text-sm leading-7 text-slate-300">I start with the process and its constraints, then choose the tools and controls that fit.</p></div>
+        <div className="mt-7 grid gap-4 md:grid-cols-3">
+          <article className="detail-panel rounded-xl p-6"><Workflow size={22} className="text-cyan-200" aria-hidden="true" /><h3 className="mt-4 text-lg font-semibold text-white">Workflow automation</h3><p className="mt-2 text-sm leading-6 text-slate-300">Map repetitive work, route requests, and make handoffs and exceptions visible.</p><a href="/projects/ai-procurement-approval-system" className="mt-4 inline-flex text-sm font-semibold text-cyan-200">See procurement design →</a></article>
+          <article className="detail-panel rounded-xl p-6"><Boxes size={22} className="text-cyan-200" aria-hidden="true" /><h3 className="mt-4 text-lg font-semibold text-white">API and tool integration</h3><p className="mt-2 text-sm leading-6 text-slate-300">Connect existing platforms through APIs and webhooks with validation and clear failure handling.</p><a href="/projects/roofing-lead-sales-automation" className="mt-4 inline-flex text-sm font-semibold text-cyan-200">See lead workflow →</a></article>
+          <article className="detail-panel rounded-xl p-6"><BrainCircuit size={22} className="text-cyan-200" aria-hidden="true" /><h3 className="mt-4 text-lg font-semibold text-white">Data-backed systems and AI</h3><p className="mt-2 text-sm leading-6 text-slate-300">Design around authoritative data, explicit access rules, and human oversight for consequential decisions.</p><a href="/projects/dentalflow-saas" className="mt-4 inline-flex text-sm font-semibold text-cyan-200">Explore DentalFlow →</a></article>
+        </div>
+      </section>
 
       <section id="approach" className="tech-band mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
@@ -127,6 +137,7 @@ export default function Home() {
         </div>
       </section>
 
+      <ClinicShowcase />
       <WorkflowDemo />
       <BuildingWithCodex />
 

@@ -164,7 +164,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[18rem_minmax(0,1fr)] lg:items-center lg:gap-12">
           <div className="profile-frame overflow-hidden rounded-xl p-2">
             <Image
-              src="/images/aries-headshot.jpg"
+              src="/images/aries-headshot-retouched.jpg"
               alt="Jette Aries E. Portilla, AI Automation Specialist"
               width={800}
               height={800}

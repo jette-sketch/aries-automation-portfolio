@@ -45,7 +45,7 @@ export default function Home() {
           <p className="eyebrow">AI AUTOMATION / SAAS SYSTEMS</p>
           <h1>Reliable systems for <span className="gradient-text">work that slows teams down.</span></h1>
           <p>I use Codex, TypeScript, Supabase/PostgreSQL, APIs, and n8n to turn operational problems into tested systems with clear data rules, human oversight, and maintainable architecture.</p>
-          <div className="hero-actions"><a href="#projects" className="button-primary">Explore my work <ArrowDown size={16} /></a><a href="#building-with-codex" className="button-secondary">How I build with Codex <ArrowDown size={16} /></a></div>
+          <div className="hero-actions"><a href="/projects/dentalflow-saas" className="button-primary">Explore DentalFlow <ArrowUpRight size={16} /></a><a href="#building-with-codex" className="button-secondary">How I build with Codex <ArrowDown size={16} /></a></div>
         </div>
         <SystemsExplorer />
         <a className="scroll-cue" href="#approach">SCROLL TO EXPLORE <ArrowDown size={14} /></a>

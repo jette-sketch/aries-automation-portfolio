@@ -394,3 +394,16 @@ body { background: #050c12; background-image: radial-gradient(circle at 18% 16%,
 .workflow-demo-steps { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
 .workflow-demo-steps button:not(:last-child)::after { content: ' →'; color: #8cece1; }
 @media(max-width: 700px) { .clinic-showcase { grid-template-columns: 1fr; } .clinic-stage-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Workflow simulation */
+.workflow-simulation { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(16rem, .7fr); gap: 1.25rem; }
+.simulation-select-label { display: grid; gap: .4rem; color: #c4dadd; font-size: .8rem; font-weight: 600; }
+.simulation-select { min-height: 3.15rem; min-width: 13rem; padding: .65rem .85rem; border: 1px solid #84e9de66; border-radius: .4rem; background: #0a1a23; color: #f0fbfb; }
+.simulation-select:focus-visible { outline: 2px solid #a5f3fc; outline-offset: 4px; }
+.workflow-simulation .filter-button { flex: 1 1 8rem; }
+#workflow-demo button:disabled { cursor: wait; opacity: .65; transform: none; }
+.simulation-log { min-height: 12rem; padding: 1rem; border: 1px solid #8be4de35; border-radius: .6rem; background: #06121bd9; }
+.simulation-status { color: #a6ede3; font: 600 .65rem/1.4 monospace; text-transform: uppercase; letter-spacing: .08em; }
+.simulation-event { display: flex; align-items: flex-start; gap: .65rem; color: #c8dadd; font-size: .8rem; line-height: 1.5; }
+.simulation-event span { color: #83e9dc; font: .7rem/1.7 monospace; }
+@media (max-width: 800px) { .workflow-simulation { grid-template-columns: 1fr; } .simulation-select { width: 100%; } }

@@ -23,6 +23,21 @@ export default async function ProjectDetailPage({
   const engineering = 'engineering' in project ? project.engineering : undefined;
   const social = 'social' in project ? project.social : undefined;
   const clinic = 'clinic' in project ? project.clinic : undefined;
+  const originalConcepts: Record<string, { image: string; description: string }> = {
+    'dentalflow-saas': {
+      image: '/images/concepts/dentalflow-concept.webp',
+      description: 'This early automation concept helped shape DentalFlow. The project has since evolved toward the database-backed SaaS architecture described above.',
+    },
+    'clinicflow-operations-prototype': {
+      image: '/images/concepts/clinicflow-concept.webp',
+      description: 'This early automation concept informed the project. The current ClinicFlow is a synthetic-data frontend prototype, without live clinic integrations.',
+    },
+    'social-presence-automation': {
+      image: '/images/concepts/social-presence-concept.webp',
+      description: 'This early content automation concept informed the current engineering build. Publishing and downstream media processing remain under development.',
+    },
+  };
+  const originalConcept = originalConcepts[slug];
 
   return (
     <main className="mx-auto max-w-7xl px-5 py-7 sm:px-8 lg:px-10 lg:py-10">
@@ -80,6 +95,20 @@ export default async function ProjectDetailPage({
             <img src={`/diagrams/${project.diagram}`} alt={`${project.title} ${engineering ? 'architecture layers' : 'workflow diagram'}`} className="mx-auto w-full" style={engineering || social || clinic ? { maxWidth: '48rem', maxHeight: 'none' } : undefined} />
           </div>
         </section>
+
+        {originalConcept && (
+          <section className="border-b border-cyan-100/15 px-5 py-8 sm:px-8 lg:px-12" aria-labelledby="original-concept-title">
+            <p className="eyebrow">Project evolution</p>
+            <h2 id="original-concept-title" className="mt-2 text-2xl font-semibold text-white">Original workflow concept</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300">{originalConcept.description} This illustration captures an early idea, not evidence that its depicted integrations or outcomes are currently operational.</p>
+            <figure className="mt-5">
+              <a href={originalConcept.image} target="_blank" rel="noopener noreferrer" className="block rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200" aria-label={`Open the full-size original ${project.title} concept illustration`}>
+                <img src={originalConcept.image} alt={`Early workflow concept illustration for ${project.title}`} className="h-auto w-full rounded-lg border border-cyan-100/20" loading="lazy" />
+              </a>
+              <figcaption className="mt-3 text-sm leading-6 text-slate-400">Original concept illustration. Select the image to view it full size.</figcaption>
+            </figure>
+          </section>
+        )}
 
         {clinic && (
           <div className="space-y-10 border-b border-cyan-100/15 px-5 py-8 sm:px-8 lg:px-12 lg:py-10">

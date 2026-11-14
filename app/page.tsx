@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { ArrowDown, ArrowRight, ArrowUpRight, BrainCircuit, Boxes, CalendarCheck2, Mail, Workflow } from 'lucide-react';
 
@@ -10,6 +11,11 @@ import { ClinicShowcase } from '@/components/ClinicShowcase';
 import { BuildingWithCodex } from '@/components/BuildingWithCodex';
 import { WorkflowIntakeDialog } from '@/components/WorkflowIntakeDialog';
 import { SystemsExplorer } from '@/components/SystemsExplorer';
+
+export const metadata: Metadata = {
+  description: 'Explore Jette Aries Portilla’s automation portfolio, with case studies on clinic operations, lead intake, and workflow design using n8n, Supabase, and APIs.',
+  alternates: { canonical: '/' },
+};
 
 const stackGroups = [
   { name: 'Automation', tools: ['n8n', 'Make.com', 'GoHighLevel', 'Zapier'] },
@@ -43,7 +49,7 @@ export default function Home() {
       <section id="top" className="reference-hero">
         <div className="hero-copy">
           <p className="eyebrow">AI AUTOMATION / SAAS SYSTEMS</p>
-          <h1>Reliable systems for <span className="gradient-text">work that slows teams down.</span></h1>
+          <h1>AI automation for <span className="gradient-text">business workflows.</span></h1>
           <p>I use Codex, TypeScript, Supabase/PostgreSQL, APIs, and n8n to turn operational problems into tested systems with clear data rules, human oversight, and maintainable architecture.</p>
           <div className="hero-actions"><a href="/projects/dentalflow-saas" className="button-primary">Explore DentalFlow <ArrowUpRight size={16} /></a><a href="#building-with-codex" className="button-secondary">How I build with Codex <ArrowDown size={16} /></a></div>
         </div>
@@ -180,7 +186,7 @@ export default function Home() {
           <div>
             <p className="eyebrow">The builder behind the systems</p>
             <h2 className="mt-3 max-w-2xl text-3xl font-semibold leading-tight text-white sm:text-4xl">Operations-first thinking, built into every workflow.</h2>
-            <p className="mt-4 max-w-3xl text-base leading-7 text-slate-300">More than six years of customer support and operations experience inform how I map handoffs, data rules, and exception paths before choosing an automation.</p>
+            <p className="mt-4 max-w-3xl text-base leading-7 text-slate-300">I build AI automation and workflow systems under Autom8urBiz. More than six years of customer support and operations experience inform how I map handoffs, data rules, and exception paths before choosing an automation.</p>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               <div className="detail-panel rounded-lg p-4">
                 <p className="font-mono text-xs uppercase text-cyan-100/70">01 / Approach</p>

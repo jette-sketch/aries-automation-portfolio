@@ -1,9 +1,14 @@
 import type { Metadata } from 'next';
+
+import { siteUrl } from '@/data/site';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Jette Aries Portilla | AI Automation Portfolio',
-  description: 'AI automation, CRM automation, workflow orchestration, and business process automation portfolio.',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'Jette Aries Portilla | AI Automation Specialist',
+    template: '%s | Jette Aries Portilla',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

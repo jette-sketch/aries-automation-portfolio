@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { ArrowDown, ArrowRight, ArrowUpRight, BrainCircuit, Boxes, CalendarCheck2, Mail, Workflow } from 'lucide-react';
 
@@ -10,6 +11,10 @@ import { ClinicShowcase } from '@/components/ClinicShowcase';
 import { BuildingWithCodex } from '@/components/BuildingWithCodex';
 import { WorkflowIntakeDialog } from '@/components/WorkflowIntakeDialog';
 import { SystemsExplorer } from '@/components/SystemsExplorer';
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+};
 
 const stackGroups = [
   { name: 'Automation', tools: ['n8n', 'Make.com', 'GoHighLevel', 'Zapier'] },

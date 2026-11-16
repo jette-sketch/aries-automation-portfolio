@@ -1,18 +1,54 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowUpRight, Check, CircleDot, ShieldCheck } from 'lucide-react';
 
 import { projects } from '@/data/projects';
 
+type ProjectPageProps = {
+  params: Promise<{ slug: string }>;
+};
+
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }
 
-export default async function ProjectDetailPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const project = projects.find((item) => item.slug === slug);
+
+  if (!project) {
+    notFound();
+  }
+
+  const title = `${project.title} | Jette Aries Portilla`;
+  const description = project.summary;
+  const canonical = `/projects/${project.slug}`;
+  const image = project.slug === 'clinicflow-operations-prototype'
+    ? {
+        url: '/images/social/clinicflow.png',
+        width: 1200,
+        height: 630,
+        alt: 'ClinicFlow Operations Prototype, a walk-in reception and queue demo with synthetic data',
+      }
+    : undefined;
+
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      type: 'website',
+      title,
+      description,
+      url: canonical,
+      images: image ? [image] : undefined,
+    },
+    twitter: image ? { card: 'summary_large_image', title, description, images: [image] } : undefined,
+  };
+}
+
+export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const { slug } = await params;
   const project = projects.find((item) => item.slug === slug);
 

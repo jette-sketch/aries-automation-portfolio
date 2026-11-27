@@ -702,3 +702,51 @@ dialog.booking-calendar-dialog[open] {
   .lucifer-core-label span { max-width: 5.5rem; }
   .lucifer-node { font-size: .55rem; }
 }
+
+
+/* Core mode change: dissolve the old reactor into a particle cloud, then rebuild
+   the new reactor from the same fragments. Idle breathing and orbits remain separate. */
+.lucifer-fragments { pointer-events: none; }
+.lucifer-fragment { opacity: 0; transform-box: view-box; transform-origin: 50% 50%; }
+.lucifer-explorer[data-phase="disintegrate"] .lucifer-structure,
+.lucifer-explorer[data-phase="disintegrate"] .lucifer-core-label {
+  animation: lucifer-structure-dissolve var(--dissolve-duration) ease-in both;
+}
+.lucifer-explorer[data-phase="integrate"] .lucifer-structure,
+.lucifer-explorer[data-phase="integrate"] .lucifer-core-label {
+  animation: lucifer-structure-reassemble var(--integrate-duration) ease-out both;
+}
+.lucifer-explorer[data-phase="disintegrate"] .lucifer-fragment {
+  animation: lucifer-fragment-dissolve var(--dissolve-duration) cubic-bezier(.18,.68,.28,1) both;
+}
+.lucifer-explorer[data-phase="integrate"] .lucifer-fragment {
+  animation: lucifer-fragment-reassemble var(--integrate-duration) cubic-bezier(.45,.03,.25,1) both;
+}
+.lucifer-explorer[data-phase="disintegrate"] .lucifer-aura,
+.lucifer-explorer[data-phase="integrate"] .lucifer-aura { opacity: .28; }
+.lucifer-explorer .lucifer-node[aria-disabled="true"] { cursor: wait; }
+@keyframes lucifer-structure-dissolve {
+  0% { opacity: 1; }
+  30% { opacity: .8; }
+  75%, 100% { opacity: 0; }
+}
+@keyframes lucifer-structure-reassemble {
+  0%, 26% { opacity: 0; }
+  72% { opacity: .7; }
+  100% { opacity: 1; }
+}
+@keyframes lucifer-fragment-dissolve {
+  0% { transform: translate(0,0); opacity: 0; }
+  22% { opacity: var(--fragment-opacity); }
+  100% { transform: translate(var(--fragment-x),var(--fragment-y)); opacity: var(--fragment-opacity); }
+}
+@keyframes lucifer-fragment-reassemble {
+  0% { transform: translate(var(--fragment-x),var(--fragment-y)); opacity: var(--fragment-opacity); }
+  72% { opacity: var(--fragment-opacity); }
+  100% { transform: translate(0,0); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lucifer-explorer .lucifer-structure,
+  .lucifer-explorer .lucifer-core-label { animation: none !important; opacity: 1; }
+  .lucifer-explorer .lucifer-fragments { display: none; }
+}

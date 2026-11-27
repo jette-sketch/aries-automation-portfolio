@@ -34,7 +34,7 @@ These are bounded case-study reports. They do not establish exhaustive security 
 
 ## November 27 progress update (reported)
 
-Bounded offline reliability and recovery qualification has advanced, including archive integrity validation and negative checks using deliberately corrupted evidence. Native integration acceptance, hosted CI, and production qualification remain open. These are project-reported results, not independently reproduced tests or a deployment certification.
+The November 24 project checkpoint documents archive integrity review and security remediation proposals. These are offline artifacts, not native database execution or proof that the proposed controls are effective. Security findings remain open; native acceptance and release qualification have not been established. No alpha, beta or production readiness is claimed.
 
 ## Codex's role
 

@@ -747,11 +747,12 @@ dialog.booking-calendar-dialog[open] {
 
 
 /* Luminous elliptical tracks carry the comet heads and their tapered particle tails.
-   Keep the three-plane silhouette readable while electrons travel at the requested 10x speed. */
+   Keep all three orbital planes stationary while electrons travel at the requested 10x speed. */
 .lucifer-atomic-orbits {
   transform-box: view-box;
   transform-origin: 50% 50%;
-  animation: lucifer-orbit-spin 18s linear infinite;
+  /* Fixed orbital planes; only comet heads and tails travel. */
+  animation: none;
 }
 .lucifer-atomic-halo {
   stroke-width: 6;

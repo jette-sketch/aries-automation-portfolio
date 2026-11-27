@@ -172,7 +172,7 @@ export default function Home() {
           <div className="mb-9 max-w-3xl">
             <p className="eyebrow">Project proof</p>
             <h2 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">Systems built around the work.</h2>
-            <p className="mt-4 text-sm leading-7 text-slate-300">Explore workflow design, automation architecture, and AI-assisted operations across these systems. Each project is labeled by its current build status.</p>
+            <p className="mt-4 text-sm leading-7 text-slate-300">Browse the project cabinet by category. Select a project title to reveal its architecture, workflow, technologies and current build status.</p>
           </div>
           <ProjectFilter projects={projects} />
           <div className="mt-9">

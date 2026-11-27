@@ -750,3 +750,64 @@ dialog.booking-calendar-dialog[open] {
   .lucifer-explorer .lucifer-core-label { animation: none !important; opacity: 1; }
   .lucifer-explorer .lucifer-fragments { display: none; }
 }
+
+
+/* Three intersecting atomic paths with independent dots. Ten times the base
+   comet angular frequency; steady luminance (no strobe or opacity cycling). */
+.lucifer-atomic-orbits {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  animation: lucifer-orbit-spin calc(var(--orbit-speed) / 10) linear infinite;
+}
+.lucifer-atomic-dot {
+  filter: drop-shadow(0 0 4px currentColor);
+  animation: lucifer-atomic-dot-orbit calc(var(--orbit-speed) / 10) linear infinite;
+}
+.lucifer-atomic-dot-0 { transform: translate(188px, 0); }
+.lucifer-atomic-dot-1 {
+  transform: translate(-94px, 73.612px);
+  animation-delay: calc(var(--orbit-speed) / -30);
+}
+.lucifer-atomic-dot-2 {
+  transform: translate(-94px, -73.612px);
+  animation-delay: calc(var(--orbit-speed) / -15);
+  animation-direction: reverse;
+}
+@keyframes lucifer-atomic-dot-orbit {
+  0.000% { transform: translate(188.000px, 0.000px); }
+  3.125% { transform: translate(184.388px, 16.583px); }
+  6.250% { transform: translate(173.689px, 32.528px); }
+  9.375% { transform: translate(156.316px, 47.223px); }
+  12.500% { transform: translate(132.936px, 60.104px); }
+  15.625% { transform: translate(104.447px, 70.675px); }
+  18.750% { transform: translate(71.944px, 78.530px); }
+  21.875% { transform: translate(36.677px, 83.367px); }
+  25.000% { transform: translate(0.000px, 85.000px); }
+  28.125% { transform: translate(-36.677px, 83.367px); }
+  31.250% { transform: translate(-71.944px, 78.530px); }
+  34.375% { transform: translate(-104.447px, 70.675px); }
+  37.500% { transform: translate(-132.936px, 60.104px); }
+  40.625% { transform: translate(-156.316px, 47.223px); }
+  43.750% { transform: translate(-173.689px, 32.528px); }
+  46.875% { transform: translate(-184.388px, 16.583px); }
+  50.000% { transform: translate(-188.000px, 0.000px); }
+  53.125% { transform: translate(-184.388px, -16.583px); }
+  56.250% { transform: translate(-173.689px, -32.528px); }
+  59.375% { transform: translate(-156.316px, -47.223px); }
+  62.500% { transform: translate(-132.936px, -60.104px); }
+  65.625% { transform: translate(-104.447px, -70.675px); }
+  68.750% { transform: translate(-71.944px, -78.530px); }
+  71.875% { transform: translate(-36.677px, -83.367px); }
+  75.000% { transform: translate(-0.000px, -85.000px); }
+  78.125% { transform: translate(36.677px, -83.367px); }
+  81.250% { transform: translate(71.944px, -78.530px); }
+  84.375% { transform: translate(104.447px, -70.675px); }
+  87.500% { transform: translate(132.936px, -60.104px); }
+  90.625% { transform: translate(156.316px, -47.223px); }
+  93.750% { transform: translate(173.689px, -32.528px); }
+  96.875% { transform: translate(184.388px, -16.583px); }
+  100.000% { transform: translate(188.000px, -0.000px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lucifer-atomic-orbits, .lucifer-atomic-dot { animation: none !important; }
+}

@@ -15,6 +15,7 @@ Code that looks correct or compiles is one signal. Completion depends on evidenc
 | [ClinicFlow Operations Prototype](clinicflow.md) | Deployed prototype | Field discovery, walk-in operations, and a synthetic browser-local demonstration |
 | [Webhook Payload Validator](webhook-validator.md) | Tested utility | Deterministic event validation and reported test coverage |
 | [AI Autopilot Supervisor](ai-autopilot.md) | Offline proof of concept | Bounded synthetic repair and controlled resume |
+| [Research and CRM progress](research-crm.md) | Draft / synthetic proof / architecture | Construction CRM, Autom8urBiz governance and SecretaryFlow boundaries |
 | [Building with Codex](building-with-codex.md) | Engineering method | Requirements, implementation, diagnosis, correction, and verification |
 
 ## Distinct engineering states

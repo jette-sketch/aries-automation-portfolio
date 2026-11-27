@@ -122,26 +122,19 @@ export function SystemsExplorer() {
           </g>
           <g className="lucifer-atomic-orbits">
             {[0, 60, 120].map((angle, index) => (
-              <g key={angle} transform={'rotate(' + angle + ' 210 210)'}>
-                <ellipse cx="210" cy="210" rx="188" ry="85" fill="none" stroke="currentColor" strokeWidth="1.4" strokeOpacity=".36" />
-                <circle className={'lucifer-atomic-dot lucifer-atomic-dot-' + index}
-                  cx="210" cy="210" r="3.8" fill="var(--core-light)" />
+              <g key={angle} transform={'rotate(' + angle + ' 210 210)'}
+                className={'lucifer-atomic-plane lucifer-atomic-plane-' + index}>
+                <ellipse className="lucifer-atomic-halo" cx="210" cy="210" rx="188" ry="85" fill="none" stroke="currentColor" />
+                <ellipse className="lucifer-atomic-track" cx="210" cy="210" rx="188" ry="85" fill="none" stroke="currentColor" />
+                {Array.from({ length: 24 }, (_, tail) => {
+                  const strength = 1 - tail / 24;
+                  return <circle key={tail} className="lucifer-atomic-tail" cx="210" cy="210"
+                    r={.6 + 2.65 * strength} fill="currentColor" opacity={strength * .8}
+                    style={{ '--tail-lag': (tail + 1) * .0035 } as CSSProperties} />;
+                })}
+                <circle className="lucifer-atomic-dot" cx="210" cy="210" r="3.8" fill="var(--core-light)" />
               </g>
             ))}
-          </g>
-          <g className="lucifer-orbit lucifer-orbit-outer" fill="none" stroke="currentColor">
-            <circle cx="210" cy="210" r="183" strokeWidth="2" strokeOpacity=".7" strokeDasharray="100 1049" strokeLinecap="round" />
-            <circle cx="393" cy="210" r="3.5" fill="var(--core-light)" stroke="none" />
-            <circle cx="210" cy="210" r="167" strokeWidth="1.5" strokeDasharray="29 1020" strokeOpacity=".8" />
-          </g>
-          <g className="lucifer-orbit lucifer-orbit-inner" fill="none" stroke="currentColor">
-            <circle cx="210" cy="210" r="145" strokeWidth="3" strokeDasharray="59 852" strokeOpacity=".65" strokeLinecap="round" />
-            <circle cx="355" cy="210" r="3.2" fill="var(--core-light)" stroke="none" />
-            <circle cx="210" cy="210" r="130" strokeWidth="1.4" strokeDasharray="18 798" strokeOpacity=".8" />
-          </g>
-          <g className="lucifer-orbit lucifer-orbit-third" fill="none" stroke="currentColor">
-            <circle cx="210" cy="210" r="155" strokeWidth="1.8" strokeDasharray="38 936" strokeOpacity=".55" strokeLinecap="round" />
-            <circle cx="365" cy="210" r="2.5" fill="var(--core-light)" stroke="none" />
           </g>
           <g className="lucifer-orbit lucifer-segments" fill="none" stroke="currentColor">
             <circle cx="210" cy="210" r="111" strokeWidth="8" strokeDasharray="28 15 8 16" strokeOpacity=".42" />

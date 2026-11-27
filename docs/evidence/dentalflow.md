@@ -32,6 +32,10 @@ The public project data reports:
 
 These are bounded case-study reports. They do not establish exhaustive security coverage, general recovery guarantees, or production verification. This hub supplies no additional test counts, raw test records, or independently reproduced results.
 
+## November 27 progress update (reported)
+
+Bounded offline reliability and recovery qualification has advanced, including archive integrity validation and negative checks using deliberately corrupted evidence. Native integration acceptance, hosted CI, and production qualification remain open. These are project-reported results, not independently reproduced tests or a deployment certification.
+
 ## Codex's role
 
 Codex supports implementation, inspection, debugging, testing, and evidence-driven correction. The documented loop starts with requirements, acceptance criteria, and architecture, then moves through implementation, targeted testing, evidence review, root-cause fixes, regression testing, and staging/deployment verification. Aries retains responsibility for architecture, security boundaries, evidence review, and deployment decisions.

@@ -541,14 +541,13 @@ dialog.booking-calendar-dialog[open] {
 .hero-profile { width: 100%; max-width: 160px; }
 .hero-builder .eyebrow { font-size: .66rem; }
 .hero-explorer-column { display: grid; gap: 1.4rem; }
-.hero-explorer-column .systems-graphic { width: min(100%, 360px); }
-.hero-builder-details { border-top: 1px solid rgba(127, 213, 239, .2); padding-top: 1.1rem; }
+.hero-explorer-column .systems-graphic { width: min(100%, 420px); }
 .hero-codex-link { display: inline-flex; align-items: center; gap: .5rem; color: #a5f3fc; font-size: .8rem; padding: .65rem .15rem; }
 .hero-codex-link:hover { color: white; }
 @media (max-width: 800px) {
   .reference-hero-with-builder { grid-template-columns: minmax(0, 1fr); gap: 2rem; padding: 8rem 1.25rem 3rem; }
   .reference-hero-with-builder .hero-copy { max-width: none; }
-  .hero-explorer-column .systems-graphic { width: min(100%, 360px); }
+  .hero-explorer-column .systems-graphic { width: min(100%, 420px); }
 }
 @media (max-width: 480px) {
   .hero-builder { grid-template-columns: minmax(0, 6.5rem) minmax(0, 1fr); gap: .8rem; }

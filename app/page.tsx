@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ArrowDown, ArrowRight, ArrowUpRight, BrainCircuit, Boxes, CalendarCheck2, Mail, Workflow } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, BrainCircuit, Boxes, CalendarCheck2, Workflow } from 'lucide-react';
 
 import { projects } from '@/data/projects';
 import { ProjectFilter } from '@/components/ProjectFilter';
@@ -34,11 +34,11 @@ export default function Home() {
     { number: '03', title: 'Decide the next best system', detail: 'Leave with a clearer view of what to automate next.' }
   ];
   return (
-    <main className="pb-16">
+    <main data-booking-sections className="pb-24">
       <nav className="portfolio-nav" aria-label="Portfolio navigation">
         <a href="#top" className="nav-brand"><span className="brand-mark">AP</span><span>Jette Aries Portilla</span></a>
         <div className="nav-links"><a href="#capabilities">Capabilities</a><a href="#tools">Tools</a><a href="#projects">Work</a><a href="#building-with-codex">Codex</a><a href="#process">Process</a><a href="#builder">About</a></div>
-        <a href="#contact" className="nav-cta">Let&apos;s talk <ArrowUpRight size={14} /></a>
+        <a href="https://cal.com/jette-aries-portilla/discovery-call" data-booking className="nav-cta">Let&apos;s talk <ArrowUpRight size={14} /></a>
       </nav>
       <section id="top" className="reference-hero">
         <div className="hero-copy">
@@ -68,7 +68,7 @@ export default function Home() {
             <p className="eyebrow">A practical approach</p>
             <h2 className="mt-3 max-w-xl text-3xl font-semibold leading-tight text-white sm:text-4xl">A clear path from process to system.</h2>
             <p className="mt-4 max-w-lg text-sm leading-7 text-slate-300">Start with how the work happens today. Build around the real tools, decisions, and people involved.</p>
-            <a href="https://cal.com/jette-aries-portilla/discovery-call" target="_blank" rel="noopener noreferrer" className="button-primary mt-7 w-full sm:w-auto">
+            <a href="https://cal.com/jette-aries-portilla/discovery-call" data-booking aria-haspopup="dialog" className="button-primary mt-7 w-full sm:w-auto">
               Discuss Your Workflow <ArrowUpRight size={16} />
             </a>
           </div>
@@ -130,7 +130,7 @@ export default function Home() {
           </div>
           <ProjectFilter projects={projects} />
           <div className="mt-9">
-            <a href="https://cal.com/jette-aries-portilla/discovery-call" target="_blank" rel="noopener noreferrer" className="button-primary w-full sm:w-auto">
+            <a href="https://cal.com/jette-aries-portilla/discovery-call" data-booking aria-haspopup="dialog" className="button-primary w-full sm:w-auto">
               Review These Systems With Me <ArrowUpRight size={16} />
             </a>
           </div>
@@ -155,7 +155,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <a href="https://cal.com/jette-aries-portilla/discovery-call" target="_blank" rel="noopener noreferrer" className="button-primary mt-8 w-full sm:w-auto">
+        <a href="https://cal.com/jette-aries-portilla/discovery-call" data-booking aria-haspopup="dialog" className="button-primary mt-8 w-full sm:w-auto">
           Start With a Workflow Review <ArrowUpRight size={16} />
         </a>
       </section>
@@ -192,15 +192,7 @@ export default function Home() {
               </div>
             </div>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a href="mailto:jette.portilla@gmail.com" className="button-secondary w-full sm:w-auto">
-                <Mail size={16} /> Email
-              </a>
-              <a href="https://www.linkedin.com/in/jettearies/" target="_blank" rel="noopener noreferrer" className="button-secondary w-full sm:w-auto">
-                <ArrowUpRight size={16} /> LinkedIn
-              </a>
-              <a href="https://github.com/jette-sketch" target="_blank" rel="noopener noreferrer" className="button-secondary w-full sm:w-auto">
-                <ArrowUpRight size={16} /> GitHub
-              </a>
+              <a href="https://cal.com/jette-aries-portilla/discovery-call" data-booking aria-haspopup="dialog" className="button-primary w-full sm:w-auto">Book a Discovery Call <ArrowUpRight size={16} /></a>
             </div>
           </div>
         </div>
@@ -210,36 +202,20 @@ export default function Home() {
       <section id="contact" className="tech-band mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 lg:py-14">
         <div className="cyber-panel relative overflow-hidden rounded-xl bg-[linear-gradient(120deg,rgba(12,52,71,0.75),rgba(12,21,34,0.96)_58%,rgba(55,28,43,0.55)] p-6 sm:p-10 lg:p-12">
           <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-cyan-200/55 to-transparent" aria-hidden="true" />
-          <div className="relative grid gap-10 lg:grid-cols-[minmax(0,1fr)_19rem] lg:items-end">
+          <div className="relative">
             <div className="max-w-3xl">
               <p className="eyebrow">Start a conversation</p>
               <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">Ready to review your workflow?</h2>
               <p className="mt-5 max-w-2xl text-base leading-7 text-slate-300">Book a short discovery call so we can identify bottlenecks, automation opportunities, and the best next step for your operation.</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <a href="https://cal.com/jette-aries-portilla/discovery-call" target="_blank" rel="noopener noreferrer" className="button-primary w-full sm:w-auto">
+                <a href="https://cal.com/jette-aries-portilla/discovery-call" data-booking aria-haspopup="dialog" className="button-primary w-full sm:w-auto">
                   Book a Discovery Call <ArrowUpRight size={16} />
                 </a>
                 <WorkflowIntakeDialog />
               </div>
             </div>
 
-            <address className="not-italic">
-              <p className="font-mono text-xs uppercase text-cyan-100/75">Other ways to connect</p>
-              <div className="mt-4 space-y-3 border-t border-white/10 pt-4">
-                <a href="mailto:jette.portilla@gmail.com" className="flex items-center gap-3 text-sm text-slate-200 transition hover:text-cyan-200">
-                  <Mail size={16} className="shrink-0 text-cyan-200" />
-                  <span className="break-all">jette.portilla@gmail.com</span>
-                </a>
-                <a href="https://www.linkedin.com/in/jettearies/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-slate-200 transition hover:text-cyan-200">
-                  <ArrowUpRight size={16} className="shrink-0 text-cyan-200" />
-                  <span>LinkedIn</span>
-                </a>
-                <a href="https://github.com/jette-sketch" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-slate-200 transition hover:text-cyan-200">
-                  <ArrowUpRight size={16} className="shrink-0 text-cyan-200" />
-                  <span>GitHub</span>
-                </a>
-              </div>
-            </address>
+
           </div>
         </div>
       </section>

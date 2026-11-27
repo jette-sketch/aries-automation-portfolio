@@ -114,7 +114,9 @@ export const projects = [
       "Detect duplicates within a configurable process-local window",
       "Return structured validation results"
     ],
-    "aiUsage": [],
+    "aiUsage": [
+      "No runtime AI is required. Payload validation and duplicate warnings are deterministic."
+    ],
     "safetyNotes": [
       "This utility does not authenticate webhook senders or verify signatures.",
       "Duplicate warnings are not an atomic idempotency guarantee and do not survive restart.",

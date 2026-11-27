@@ -3,6 +3,9 @@ import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowUpRight, Check, CircleDot, ShieldCheck } from 'lucide-react';
 
 import { projects } from '@/data/projects';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { ProjectRoadmap } from '@/components/ProjectRoadmap';
+import { ProjectWorkflowCanvas } from '@/components/ProjectWorkflowCanvas';
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -45,7 +48,7 @@ export default async function ProjectDetailPage({
         <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 transition hover:text-emerald-200">
           <ArrowLeft size={16} /> Back to portfolio
         </Link>
-        <span className="hidden font-mono text-xs uppercase tracking-wider text-slate-500 sm:inline">Case study / System design</span>
+        <div className="nav-actions"><span className="hidden font-mono text-xs uppercase tracking-wider text-slate-500 sm:inline">Case study / System design</span><ThemeToggle /></div>
       </div>
 
       <article className="card cyber-panel overflow-hidden rounded-xl">
@@ -82,6 +85,14 @@ export default async function ProjectDetailPage({
             </div>
           </div>}
         </header>
+
+        <section className="border-b border-cyan-100/15 px-5 py-6 sm:px-8 lg:px-12" aria-label="Development roadmap">
+          <ProjectRoadmap slug={project.slug} />
+        </section>
+
+        <section className="border-b border-cyan-100/15 px-5 py-6 sm:px-8 lg:px-12" aria-label="Interactive workflow canvas">
+          <ProjectWorkflowCanvas slug={project.slug} />
+        </section>
 
         <section className="border-b border-cyan-100/15 px-5 py-6 sm:px-8 lg:px-12" aria-labelledby="workflow-diagram-title">
           <div className="mb-4 flex items-center justify-between gap-3">

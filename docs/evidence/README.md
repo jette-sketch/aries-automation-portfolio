@@ -13,6 +13,9 @@ Code that looks correct or compiles is one signal. Completion depends on evidenc
 | [DentalFlow](dentalflow.md) | Flagship build | Evolution toward SaaS, access enforcement, reliability, and staging readiness |
 | [Social Presence Automation](social-presence.md) | Engineering build | Deterministic ingestion, transactional audit behavior, and controlled AI assessment |
 | [ClinicFlow Operations Prototype](clinicflow.md) | Deployed prototype | Field discovery, walk-in operations, and a synthetic browser-local demonstration |
+| [Webhook Payload Validator](webhook-validator.md) | Tested utility | Deterministic event validation and reported test coverage |
+| [AI Autopilot Supervisor](ai-autopilot.md) | Offline proof of concept | Bounded synthetic repair and controlled resume |
+| [Research and CRM progress](research-crm.md) | Draft / synthetic proof / architecture | Construction CRM, Autom8urBiz governance and SecretaryFlow boundaries |
 | [Building with Codex](building-with-codex.md) | Engineering method | Requirements, implementation, diagnosis, correction, and verification |
 
 ## Distinct engineering states
@@ -25,7 +28,7 @@ Code that looks correct or compiles is one signal. Completion depends on evidenc
 | Deployed | A build is available in an environment, including a demonstration environment. |
 | Production Verified | Operational behavior has been verified in production for the stated scope. A local build or deployed demo alone does not establish this state. |
 
-These labels are not interchangeable. All three project case studies currently state **Production Verified: No**. Reported project verification is attributed to the public case-study content; these documents add no new test results or deployment certifications.
+These labels are not interchangeable. None of the case studies in this evidence index claims production verification. Reported project verification is attributed to the public case-study content; these documents add no new test results or deployment certifications.
 
 ## Sanitization and disclosure
 
@@ -35,6 +38,6 @@ Exact database definitions, database routines, access policies, migration intern
 
 ## Public sources
 
-- [Project data](../../data/projects.ts): maturity, status, evidence summaries, and limitations for the three projects.
+- [Project data](../../data/projects.ts): maturity, status, evidence summaries, and limitations for the indexed projects.
 - [Building with Codex component](../../components/BuildingWithCodex.tsx): responsibility, verification, failure handling, and model routing.
 - [Live portfolio](https://aries-automation-portfolio.vercel.app/).

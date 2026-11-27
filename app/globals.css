@@ -463,3 +463,632 @@ body { background: #050c12; background-image: radial-gradient(circle at 18% 16%,
 @media (max-width: 520px) { .simulation-scenarios { grid-template-columns: 1fr; } .simulation-intro { align-items: start; flex-direction: column; } .simulation-hint { width: 100%; margin-left: 0; } .simulation-track { grid-template-columns: repeat(2,minmax(0,1fr)); } .simulation-canvas { margin: 0 .75rem; padding: .8rem; } .simulation-scenarios { padding: 0 1rem; } .simulation-intro, .simulation-toolbar { padding-left: 1rem; padding-right: 1rem; } }
 @media (prefers-reduced-motion: reduce) { .simulation-scenario, .simulation-node { transition: none; } .simulation-scenario:hover, .simulation-node:hover:not(:disabled) { transform: none; } }
 
+
+
+/* Compact left-side booking calendar; retain native modal focus and scroll guards. */
+dialog.booking-calendar-dialog {
+  position: fixed;
+  inset: auto auto max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+  margin: 0;
+  width: min(30rem, calc(100vw - 2rem));
+  max-width: none;
+  max-height: min(78dvh, calc(100dvh - 2rem));
+  overscroll-behavior: contain;
+}
+
+dialog.booking-calendar-dialog::backdrop {
+  background: rgba(2, 6, 12, 0.22);
+  backdrop-filter: none;
+}
+
+@media (max-width: 640px) {
+  dialog.booking-calendar-dialog {
+    left: max(0.5rem, env(safe-area-inset-left));
+    bottom: max(0.5rem, env(safe-area-inset-bottom));
+    width: calc(100vw - max(0.5rem, env(safe-area-inset-left)) - max(0.5rem, env(safe-area-inset-right)));
+    max-height: 82dvh;
+  }
+}
+
+
+/* Only the embedded calendar region scrolls; keep close and fallback controls visible. */
+dialog.booking-calendar-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.booking-calendar-header,
+.booking-calendar-footer {
+  flex: 0 0 auto;
+}
+.booking-calendar-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+@media (max-height: 500px) {
+  .booking-calendar-header #booking-calendar-description {
+    display: none;
+  }
+  .booking-calendar-footer {
+    padding-block: 0.35rem;
+  }
+  .booking-calendar-footer .button-secondary {
+    min-height: 2rem;
+    padding: 0.35rem 0.65rem;
+  }
+}
+
+
+/* Integrated hero identity and interactive systems explorer. */
+.reference-hero-with-builder {
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  padding-bottom: 5rem;
+}
+.reference-hero-with-builder .hero-copy h1 {
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+}
+.hero-builder {
+  display: grid;
+  grid-template-columns: minmax(0, 8rem) minmax(0, 1fr);
+  align-items: center;
+  gap: 1.15rem;
+  margin-top: 1.1rem;
+}
+.hero-profile { width: 100%; max-width: 160px; }
+.hero-builder .eyebrow { font-size: .66rem; }
+.hero-explorer-column { display: grid; gap: 1.4rem; }
+.hero-explorer-column .systems-graphic { width: min(100%, 420px); }
+.hero-codex-link { display: inline-flex; align-items: center; gap: .5rem; color: #a5f3fc; font-size: .8rem; padding: .65rem .15rem; }
+.hero-codex-link:hover { color: white; }
+@media (max-width: 800px) {
+  .reference-hero-with-builder { grid-template-columns: minmax(0, 1fr); gap: 2rem; padding: 8rem 1.25rem 3rem; }
+  .reference-hero-with-builder .hero-copy { max-width: none; }
+  .hero-explorer-column .systems-graphic { width: min(100%, 420px); }
+}
+@media (max-width: 480px) {
+  .hero-builder { grid-template-columns: minmax(0, 6.5rem) minmax(0, 1fr); gap: .8rem; }
+  .hero-builder .eyebrow { letter-spacing: .06em; }
+  .hero-actions .button-primary, .hero-actions .button-secondary { width: 100%; }
+}
+
+
+/* Lucifer-inspired energy core: native SVG, transparent edges, selectable visual modes. */
+.lucifer-explorer {
+  --core-color: #53c9ff;
+  --core-light: #baf7ff;
+  --core-rgb: 83, 201, 255;
+  --orbit-speed: 2.2s;
+  --pulse-speed: 3.6s;
+  min-width: 0;
+  width: 100%;
+}
+.lucifer-explorer[data-core="workflows"] {
+  --core-color: #f4aa4c;
+  --core-light: #ffe0a3;
+  --core-rgb: 244, 170, 76;
+  --orbit-speed: 1.6s;
+  --pulse-speed: 3.3s;
+}
+.lucifer-explorer[data-core="data"] {
+  --core-color: #a28bff;
+  --core-light: #e1d6ff;
+  --core-rgb: 162, 139, 255;
+  --orbit-speed: 1.9s;
+  --pulse-speed: 3.5s;
+}
+.lucifer-graphic { color: var(--core-color); isolation: isolate; }
+.lucifer-reactor {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  color: var(--core-color);
+  pointer-events: none;
+  transition: color .35s ease;
+}
+.lucifer-reactor .lucifer-orbit,
+.lucifer-reactor .lucifer-aura,
+.lucifer-reactor .lucifer-pulse,
+.lucifer-reactor .lucifer-particles {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+}
+.lucifer-orbit { filter: drop-shadow(0 0 3px currentColor); }
+.lucifer-segments { animation: lucifer-orbit-spin 38s linear infinite; }
+.lucifer-pulse { animation: lucifer-core-breathe var(--pulse-speed) ease-in-out infinite; }
+.lucifer-aura { animation: lucifer-aura-breathe var(--pulse-speed) ease-in-out infinite; }
+.lucifer-particles { animation: lucifer-orbit-spin 65s linear infinite; }
+.lucifer-core-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  pointer-events: none;
+  color: var(--core-light);
+  text-shadow: 0 0 12px rgba(var(--core-rgb), .8);
+}
+.lucifer-core-label span {
+  max-width: 6.5rem;
+  font: 700 clamp(.48rem, 1.2vw, .64rem)/1.35 monospace;
+  text-align: center;
+  letter-spacing: .08em;
+}
+.lucifer-core-hint {
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  color: var(--core-light);
+  font: 600 .54rem/1.4 monospace;
+  letter-spacing: .12em;
+  opacity: .8;
+}
+.lucifer-node-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .4rem;
+  width: min(100%, 25rem);
+  margin-top: .6rem;
+}
+.lucifer-node {
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid #35505f;
+  border-radius: .5rem;
+  padding: .5rem .25rem;
+  background: #0b1823;
+  color: #b1cbd8;
+  font: 700 .6rem/1.35 monospace;
+  letter-spacing: .025em;
+  cursor: pointer;
+  transition: background .25s, border-color .25s, color .25s;
+}
+.lucifer-node:hover,
+.lucifer-node[aria-pressed="true"] {
+  border-color: var(--core-color);
+  color: var(--core-light);
+  background: rgba(var(--core-rgb), .12);
+}
+.lucifer-explorer .hero-caption {
+  width: min(100%, 25rem);
+  border-left-color: var(--core-color);
+  background: linear-gradient(100deg, rgba(var(--core-rgb), .08), #0a141de8);
+}
+.lucifer-explorer .hero-caption span { color: var(--core-light); }
+.lucifer-motion-control {
+  margin-top: .5rem;
+  min-height: 44px;
+  padding: .4rem .7rem;
+  color: #a7bac6;
+  font-size: .68rem;
+  cursor: pointer;
+}
+.lucifer-motion-control:hover { color: #fff; }
+.lucifer-node:focus-visible, .lucifer-motion-control:focus-visible {
+  outline: 2px solid var(--core-light);
+  outline-offset: 3px;
+}
+.lucifer-explorer[data-paused="true"] .lucifer-reactor * { animation-play-state: paused !important; }
+@keyframes lucifer-orbit-spin { to { transform: rotate(360deg); } }
+@keyframes lucifer-core-breathe {
+  0%, 100% { transform: scale(.97); filter: drop-shadow(0 0 5px currentColor); }
+  50% { transform: scale(1.035); filter: drop-shadow(0 0 12px currentColor); }
+}
+@keyframes lucifer-aura-breathe {
+  0%, 100% { transform: scale(.95); opacity: .55; }
+  50% { transform: scale(1); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lucifer-explorer .lucifer-reactor * { animation: none !important; transition: none !important; }
+  .lucifer-node { transition: none; }
+  .lucifer-motion-control { display: none; }
+}
+@media (max-width: 400px) {
+  .lucifer-core-label svg { width: 28px; height: 28px; }
+  .lucifer-core-label span { max-width: 5.5rem; }
+  .lucifer-node { font-size: .55rem; }
+}
+
+
+/* Core mode change: dissolve the old reactor into a particle cloud, then rebuild
+   the new reactor from the same fragments. Idle breathing and orbits remain separate. */
+.lucifer-fragments { pointer-events: none; }
+.lucifer-fragment { opacity: 0; transform-box: view-box; transform-origin: 50% 50%; }
+.lucifer-explorer[data-phase="disintegrate"] .lucifer-structure,
+.lucifer-explorer[data-phase="disintegrate"] .lucifer-core-label {
+  animation: lucifer-structure-dissolve var(--dissolve-duration) ease-in both;
+}
+.lucifer-explorer[data-phase="integrate"] .lucifer-structure,
+.lucifer-explorer[data-phase="integrate"] .lucifer-core-label {
+  animation: lucifer-structure-reassemble var(--integrate-duration) ease-out both;
+}
+.lucifer-explorer[data-phase="disintegrate"] .lucifer-fragment {
+  animation: lucifer-fragment-dissolve var(--dissolve-duration) cubic-bezier(.18,.68,.28,1) both;
+}
+.lucifer-explorer[data-phase="integrate"] .lucifer-fragment {
+  animation: lucifer-fragment-reassemble var(--integrate-duration) cubic-bezier(.45,.03,.25,1) both;
+}
+.lucifer-explorer[data-phase="disintegrate"] .lucifer-aura,
+.lucifer-explorer[data-phase="integrate"] .lucifer-aura { opacity: .28; }
+.lucifer-explorer .lucifer-node[aria-disabled="true"] { cursor: wait; }
+@keyframes lucifer-structure-dissolve {
+  0% { opacity: 1; }
+  30% { opacity: .8; }
+  75%, 100% { opacity: 0; }
+}
+@keyframes lucifer-structure-reassemble {
+  0%, 26% { opacity: 0; }
+  72% { opacity: .7; }
+  100% { opacity: 1; }
+}
+@keyframes lucifer-fragment-dissolve {
+  0% { transform: translate(0,0); opacity: 0; }
+  22% { opacity: var(--fragment-opacity); }
+  100% { transform: translate(var(--fragment-x),var(--fragment-y)); opacity: var(--fragment-opacity); }
+}
+@keyframes lucifer-fragment-reassemble {
+  0% { transform: translate(var(--fragment-x),var(--fragment-y)); opacity: var(--fragment-opacity); }
+  72% { opacity: var(--fragment-opacity); }
+  100% { transform: translate(0,0); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lucifer-explorer .lucifer-structure,
+  .lucifer-explorer .lucifer-core-label { animation: none !important; opacity: 1; }
+  .lucifer-explorer .lucifer-fragments { display: none; }
+}
+
+
+/* Luminous elliptical tracks carry the comet heads and their tapered particle tails.
+   Keep all three orbital planes stationary while electrons travel at the requested 10x speed. */
+.lucifer-atomic-orbits {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  /* Fixed orbital planes; only comet heads and tails travel. */
+  animation: none;
+}
+.lucifer-atomic-halo {
+  stroke-width: 6;
+  stroke-opacity: .13;
+  filter: blur(3px);
+}
+.lucifer-atomic-track {
+  stroke-width: 1.5;
+  stroke-opacity: .65;
+}
+.lucifer-atomic-plane {
+  --electron-phase: -1;
+  --electron-direction: normal;
+}
+.lucifer-atomic-plane-1 { --electron-phase: -1.333333; }
+.lucifer-atomic-plane-2 { --electron-phase: -1.666667; --electron-direction: reverse; }
+.lucifer-atomic-dot, .lucifer-atomic-tail {
+  --tail-lag: 0;
+  animation: lucifer-atomic-dot-orbit calc(var(--orbit-speed) / 10) linear infinite;
+  animation-delay: calc(var(--orbit-speed) * (var(--electron-phase) + var(--tail-lag)) / 10);
+  animation-direction: var(--electron-direction);
+  transform: translate(188px, 0);
+}
+.lucifer-atomic-dot { filter: drop-shadow(0 0 5px currentColor); }
+.lucifer-atomic-plane-1 .lucifer-atomic-dot { transform: translate(-94px, 73.612px); }
+.lucifer-atomic-plane-2 .lucifer-atomic-dot { transform: translate(-94px, -73.612px); }
+@keyframes lucifer-atomic-dot-orbit {
+  0.000% { transform: translate(188.000px, 0.000px); }
+  3.125% { transform: translate(184.388px, 16.583px); }
+  6.250% { transform: translate(173.689px, 32.528px); }
+  9.375% { transform: translate(156.316px, 47.223px); }
+  12.500% { transform: translate(132.936px, 60.104px); }
+  15.625% { transform: translate(104.447px, 70.675px); }
+  18.750% { transform: translate(71.944px, 78.530px); }
+  21.875% { transform: translate(36.677px, 83.367px); }
+  25.000% { transform: translate(0.000px, 85.000px); }
+  28.125% { transform: translate(-36.677px, 83.367px); }
+  31.250% { transform: translate(-71.944px, 78.530px); }
+  34.375% { transform: translate(-104.447px, 70.675px); }
+  37.500% { transform: translate(-132.936px, 60.104px); }
+  40.625% { transform: translate(-156.316px, 47.223px); }
+  43.750% { transform: translate(-173.689px, 32.528px); }
+  46.875% { transform: translate(-184.388px, 16.583px); }
+  50.000% { transform: translate(-188.000px, 0.000px); }
+  53.125% { transform: translate(-184.388px, -16.583px); }
+  56.250% { transform: translate(-173.689px, -32.528px); }
+  59.375% { transform: translate(-156.316px, -47.223px); }
+  62.500% { transform: translate(-132.936px, -60.104px); }
+  65.625% { transform: translate(-104.447px, -70.675px); }
+  68.750% { transform: translate(-71.944px, -78.530px); }
+  71.875% { transform: translate(-36.677px, -83.367px); }
+  75.000% { transform: translate(-0.000px, -85.000px); }
+  78.125% { transform: translate(36.677px, -83.367px); }
+  81.250% { transform: translate(71.944px, -78.530px); }
+  84.375% { transform: translate(104.447px, -70.675px); }
+  87.500% { transform: translate(132.936px, -60.104px); }
+  90.625% { transform: translate(156.316px, -47.223px); }
+  93.750% { transform: translate(173.689px, -32.528px); }
+  96.875% { transform: translate(184.388px, -16.583px); }
+  100.000% { transform: translate(188.000px, -0.000px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lucifer-atomic-orbits, .lucifer-atomic-dot, .lucifer-atomic-tail { animation: none !important; }
+  .lucifer-atomic-tail { display: none; }
+}
+
+
+/* Day / night preference. Night is the original default. */
+.nav-actions { display: flex; align-items: center; gap: .55rem; flex: 0 0 auto; }
+.theme-toggle { display: inline-grid; place-items: center; width: 44px; height: 44px; flex: 0 0 44px; border: 1px solid var(--line); border-radius: 50%; color: var(--accent); background: var(--surface); cursor: pointer; }
+.theme-toggle:hover { border-color: var(--accent); }
+.theme-toggle .theme-toggle-moon { display: none; }
+html[data-theme="light"] .theme-toggle .theme-toggle-sun { display: none; }
+html[data-theme="light"] .theme-toggle .theme-toggle-moon { display: block; }
+@media (max-width: 1050px) { .portfolio-nav .nav-links { gap: .7rem; } .portfolio-nav { gap: .65rem; } }
+@media (max-width: 900px) { .portfolio-nav .nav-links { display: none; } }
+@media (max-width: 480px) {
+  .portfolio-nav { gap: .4rem; padding: .5rem; }
+  .portfolio-nav .nav-brand { min-width: 0; gap: .35rem; }
+  .portfolio-nav .nav-brand span:last-child { overflow: hidden; text-overflow: ellipsis; }
+  .portfolio-nav .brand-mark { flex-shrink: 0; }
+  .portfolio-nav .nav-actions { gap: .35rem; }
+  .portfolio-nav .nav-cta { padding: .65rem .55rem; }
+}
+html[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f2f7fa;
+  --surface: #fff;
+  --surface-raised: #eaf2f6;
+  --text: #142936;
+  --muted: #486171;
+  --accent: #096c79;
+  --accent-bright: #075a68;
+  --warm: #a43b50;
+  --line: #b9d0d9;
+}
+html[data-theme="light"] body {
+  background-color: var(--bg);
+  background-image: radial-gradient(circle at 18% 16%, #c5e9ec66, transparent 24rem), radial-gradient(circle at 78% 32%, #d4e6f566, transparent 27rem), radial-gradient(circle, #5c8c9c40 1px, transparent 1.5px);
+  background-size: auto, auto, 173px 173px;
+}
+html[data-theme="light"] .gradient-text { background-image: linear-gradient(100deg,#08756f,#096c79 55%,#345aa1); }
+html[data-theme="light"] .portfolio-nav { background: #ffffffed; border-color: var(--line); box-shadow: 0 12px 36px #18374816; }
+html[data-theme="light"] :is(.nav-brand,.hero-copy h1,.project-feature-copy h3,.project-status strong,.faq-item summary) { color: var(--text); }
+html[data-theme="light"] :is(.nav-links,.hero-copy > p:not(.eyebrow),.project-feature-copy > p:not(.eyebrow),.faq-item p,.hero-caption p,.scroll-cue) { color: var(--muted); }
+html[data-theme="light"] :is(.nav-links a:hover,.brand-mark,.hero-codex-link,.project-tools,.project-visual > span,.project-context strong) { color: var(--accent); }
+html[data-theme="light"] :is(.card,.cyber-panel,.detail-panel,.profile-frame,.stack-module,.case-study-header,.emblem-core,.project-visual,.clinic-stage-content,.project-context) {
+  background: linear-gradient(145deg,#ffffff,#eaf3f7);
+  border-color: var(--line);
+  box-shadow: 0 12px 32px #173b4a0b;
+}
+html[data-theme="light"] .tech-band::before { opacity: .1; }
+html[data-theme="light"] .project-feature { border-color: var(--line); }
+html[data-theme="light"] .project-context p { color: var(--muted); }
+html[data-theme="light"] :is(.button-primary,.nav-cta) { background: #117b83; color: #fff; border-color: #117b83; box-shadow: none; }
+html[data-theme="light"] :is(.button-primary,.nav-cta):hover { background: #09616b; color: #fff; }
+html[data-theme="light"] :is(.button-secondary,.stack-badge,.choice-button,.filter-button,.flow-step,.simulation-select) { color: var(--text); background: #fff; border-color: var(--line); box-shadow: none; }
+html[data-theme="light"] :is(.button-secondary,.choice-button,.filter-button):hover,
+html[data-theme="light"] :is(.choice-button,.filter-button)[aria-pressed="true"] { background: #d9eef0; border-color: #25818b; color: #103e49; }
+html[data-theme="light"] :is(.flow-step span,.clinic-stage-list button span,.workflow-demo-steps button:not(:last-child)::after) { color: var(--accent); }
+/* Existing Tailwind utility colors used in the page and case study templates. */
+html[data-theme="light"] :is(.text-white,.text-slate-100,.text-slate-200) { color: var(--text); }
+html[data-theme="light"] :is(.text-slate-300,.text-slate-400,.text-slate-500) { color: var(--muted); }
+html[data-theme="light"] :is(.text-cyan-100,.text-cyan-200,.text-cyan-300,[class~="text-cyan-100/70"],[class~="text-cyan-100/75"],[class~="text-cyan-100/80"],[class~="text-cyan-100/85"],[class~="text-cyan-200/70"]) { color: var(--accent); }
+html[data-theme="light"] :is(.text-rose-200,[class~="text-rose-200/80"],[class~="text-rose-200/90"],[class~="text-rose-300/80"]) { color: var(--warm); }
+html[data-theme="light"] .text-amber-200 { color: #8b4d13; }
+html[data-theme="light"] :is([class~="hover:text-white"],[class~="hover:text-cyan-100"],[class~="hover:text-emerald-200"]):hover { color: var(--accent-bright); }
+html[data-theme="light"] :is([class~="border-white/10"],[class~="border-cyan-100/10"],[class~="border-cyan-100/15"],[class~="border-cyan-100/20"],[class~="border-cyan-200/10"]) { border-color: var(--line); }
+html[data-theme="light"] :is([class~="divide-white/10"],[class~="md:divide-white/10"]) > :not(:last-child) { border-color: var(--line); }
+html[data-theme="light"] :is([class~="bg-[#08111c]/75"],[class~="bg-[#08141d]/80"],[class~="bg-[#09111b]/95"],[class~="bg-[#0a111a]/90"],[class~="bg-[#0d1312]/90"],[class~="bg-black/25"]) { background-color: #fff; }
+html[data-theme="light"] [class~="hover:bg-[#0d1b29]/90"]:hover { background-color: #e0eef3; }
+html[data-theme="light"] [class~="hover:bg-white/10"]:hover { background-color: #e0eef3; }
+html[data-theme="light"] [class~="bg-[linear-gradient(120deg,rgba(12,52,71,0.75),rgba(12,21,34,0.96)_58%,rgba(55,28,43,0.55)]"] { background: linear-gradient(120deg,#d9eef3,#fff 58%,#f0eaf4); }
+/* The original SVG diagrams keep their own palette; the surrounding shell is light. */
+html[data-theme="light"] .project-visual .diagram-frame { background: #eef7f8; }
+html[data-theme="light"] .lucifer-explorer { --core-color: #1687c2; --core-light: #baf7ff; --core-rgb: 22,135,194; --core-ink: #11618d; }
+html[data-theme="light"] .lucifer-explorer[data-core="workflows"] { --core-color: #b96e14; --core-light: #ffe0a3; --core-rgb: 185,110,20; --core-ink: #854808; }
+html[data-theme="light"] .lucifer-explorer[data-core="data"] { --core-color: #7451ca; --core-light: #e1d6ff; --core-rgb: 116,81,202; --core-ink: #57389c; }
+html[data-theme="light"] .lucifer-explorer .hero-caption { background: linear-gradient(100deg,rgba(var(--core-rgb),.08),#fff); color: var(--text); box-shadow: none; }
+html[data-theme="light"] :is(.lucifer-explorer .hero-caption span,.lucifer-core-hint) { color: var(--core-ink); }
+html[data-theme="light"] .lucifer-node { background: #fff; color: var(--muted); border-color: var(--line); }
+html[data-theme="light"] .lucifer-node:is(:hover,[aria-pressed="true"]) { background: rgba(var(--core-rgb),.1); color: var(--core-ink); border-color: var(--core-color); }
+html[data-theme="light"] .lucifer-motion-control { color: var(--muted); }
+html[data-theme="light"] .lucifer-motion-control:hover { color: var(--text); }
+html[data-theme="light"] :is(.lucifer-node,.lucifer-motion-control):focus-visible { outline-color: var(--core-ink); }
+/* Workflow lab uses semantic light surfaces and status colors. */
+html[data-theme="light"] :is(.simulation-studio,.simulation-log,.simulation-detail,.simulation-canvas,.simulation-scenario,.simulation-node) { background: #fff; border-color: var(--line); box-shadow: none; }
+html[data-theme="light"] .simulation-topline { background: #e1eff3; color: #17646b; border-color: var(--line); }
+html[data-theme="light"] :is(.simulation-intro h3,.simulation-scenario strong,.simulation-node strong,.simulation-detail h3,.simulation-log h3) { color: var(--text); }
+html[data-theme="light"] :is(.simulation-select-label,.simulation-synthetic,.simulation-scenario small,.simulation-hint,.simulation-node-number,.simulation-node small,.simulation-detail p,.simulation-empty,.simulation-event,.simulation-disclaimer) { color: var(--muted); }
+html[data-theme="light"] :is(.simulation-kicker,.simulation-status,.simulation-choice,.simulation-node-icon,.simulation-scenario-icon,.simulation-detail-tip,.simulation-count,.simulation-event span) { color: var(--accent); }
+html[data-theme="light"] :is(.simulation-scenario[aria-pressed="true"],.simulation-node.is-active) { background: #d9f0e9; border-color: #419785; }
+html[data-theme="light"] .simulation-node.is-stopped { background: #fff0e1; border-color: #bd7c3f; }
+html[data-theme="light"] .simulation-status.is-rejected { color: #995012; }
+html[data-theme="light"] .simulation-result:not(:empty) { color: #155d4c; background: #e2f4eb; border-color: #419785; }
+html[data-theme="light"] .simulation-result.is-rejected:not(:empty) { color: #87430f; background: #fff0e1; border-color: #bd7c3f; }
+html[data-theme="light"] .simulation-node.is-done .simulation-node-icon { color: #114e43; background: #aee4d6; }
+html[data-theme="light"] dialog.booking-calendar-dialog::backdrop { background: #14293630; }
+
+
+/* Project cabinet: compact title drawers with native disclosure semantics. */
+.project-cabinet {
+  border: 1px solid var(--line);
+  border-radius: .85rem;
+  background: var(--surface);
+  box-shadow: 0 16px 48px rgba(0,0,0,.12);
+  overflow: hidden;
+}
+.project-cabinet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: .9rem 1.25rem;
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font: 700 .67rem/1.5 monospace;
+  letter-spacing: .1em;
+}
+.project-drawer + .project-drawer { border-top: 1px solid var(--line); }
+.project-drawer-trigger {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1.4rem minmax(0,1fr) auto 1.3rem;
+  align-items: center;
+  gap: .85rem;
+  min-height: 3.7rem;
+  padding: .9rem 1.25rem;
+  color: var(--text);
+  cursor: pointer;
+}
+.project-drawer-trigger::-webkit-details-marker { display: none; }
+.project-drawer-trigger::marker { content: ''; }
+.project-drawer-trigger:hover, .project-drawer[open] > .project-drawer-trigger { background: var(--surface-raised); }
+.project-drawer-trigger:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+.project-drawer-title { font-size: 1rem; font-weight: 650; line-height: 1.4; overflow-wrap: anywhere; }
+.project-drawer-icon, .project-drawer-chevron { color: var(--accent); }
+.project-drawer-chevron { transition: transform .2s ease; }
+.project-drawer[open] .project-drawer-chevron { transform: rotate(180deg); }
+.project-drawer-maturity {
+  padding: .2rem .6rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: .7rem;
+  line-height: 1.5;
+  text-align: center;
+}
+.project-drawer-content {
+  display: grid;
+  grid-template-columns: minmax(0,1.15fr) minmax(0,1fr);
+  align-items: start;
+  gap: clamp(1rem,3vw,2rem);
+  padding: 1.5rem 1.25rem 1.75rem;
+  border-top: 1px solid var(--line);
+}
+.project-drawer-copy { min-width: 0; color: var(--muted); font-size: .9rem; line-height: 1.7; }
+.project-drawer-status { margin-top: 1rem; padding-left: .85rem; border-left: 2px solid var(--accent); font-size: .83rem; }
+.project-drawer-status strong { color: var(--text); }
+.project-drawer-visual { min-width: 0; box-shadow: none; }
+.project-drawer-visual .diagram-frame img { max-height: 22rem; }
+@media (max-width: 700px) {
+  .project-drawer-content { grid-template-columns: minmax(0,1fr); }
+  .project-drawer-trigger { grid-template-columns: 1.4rem minmax(0,1fr) 1.3rem; gap: .3rem .65rem; padding: .8rem 1rem; }
+  .project-drawer-icon { grid-column: 1; grid-row: 1 / 3; }
+  .project-drawer-title { grid-column: 2; grid-row: 1; }
+  .project-drawer-maturity { grid-column: 2; grid-row: 2; justify-self: start; text-align: left; }
+  .project-drawer-chevron { grid-column: 3; grid-row: 1 / 3; }
+}
+@media (prefers-reduced-motion: reduce) { .project-drawer-chevron { transition: none; } }
+
+
+/* Interactive project milestones. Uses the shared day/night palette. */
+.project-drawer-roadmap { grid-column: 1 / -1; min-width: 0; }
+.project-roadmap {
+  border: 1px solid var(--line);
+  border-radius: .8rem;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  background: var(--surface);
+  color: var(--text);
+}
+.roadmap-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: .8rem; }
+.roadmap-heading h3 { font-size: 1.3rem; font-weight: 650; line-height: 1.3; margin-top: .3rem; }
+.roadmap-count { color: var(--muted); font: 600 .64rem/1.5 monospace; white-space: nowrap; }
+.roadmap-instruction { color: var(--muted); font-size: .82rem; margin-top: .6rem; }
+.roadmap-track { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0,1fr); list-style: none; padding: 0; margin: 1.3rem 0; }
+.roadmap-track > li { position: relative; min-width: 0; }
+.roadmap-track > li:not(:last-child)::after { content: ''; position: absolute; height: 1px; top: 1.7rem; left: calc(50% + 1.25rem); right: calc(-50% + 1.25rem); background: var(--line); pointer-events: none; }
+.roadmap-track > li, .roadmap-detail { --milestone-color: var(--muted); }
+.roadmap-track > li[data-status="documented"], .roadmap-detail[data-status="documented"] { --milestone-color: var(--accent); }
+.roadmap-track > li[data-status="built"], .roadmap-detail[data-status="built"] { --milestone-color: var(--accent); }
+.roadmap-track > li[data-status="reported-tested"], .roadmap-detail[data-status="reported-tested"],
+.roadmap-track > li[data-status="demo-deployed"], .roadmap-detail[data-status="demo-deployed"] { --milestone-color: #86e2bd; }
+.roadmap-track > li[data-status="open"], .roadmap-detail[data-status="open"] { --milestone-color: #f4c180; }
+html[data-theme="light"] :is(.roadmap-track > li,.roadmap-detail):is([data-status="reported-tested"],[data-status="demo-deployed"]) { --milestone-color: #176b4e; }
+html[data-theme="light"] :is(.roadmap-track > li,.roadmap-detail)[data-status="open"] { --milestone-color: #935514; }
+.roadmap-step {
+  width: 100%; min-height: 44px; height: 100%; display: flex; align-items: center; flex-direction: column; gap: .35rem; text-align: center;
+  padding: .5rem .4rem .65rem; border: 1px solid transparent; border-radius: .55rem; color: var(--text); cursor: pointer;
+}
+.roadmap-step:hover, .roadmap-step[aria-pressed="true"] { background: var(--surface-raised); border-color: var(--line); }
+.roadmap-step:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.roadmap-node { display: grid; place-items: center; height: 2.3rem; width: 2.3rem; border-radius: 50%; border: 1px solid var(--milestone-color); background: var(--surface); color: var(--milestone-color); }
+.roadmap-step[aria-pressed="true"] .roadmap-node { outline: 2px solid var(--milestone-color); outline-offset: 3px; }
+.roadmap-step-number { font: .64rem monospace; color: var(--muted); }
+.roadmap-step-title { font-size: .83rem; line-height: 1.35; font-weight: 650; overflow-wrap: anywhere; }
+.roadmap-step-status { font-size: .68rem; line-height: 1.35; color: var(--milestone-color); }
+.roadmap-detail { border: 1px solid var(--line); border-left: 3px solid var(--milestone-color); background: var(--surface-raised); border-radius: .55rem; padding: 1rem; }
+.roadmap-detail-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
+.roadmap-detail-status { display: flex; align-items: center; gap: .35rem; font-size: .74rem; font-weight: 650; color: var(--milestone-color); }
+.roadmap-detail h4 { font-size: 1rem; font-weight: 650; margin-top: .55rem; }
+.roadmap-detail p { color: var(--muted); font-size: .86rem; line-height: 1.65; margin-top: .35rem; }
+.roadmap-disclaimer { margin-top: .75rem; font-size: .7rem; color: var(--muted); }
+@media (max-width: 700px) {
+  .roadmap-track { grid-auto-flow: row; grid-template-columns: minmax(0,1fr); gap: .3rem; }
+  .roadmap-track > li:not(:last-child)::after { top: 2.9rem; bottom: -.55rem; left: 1.65rem; right: auto; width: 1px; height: auto; }
+  .roadmap-step { display: grid; grid-template-columns: 2.3rem minmax(0,1fr) auto; grid-template-rows: auto auto; text-align: left; gap: .25rem .65rem; }
+  .roadmap-node { grid-column: 1; grid-row: 1 / 3; }
+  .roadmap-step-title { grid-column: 2; grid-row: 1; }
+  .roadmap-step-status { grid-column: 2; grid-row: 2; }
+  .roadmap-step-number { grid-column: 3; grid-row: 1 / 3; }
+}
+
+
+/* Project workflow lab: one responsive canvas, explicit decision branches and inspectable traces. */
+.project-workflow-lab { min-width: 0; border: 1px solid var(--line); border-radius: .85rem; padding: clamp(.85rem, 2.5vw, 1.5rem); background: var(--surface); color: var(--text); }
+.workflow-lab-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: .8rem; flex-wrap: wrap; }
+.workflow-lab-heading h3 { font-size: 1.3rem; font-weight: 650; margin-top: .35rem; line-height: 1.3; }
+.workflow-lab-tag, .workflow-node-kind { color: var(--accent); font: 700 .64rem/1.5 monospace; letter-spacing: .05em; }
+.workflow-lab-tag { border: 1px solid var(--line); border-radius: 999px; padding: .25rem .6rem; }
+.workflow-lab-description { color: var(--muted); font-size: .85rem; margin: .65rem 0 1rem; }
+.workflow-lab-scenarios { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .65rem; }
+.workflow-scenario-option { display: grid; gap: .35rem; min-width: 0; min-height: 44px; padding: .85rem; border: 1px solid var(--line); border-radius: .55rem; background: var(--surface); text-align: left; cursor: pointer; }
+.workflow-scenario-option[aria-pressed="true"] { border-color: var(--accent); background: var(--surface-raised); }
+.workflow-scenario-option strong { color: var(--text); font-size: .92rem; }
+.workflow-scenario-option small { font-size: .75rem; color: var(--muted); overflow-wrap: anywhere; }
+.workflow-lab-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; margin: .9rem 0; }
+.workflow-lab-toolbar :is(.button-primary,.button-secondary) { min-height: 44px; font-size: .78rem; padding: .55rem .8rem; }
+.workflow-lab-toolbar button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+.workflow-run-indicator { margin-left: auto; font: 700 .7rem/1.5 monospace; color: var(--muted); }
+.workflow-canvas-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: .65rem; background-color: var(--bg); background-image: radial-gradient(circle, var(--line) 1px, transparent 1.4px); background-size: 19px 19px; overscroll-behavior-x: contain; }
+.workflow-canvas-grid { display: grid; gap: 1.6rem; width: max-content; min-width: 100%; padding: 1.15rem; align-items: start; }
+.workflow-canvas-column, .workflow-main-node { min-width: 0; position: relative; }
+.workflow-canvas-node { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: .38rem; width: 100%; min-width: 0; min-height: 8.4rem; padding: .7rem; border: 1px solid var(--line); border-radius: .6rem; background: var(--surface); color: var(--text); text-align: left; cursor: pointer; transition: border-color .18s, background-color .18s, box-shadow .18s; }
+.workflow-canvas-node strong { font-size: .85rem; line-height: 1.35; overflow-wrap: anywhere; }
+.workflow-node-icon { display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: .45rem; border: 1px solid var(--line); color: var(--accent); }
+.workflow-node-state { font: .64rem/1.35 monospace; color: var(--muted); margin-top: auto; }
+.workflow-canvas-node[aria-pressed="true"] { outline: 2px solid var(--accent); outline-offset: 3px; }
+.workflow-canvas-node[data-state="running"] { border-color: var(--accent); box-shadow: 0 0 16px rgba(103,232,249,.2); animation: workflow-node-pulse 1s ease-in-out infinite; }
+.workflow-canvas-node[data-state="done"] { border-color: var(--workflow-good); }
+.workflow-canvas-node[data-state="done"] :is(.workflow-node-icon,.workflow-node-state) { color: var(--workflow-good); }
+.workflow-canvas-node[data-state="branch"] { border-color: var(--workflow-warning); }
+.workflow-canvas-node[data-state="branch"] :is(.workflow-node-icon,.workflow-node-state) { color: var(--workflow-warning); }
+.workflow-canvas-node[data-state="skipped"] { opacity: .55; }
+.workflow-canvas-edge { position: absolute; top: 4.2rem; left: 100%; width: 1.6rem; display: grid; place-items: center; color: var(--muted); pointer-events: none; }
+.workflow-canvas-edge[data-traversed="true"] { color: var(--workflow-good); }
+.workflow-branch-node { display: grid; gap: .35rem; }
+.workflow-branch-edge { display: flex; align-items: center; justify-content: center; gap: .25rem; padding-top: .25rem; color: var(--muted); font: .65rem monospace; }
+.workflow-branch-edge[data-traversed="true"] { color: var(--workflow-warning); }
+.workflow-branch-node .workflow-canvas-node { min-height: 7.5rem; }
+.project-workflow-lab { --workflow-good: #86e2bd; --workflow-warning: #f4c180; }
+html[data-theme="light"] .project-workflow-lab { --workflow-good: #176b4e; --workflow-warning: #935514; }
+.workflow-lab-panels { display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: .75rem; margin-top: .8rem; }
+.workflow-inspector { min-width: 0; border: 1px solid var(--line); border-radius: .6rem; padding: .9rem; background: var(--surface-raised); }
+.workflow-inspector h4 { font-size: 1rem; font-weight: 650; margin: .35rem 0; color: var(--text); }
+.workflow-inspector > p:not(.eyebrow) { font-size: .82rem; color: var(--muted); margin-top: .4rem; line-height: 1.6; }
+.workflow-trace { display: grid; gap: .35rem; padding: 0; margin: .7rem 0; list-style: none; }
+.workflow-trace li { display: flex; gap: .55rem; align-items: baseline; color: var(--muted); font-size: .78rem; overflow-wrap: anywhere; }
+.workflow-trace li span { color: var(--accent); font: .67rem monospace; flex: none; }
+.workflow-inspector .workflow-outcome { border-left: 2px solid var(--workflow-good); padding: .55rem .65rem; background: var(--surface); color: var(--text); }
+.workflow-run-indicator[data-outcome="completed"] { color: var(--workflow-good); }
+.workflow-run-indicator:is([data-outcome="review"],[data-outcome="blocked"]) { color: var(--workflow-warning); }
+.workflow-inspector .workflow-outcome:is([data-outcome="review"],[data-outcome="blocked"]) { border-left-color: var(--workflow-warning); }
+.workflow-lab-disclaimer { color: var(--muted); font-size: .71rem; margin-top: .8rem; line-height: 1.5; }
+.workflow-canvas-scroll:focus-visible, .workflow-scenario-option:focus-visible, .workflow-canvas-node:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@keyframes workflow-node-pulse { 50% { box-shadow: 0 0 0 3px rgba(103,232,249,.18); } }
+@media (max-width: 700px) { .workflow-lab-panels, .workflow-lab-scenarios { grid-template-columns: minmax(0,1fr); } .workflow-run-indicator { width: 100%; margin-left: 0; } }
+@media (prefers-reduced-motion: reduce) { .workflow-canvas-node { animation: none !important; transition: none; } }

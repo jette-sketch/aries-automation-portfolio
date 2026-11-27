@@ -6,8 +6,8 @@ export const projects = [
     summary: 'DentalFlow is an evolving multi-tenant clinic operations platform that began as workflow automation and is being hardened into a database-backed SaaS architecture with explicit tenant isolation, authorization, reliability controls, and human-supervised AI.',
     stack: ['Supabase/PostgreSQL', 'n8n', 'Google integrations', 'External APIs'],
     pattern: 'Multi-tenant SaaS architecture with database-enforced rules and workflow orchestration',
-    status: 'Active flagship development with staging and deployment hardening in progress.',
-    credibilityNote: 'Production verification is not yet claimed.',
+    status: 'Flagship development: offline archive integrity review and security remediation proposals documented; native database acceptance and broader release qualification remain open.',
+    credibilityNote: 'Offline evidence does not establish native database acceptance, hosted CI, or production readiness. Production verification is not claimed.',
     highlights: [
       'Supabase/PostgreSQL as the authoritative operational data layer',
       'Tenant isolation and role-based authorization',
@@ -37,7 +37,7 @@ export const projects = [
       'Reliability controls address failures, retries, and state integrity.'
     ],
     nextImprovements: [
-      'Continue broader security and reliability testing.',
+      'Resolve open security findings and verify remediation on an isolated native database before release qualification.',
       'Harden environment separation, migration readiness, monitoring, and recovery.',
       'Verify production operational behavior before claiming production readiness.'
     ],
@@ -60,7 +60,8 @@ export const projects = [
         'Rollback behavior verified for failed protected operations',
         'Concurrent mutation and invariant protection tested',
         'Audit events used for successful state-changing operations',
-        'Staging orchestration state survived restart, validating persistence'
+        'Staging orchestration state survived restart, validating persistence',
+        'November 24 checkpoint documents independently checked archive integrity and reviewed security remediation drafts; native execution and acceptance remain open'
       ],
       loop: ['Requirement', 'Acceptance Criteria', 'Architecture', 'Codex-Assisted Implementation', 'Automated / Targeted Testing', 'Evidence Review', 'Root-Cause Fix', 'Regression Test', 'Staging / Deployment Verification'],
       lessons: [
@@ -73,11 +74,120 @@ export const projects = [
         { label: 'Designed', detail: 'Substantial architecture complete' },
         { label: 'Built', detail: 'Substantial implementation exists' },
         { label: 'Tested', detail: 'Core security and reliability paths have verified evidence; broader testing continues' },
-        { label: 'Staging', detail: 'Active staging and deployment hardening' },
+        { label: 'Staging', detail: 'Offline artifact review has advanced; security findings, native acceptance and deployment qualification remain open' },
         { label: 'Production verified', detail: 'No' }
       ]
     },
     diagram: 'dentalflow-saas.svg'
+  },
+  {
+    "slug": "webhook-payload-validator",
+    "title": "Webhook Payload Validator",
+    "maturity": "tested utility",
+    "summary": "A reusable JavaScript validation utility for incoming webhook events, with deterministic field checks, event allowlisting, timestamp validation and duplicate warnings.",
+    "stack": [
+      "JavaScript",
+      "Node.js",
+      "Built-in modules"
+    ],
+    "pattern": "Deterministic ingress validation",
+    "status": "Implemented utility with a passing test suite reported in the project handoff. Production integration is not verified.",
+    "credibilityNote": "Duplicate detection is process-local and advisory; signature verification and durable idempotency are not implemented.",
+    "highlights": [
+      "Nested required-field checks",
+      "Event-type allowlisting",
+      "Timestamp freshness and clock-skew checks",
+      "Structured errors and duplicate warnings"
+    ],
+    "businessProblem": "Malformed, stale or repeated webhook events can trigger incorrect downstream operations if accepted without validation.",
+    "solutionOverview": "Validate incoming event structure and configured rules before passing data to downstream automation. A process-local cache flags repeated event identities; persistent deduplication and authentication belong at a separate production boundary.",
+    "workflowSequence": [
+      "Receive a webhook payload",
+      "Check payload shape and required fields",
+      "Validate event type and timestamp",
+      "Check process-local duplicate cache",
+      "Return structured errors, warnings or validation result"
+    ],
+    "keyAutomations": [
+      "Validate nested required fields",
+      "Reject unsupported event types and invalid timestamps",
+      "Detect duplicates within a configurable process-local window",
+      "Return structured validation results"
+    ],
+    "aiUsage": [
+      "No runtime AI is required. Payload validation and duplicate warnings are deterministic."
+    ],
+    "safetyNotes": [
+      "This utility does not authenticate webhook senders or verify signatures.",
+      "Duplicate warnings are not an atomic idempotency guarantee and do not survive restart.",
+      "Downstream authorization and durable deduplication remain separate responsibilities."
+    ],
+    "nextImprovements": [
+      "Add provider-specific signature verification with appropriate replay protection.",
+      "Introduce atomic persistent event deduplication and test restart/concurrency behavior.",
+      "Validate integration behavior in an isolated environment before production use."
+    ],
+    "implementationNotes": [
+      "The project handoff reports successful validation, rejection, timestamp, cache and response-format tests; the portfolio does not independently reproduce them.",
+      "No external runtime dependencies are required for the documented utility."
+    ],
+    "diagram": "webhook-payload-validator.svg"
+  },
+  {
+    "slug": "ai-autopilot-supervisor",
+    "title": "Autopilot Supervisor",
+    "maturity": "offline proof of concept",
+    "summary": "An isolated repair-supervision experiment that reserves bounded attempts, validates candidate changes against synthetic tests, records evidence and controls termination.",
+    "stack": [
+      "PowerShell",
+      "JavaScript",
+      "Node.js",
+      "Windows Sandbox"
+    ],
+    "pattern": "Bounded repair and evidence-driven supervision",
+    "status": "Synthetic repair and controlled resume reported successful in the project handoff. Independent artifact and lifecycle qualification remain open.",
+    "credibilityNote": "Not a production agent or proof of general autonomous software development. No live repository execution or production use is claimed.",
+    "highlights": [
+      "Bounded attempt reservation",
+      "Synthetic failure detection and retesting",
+      "Controlled resume and evidence preservation",
+      "Explicit terminal outcomes"
+    ],
+    "businessProblem": "AI-assisted repair loops can repeat attempts, lose state after interruption or incorrectly report success when execution evidence is incomplete.",
+    "solutionOverview": "Separate repair attempts from validation and recorded outcomes. Run synthetic candidate code inside an isolated test environment, reserve bounded attempts, retest, preserve artifacts and stop or fail closed when evidence is insufficient.",
+    "workflowSequence": [
+      "Detect a synthetic failure",
+      "Reserve a bounded attempt",
+      "Obtain or simulate a repair candidate",
+      "Run isolated deterministic tests",
+      "Record outcome and evidence",
+      "Stop or resume only within the allowed budget"
+    ],
+    "keyAutomations": [
+      "Attempt tracking and reservation",
+      "Synthetic repair retesting",
+      "Controlled resume within a bounded test scenario",
+      "Evidence and terminal-status recording"
+    ],
+    "aiUsage": [
+      "A historical experiment used an AI-assisted candidate repair; offline qualification uses synthetic fixtures and deterministic validation.",
+      "Model output cannot establish correctness, authorize real repository changes or replace execution evidence."
+    ],
+    "safetyNotes": [
+      "Qualification is limited to synthetic disposable workloads.",
+      "Independent artifact review, unexpected interruption recovery and sandbox lifecycle proof remain open.",
+      "Live provider execution and real repository integration require separate qualification."
+    ],
+    "nextImprovements": [
+      "Reconcile source and runtime artifact identities independently.",
+      "Qualify interruption recovery, duplicate supervisors and failure exhaustion.",
+      "Verify isolation and lifecycle termination before any expanded use."
+    ],
+    "implementationNotes": [
+      "The handoff reports successful bounded repair and controlled resume. Later qualification gates remain unverified.",
+      "The diagram describes the intended supervisor boundary, not a certification of every illustrated behavior."
+    ],
+    "diagram": "ai-autopilot-supervisor.svg"
   },
   {
     slug: 'social-presence-automation',
@@ -217,7 +327,7 @@ export const projects = [
   },
   {
     slug: 'ai-procurement-approval-system',
-    title: 'AI Procurement & Approval System',
+    title: 'Procurement & Approval System',
     maturity: 'production-style build',
     summary: 'Production-style procurement workflow design for validating requests, producing AI-assisted risk recommendations, routing human approvals, recording decisions in Supabase, and preparing spend reports.',
     stack: [
@@ -281,7 +391,7 @@ export const projects = [
   },
   {
     slug: 'ai-booking-agent',
-    title: 'AI Booking Agent',
+    title: 'Booking Agent',
     maturity: 'portfolio implementation',
     summary: 'Portfolio design for a conversational booking assistant that extracts request details, checks Cal.com availability, confirms booking intent, and stores session state in Supabase.',
     stack: ['Make.com', 'OpenAI', 'Cal.com', 'Supabase', 'Telegram', 'Gmail'],
@@ -337,7 +447,7 @@ export const projects = [
   },
   {
     slug: 'ai-content-operations-approval-pipeline',
-    title: 'AI Content Operations & Approval Pipeline',
+    title: 'Content Operations & Approval Pipeline',
     maturity: 'portfolio implementation',
     summary: 'Portfolio design for a human-reviewed content workflow that tracks briefs in Notion, uses Gemini for structured drafts, routes review through Slack, and archives approved documents in Google Drive.',
     stack: ['Notion', 'Gemini', 'Make.com', 'Slack', 'Google Docs', 'Google Drive'],
@@ -393,7 +503,7 @@ export const projects = [
   },
   {
     slug: 'ai-inbox-triage-assistant',
-    title: 'AI Inbox Triage Assistant',
+    title: 'Inbox Triage Assistant',
     maturity: 'portfolio implementation',
     summary: 'Portfolio design for Gmail triage that classifies message intent, urgency, and reply need, records a review queue in Airtable, and prepares draft replies with Cal.com links for relevant meeting requests.',
     stack: ['Make.com', 'Gmail', 'OpenAI', 'Airtable', 'Cal.com'],
@@ -450,12 +560,12 @@ export const projects = [
   {
     slug: 'roofing-lead-sales-automation',
     title: 'Roofing Lead & Sales Automation',
-    maturity: 'portfolio implementation',
+    maturity: 'workflow draft',
     summary: 'Portfolio design for roofing lead intake that normalizes webhook submissions, recommends job type and urgency, routes records through GoHighLevel, and prepares follow-up and reporting data.',
     stack: ['GoHighLevel', 'n8n', 'Supabase', 'OpenAI', 'Gmail', 'Looker Studio'],
     pattern: 'Vertical CRM and sales automation',
-    status: 'Portfolio implementation; not presented as a deployed client workflow.',
-    credibilityNote: 'Built as a portfolio implementation to demonstrate the automation architecture, data flow, and integration pattern.',
+    status: 'GoHighLevel intake draft reported saved but unpublished. Routing configuration, live readback and end-to-end tests remain open.',
+    credibilityNote: 'The reported draft and synthetic checks do not establish a working client integration. The broader stack is a design target.',
     highlights: [
       'Webhook-based lead capture',
       'AI urgency and job-type classification',
@@ -466,7 +576,7 @@ export const projects = [
     businessProblem:
       'Roofing inquiries may describe routine repairs, active leaks, or storm damage in unstructured language. If urgency, service area, and contact permission are not captured consistently, teams can misroute urgent work or follow up without the information needed to qualify a lead.',
     solutionOverview:
-      'The design normalizes webhook submissions, asks AI to suggest a job category and urgency from the supplied details, and applies explicit routing rules before updating the GoHighLevel pipeline. Follow-up eligibility is checked separately, while Supabase retains structured event data for operational review and reporting.',
+      'The proposed workflow normalizes webhook submissions and routes leads through GoHighLevel. The documented draft separates emergency alerts, standard follow-ups and staff review. AI classification, database reporting and estimating integration are planned rather than verified live.',
     workflowSequence: [
       'Capture lead and normalize source data',
       'Classify urgency and job type',
@@ -492,12 +602,13 @@ export const projects = [
       'Limit CRM and model access to the lead fields needed for routing, and log routing changes without exposing unnecessary personal details.'
     ],
     nextImprovements: [
-      'Add richer sales stage and close-probability logic.',
+      'Complete pipeline and stage filters, urgency branches, ownership, booking and notification configuration; test with synthetic leads.',
+      'Extend the construction CRM with estimating and bidding after intake qualification.',
       'Expand regional and service-type routing rules.',
       'Improve performance dashboards for lead quality and follow-up speed.'
     ],
     implementationNotes: [
-      'Use the CRM as the operational source of truth while keeping a separate reporting layer for summaries and trend analysis.',
+      'Use GoHighLevel as the sales-facing CRM; enforce consequential workflow invariants and durable audit records in the proposed database layer.',
       'Model urgent and non-urgent service requests separately to avoid misrouting high-priority leads.',
       'Keep sales handoff logic visible and easy to revise when the team changes its service rules.'
     ],
@@ -507,10 +618,10 @@ export const projects = [
     slug: 'autonomous-multi-agent-crm',
     title: 'Autonomous Multi-Agent CRM',
     maturity: 'architecture blueprint',
-    summary: 'Architecture blueprint for prospect research and CRM qualification using CrewAI, Apify, OpenAI, Telegram review, and Supabase audit records; not a deployed system.',
-    stack: ['CrewAI OSS', 'FastAPI', 'OpenAI', 'Apify', 'Telegram', 'Supabase'],
+    summary: 'Planned agent-assisted research, qualification and estimating expansion of the roofing and construction CRM. The earlier research blueprint is a design reference, not an integrated or deployed system.',
+    stack: ['GoHighLevel', 'CrewAI OSS (candidate)', 'FastAPI (candidate)', 'OpenAI', 'Apify', 'Telegram', 'Supabase'],
     pattern: 'Multi-agent research and qualification system',
-    status: 'Architecture blueprint only; no deployed production system is claimed.',
+    status: 'Architecture blueprint within the roofing and construction CRM initiative; agent implementation, estimating and bidding integration remain planned.',
     credibilityNote: 'Architecture blueprint only. Included to demonstrate system design direction, not a deployed production system.',
     highlights: [
       'CrewAI orchestration',
@@ -548,7 +659,7 @@ export const projects = [
       'Define agent input/output contracts, scoped credentials, retry limits, and run logs so tool calls and persistence decisions can be reviewed.'
     ],
     nextImprovements: [
-      'Build the core orchestration layer and data model first.',
+      'Qualify the roofing intake workflow first, then review estimating, bidding and agent orchestration requirements before implementation.',
       'Set explicit agent ownership and retry behavior.',
       'Add richer prospect scoring and CRM sync rules once the architecture is implemented.'
     ],
@@ -558,5 +669,109 @@ export const projects = [
       'Preserve a human review gate before any operational record is accepted into the CRM workflow.'
     ],
     diagram: 'multi-agent-crm-blueprint.svg'
+  },
+  {
+    "slug": "autom8urbiz-governance",
+    "title": "Autom8urBiz: Agent Governance",
+    "maturity": "synthetic governance proof",
+    "summary": "A personal AI workspace research project exploring approval-bound execution, idempotency, project isolation and auditable agent actions.",
+    "stack": [
+      "TypeScript",
+      "PostgreSQL (candidate)",
+      "Node.js"
+    ],
+    "pattern": "Human-authorized agent action gateway",
+    "status": "In-memory governance simulator and static SQL blueprint checks reported successful. Native database authorization and lifecycle qualification remain open.",
+    "credibilityNote": "Synthetic simulation and static checks do not establish PostgreSQL enforcement or a deployed autonomous company.",
+    "highlights": [
+      "Explicit action scope and approval",
+      "Idempotent execution simulation",
+      "Project-specific isolation design",
+      "Auditable action lifecycle"
+    ],
+    "businessProblem": "An assistant with access to multiple business tools needs a way to prevent unapproved or repeated actions and preserve evidence of decisions.",
+    "solutionOverview": "The experimental design separates agent proposals from owner approval and a bounded executor. A TypeScript simulator exercises approval and retry behavior; a proposed PostgreSQL layer would enforce durable action state and transactional rules.",
+    "workflowSequence": [
+      "Propose scoped action",
+      "Validate action contract",
+      "Request owner approval",
+      "Check authorization and prior execution",
+      "Record a bounded effect and audit outcome"
+    ],
+    "keyAutomations": [
+      "Synthetic approval and execution checks",
+      "Duplicate retry simulation",
+      "Static SQL blueprint inspection"
+    ],
+    "aiUsage": [
+      "Agents may propose bounded actions; authorization and execution are separate deterministic responsibilities."
+    ],
+    "safetyNotes": [
+      "Single-user research scope; no multi-tenant production service or live agent execution is claimed.",
+      "In-memory behavior does not prove database concurrency, RLS or external exactly-once effects.",
+      "Native database permission and transaction acceptance remain open."
+    ],
+    "nextImprovements": [
+      "Qualify the candidate database controls in an authorized isolated environment.",
+      "Verify identity binding, concurrent execution, revocation and rollback.",
+      "Evaluate external side effects only after approval and durable execution controls are established."
+    ],
+    "implementationNotes": [
+      "The November governance handoff reports passing synthetic behavior and structural checks, not complete native acceptance.",
+      "The proposed architecture is a candidate rather than a production dependency decision."
+    ],
+    "diagram": "autom8urbiz-governance.svg"
+  },
+  {
+    "slug": "secretaryflow",
+    "title": "SecretaryFlow by Autom8urBiz",
+    "maturity": "discovery and architecture",
+    "summary": "A field-informed concept for a personal task and reminder assistant that complements existing work habits rather than replacing client relationships or employer systems.",
+    "stack": [
+      "Telegram (proposed)",
+      "Supabase/PostgreSQL (proposed)",
+      "Groq (candidate)"
+    ],
+    "pattern": "Personal task capture and human-controlled reminders",
+    "status": "Discovery, proposed architecture, security boundaries and acceptance criteria documented. Infrastructure qualification, implementation and pilot remain unverified.",
+    "credibilityNote": "Architecture proposal only. No approved live client integration, deployed assistant or measured business outcome is claimed.",
+    "highlights": [
+      "Natural-language personal task capture",
+      "Explicit confirmation for ambiguous requests",
+      "Scheduled reminders and daily briefing design",
+      "Human-led communications"
+    ],
+    "businessProblem": "Busy professionals may rely on notes and manual follow-up to track obligations. A reminder assistant should support these habits without exposing confidential business information or impersonating the user.",
+    "solutionOverview": "Propose a text-first assistant that accepts personal non-confidential tasks, validates structured intent, confirms changes, stores authoritative task state and schedules reminders. Message delivery and retry behavior would be tracked with explicit uncertainty and recovery rules.",
+    "workflowSequence": [
+      "Capture personal task",
+      "Interpret and validate intent",
+      "Confirm ambiguous or consequential changes",
+      "Persist task and schedule",
+      "Dispatch reminder and track outcome"
+    ],
+    "keyAutomations": [
+      "Proposed task capture and revision",
+      "Proposed reminder scheduler and daily briefing",
+      "Proposed bounded retries and failure visibility"
+    ],
+    "aiUsage": [
+      "AI may interpret natural language into a validated task proposal; it cannot authorize actions or send messages to clients."
+    ],
+    "safetyNotes": [
+      "No employer, bank or confidential client data in the initial scope.",
+      "Provider privacy, account eligibility and deployment isolation must be verified before pilot.",
+      "External delivery is not assumed exactly once; unknown outcomes require conservative handling."
+    ],
+    "nextImprovements": [
+      "Complete isolated foundation and provider inspection.",
+      "Implement and test authorization, durable ingress and reminder lifecycle only after approval.",
+      "Qualify a synthetic deployment before any controlled personal pilot."
+    ],
+    "implementationNotes": [
+      "The November 26 handoff defines discovery and architecture only; implementation and deployment are not evidenced.",
+      "Automate the workload. Preserve the humanity."
+    ],
+    "diagram": "secretaryflow.svg"
   }
 ] as const;

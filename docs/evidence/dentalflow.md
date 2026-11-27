@@ -32,6 +32,10 @@ The public project data reports:
 
 These are bounded case-study reports. They do not establish exhaustive security coverage, general recovery guarantees, or production verification. This hub supplies no additional test counts, raw test records, or independently reproduced results.
 
+## November 27 progress update (reported)
+
+The November 24 project checkpoint documents archive integrity review and security remediation proposals. These are offline artifacts, not native database execution or proof that the proposed controls are effective. Security findings remain open; native acceptance and release qualification have not been established. No alpha, beta or production readiness is claimed.
+
 ## Codex's role
 
 Codex supports implementation, inspection, debugging, testing, and evidence-driven correction. The documented loop starts with requirements, acceptance criteria, and architecture, then moves through implementation, targeted testing, evidence review, root-cause fixes, regression testing, and staging/deployment verification. Aries retains responsibility for architecture, security boundaries, evidence review, and deployment decisions.

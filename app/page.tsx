@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ArrowDown, ArrowRight, ArrowUpRight, BrainCircuit, Boxes, CalendarCheck2, Mail, Workflow } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, BrainCircuit, Boxes, CalendarCheck2, Workflow } from 'lucide-react';
 
 import { projects } from '@/data/projects';
 import { ProjectFilter } from '@/components/ProjectFilter';
@@ -10,6 +10,7 @@ import { ClinicShowcase } from '@/components/ClinicShowcase';
 import { BuildingWithCodex } from '@/components/BuildingWithCodex';
 import { WorkflowIntakeDialog } from '@/components/WorkflowIntakeDialog';
 import { SystemsExplorer } from '@/components/SystemsExplorer';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const stackGroups = [
   { name: 'Automation', tools: ['n8n', 'Make.com', 'GoHighLevel', 'Zapier'] },
@@ -34,21 +35,66 @@ export default function Home() {
     { number: '03', title: 'Decide the next best system', detail: 'Leave with a clearer view of what to automate next.' }
   ];
   return (
-    <main className="pb-16">
+    <main data-booking-sections className="pb-24">
       <nav className="portfolio-nav" aria-label="Portfolio navigation">
         <a href="#top" className="nav-brand"><span className="brand-mark">AP</span><span>Jette Aries Portilla</span></a>
         <div className="nav-links"><a href="#capabilities">Capabilities</a><a href="#tools">Tools</a><a href="#projects">Work</a><a href="#building-with-codex">Codex</a><a href="#process">Process</a><a href="#builder">About</a></div>
-        <a href="#contact" className="nav-cta">Let&apos;s talk <ArrowUpRight size={14} /></a>
+        <div className="nav-actions"><ThemeToggle /><a href="https://cal.com/jette-aries-portilla/discovery-call" data-booking className="nav-cta">Let&apos;s talk <ArrowUpRight size={14} /></a></div>
       </nav>
-      <section id="top" className="reference-hero">
-        <div className="hero-copy">
+      <section id="top" className="reference-hero reference-hero-with-builder">
+        <div className="hero-copy min-w-0">
           <p className="eyebrow">AI AUTOMATION / SAAS SYSTEMS</p>
+          <div id="builder" className="hero-builder">
+            <div className="profile-frame hero-profile overflow-hidden rounded-xl p-1.5">
+              <Image
+                src="/images/aries-headshot-retouched.jpg"
+                alt="Jette Aries E. Portilla, AI Automation Specialist"
+                width={800}
+                height={800}
+                sizes="(max-width: 480px) 112px, 160px"
+                className="aspect-[4/5] w-full rounded-lg object-cover object-top"
+                priority
+              />
+            </div>
+            <div className="min-w-0">
+              <p className="eyebrow">The builder behind the systems</p>
+              <p className="mt-2 text-2xl font-semibold leading-tight text-white">Jette Aries E. Portilla</p>
+              <p className="mt-1 text-sm font-medium text-cyan-100">AI Automation Specialist</p>
+              <p className="mt-2 font-mono text-xs uppercase tracking-wider text-slate-400">Builder / Operator</p>
+            </div>
+          </div>
           <h1>Reliable systems for <span className="gradient-text">work that slows teams down.</span></h1>
           <p>I use Codex, TypeScript, Supabase/PostgreSQL, APIs, and n8n to turn operational problems into tested systems with clear data rules, human oversight, and maintainable architecture.</p>
-          <div className="hero-actions"><a href="/projects/dentalflow-saas" className="button-primary">Explore DentalFlow <ArrowUpRight size={16} /></a><a href="#building-with-codex" className="button-secondary">How I build with Codex <ArrowDown size={16} /></a></div>
+          <div className="hero-actions">
+            <a href="https://cal.com/jette-aries-portilla/discovery-call" data-booking aria-haspopup="dialog" className="button-primary">Book a Discovery Call <ArrowUpRight size={16} /></a>
+            <a href="/projects/dentalflow-saas" className="button-secondary">Explore DentalFlow <ArrowUpRight size={16} /></a>
+            <a href="#building-with-codex" className="hero-codex-link">How I build with Codex <ArrowDown size={14} /></a>
+          </div>
         </div>
-        <SystemsExplorer />
-        <a className="scroll-cue" href="#approach">SCROLL TO EXPLORE <ArrowDown size={14} /></a>
+        <div className="hero-explorer-column min-w-0">
+          <SystemsExplorer />
+        </div>
+        <a className="scroll-cue" href="#operations-first">SCROLL TO EXPLORE <ArrowDown size={14} /></a>
+      </section>
+
+      <section id="operations-first" aria-labelledby="operations-first-heading" className="tech-band border-y border-cyan-100/10 bg-[#0a111a]/90 px-5 py-14 sm:px-8 lg:px-10 lg:py-20">
+        <div className="mx-auto grid max-w-7xl items-start gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-12">
+          <div className="min-w-0">
+            <p className="eyebrow">The way I work</p>
+            <h2 id="operations-first-heading" className="mt-3 max-w-2xl text-3xl font-semibold leading-tight text-white sm:text-4xl">Operations-first thinking, built into every workflow.</h2>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">More than six years of customer support and operations experience inform how I map handoffs, data rules, and exception paths before choosing an automation.</p>
+          </div>
+          <div className="grid min-w-0 gap-3 sm:grid-cols-2">
+            <div className="detail-panel rounded-lg p-5 sm:p-6">
+              <p className="font-mono text-xs uppercase text-cyan-100/70">01 / Approach</p>
+              <p className="mt-3 text-sm leading-7 text-slate-200">Translate operational requirements into workflows with explicit data, rules, and human review.</p>
+            </div>
+            <div className="detail-panel rounded-lg p-5 sm:p-6">
+              <p className="font-mono text-xs uppercase text-rose-200/80">02 / Focus</p>
+              <p className="mt-3 text-sm leading-7 text-slate-200">SaaS and CRM automation, AI decision support, and business-process orchestration.</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <ProblemExplorer />
@@ -68,7 +114,7 @@ export default function Home() {
             <p className="eyebrow">A practical approach</p>
             <h2 className="mt-3 max-w-xl text-3xl font-semibold leading-tight text-white sm:text-4xl">A clear path from process to system.</h2>
             <p className="mt-4 max-w-lg text-sm leading-7 text-slate-300">Start with how the work happens today. Build around the real tools, decisions, and people involved.</p>
-            <a href="https://cal.com/jette-aries-portilla/discovery-call" target="_blank" rel="noopener noreferrer" className="button-primary mt-7 w-full sm:w-auto">
+            <a href="https://cal.com/jette-aries-portilla/discovery-call" data-booking aria-haspopup="dialog" className="button-primary mt-7 w-full sm:w-auto">
               Discuss Your Workflow <ArrowUpRight size={16} />
             </a>
           </div>
@@ -126,11 +172,11 @@ export default function Home() {
           <div className="mb-9 max-w-3xl">
             <p className="eyebrow">Project proof</p>
             <h2 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl">Systems built around the work.</h2>
-            <p className="mt-4 text-sm leading-7 text-slate-300">Explore workflow design, automation architecture, and AI-assisted operations across these systems. Each project is labeled by its current build status.</p>
+            <p className="mt-4 text-sm leading-7 text-slate-300">Browse the project cabinet by category. Select a project title to reveal its architecture, workflow, technologies and current build status.</p>
           </div>
           <ProjectFilter projects={projects} />
           <div className="mt-9">
-            <a href="https://cal.com/jette-aries-portilla/discovery-call" target="_blank" rel="noopener noreferrer" className="button-primary w-full sm:w-auto">
+            <a href="https://cal.com/jette-aries-portilla/discovery-call" data-booking aria-haspopup="dialog" className="button-primary w-full sm:w-auto">
               Review These Systems With Me <ArrowUpRight size={16} />
             </a>
           </div>
@@ -155,91 +201,29 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <a href="https://cal.com/jette-aries-portilla/discovery-call" target="_blank" rel="noopener noreferrer" className="button-primary mt-8 w-full sm:w-auto">
+        <a href="https://cal.com/jette-aries-portilla/discovery-call" data-booking aria-haspopup="dialog" className="button-primary mt-8 w-full sm:w-auto">
           Start With a Workflow Review <ArrowUpRight size={16} />
         </a>
-      </section>
-
-      <section id="builder" className="tech-band border-y border-cyan-200/10 bg-[#0a111a]/90 px-5 py-14 sm:px-8 lg:px-10 lg:py-18">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[18rem_minmax(0,1fr)] lg:items-center lg:gap-12">
-          <div className="profile-frame overflow-hidden rounded-xl p-2">
-            <Image
-              src="/images/aries-headshot-retouched.jpg"
-              alt="Jette Aries E. Portilla, AI Automation Specialist"
-              width={800}
-              height={800}
-              sizes="(max-width: 1024px) 100vw, 288px"
-              className="aspect-[4/5] w-full rounded-lg object-cover object-top"
-            />
-            <div className="border-t border-cyan-100/15 px-4 py-4">
-              <p className="font-mono text-xs uppercase text-cyan-100/70">Builder / Operator</p>
-              <p className="mt-2 text-lg font-semibold text-white">Jette Aries E. Portilla</p>
-              <p className="mt-1 text-sm text-slate-300">AI Automation Specialist</p>
-            </div>
-          </div>
-          <div>
-            <p className="eyebrow">The builder behind the systems</p>
-            <h2 className="mt-3 max-w-2xl text-3xl font-semibold leading-tight text-white sm:text-4xl">Operations-first thinking, built into every workflow.</h2>
-            <p className="mt-4 max-w-3xl text-base leading-7 text-slate-300">More than six years of customer support and operations experience inform how I map handoffs, data rules, and exception paths before choosing an automation.</p>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              <div className="detail-panel rounded-lg p-4">
-                <p className="font-mono text-xs uppercase text-cyan-100/70">01 / Approach</p>
-                <p className="mt-2 text-sm leading-6 text-slate-200">Translate operational requirements into workflows with explicit data, rules, and human review.</p>
-              </div>
-              <div className="detail-panel rounded-lg p-4">
-                <p className="font-mono text-xs uppercase text-rose-200/80">02 / Focus</p>
-                <p className="mt-2 text-sm leading-6 text-slate-200">SaaS and CRM automation, AI decision support, and business-process orchestration.</p>
-              </div>
-            </div>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a href="mailto:jette.portilla@gmail.com" className="button-secondary w-full sm:w-auto">
-                <Mail size={16} /> Email
-              </a>
-              <a href="https://www.linkedin.com/in/jettearies/" target="_blank" rel="noopener noreferrer" className="button-secondary w-full sm:w-auto">
-                <ArrowUpRight size={16} /> LinkedIn
-              </a>
-              <a href="https://github.com/jette-sketch" target="_blank" rel="noopener noreferrer" className="button-secondary w-full sm:w-auto">
-                <ArrowUpRight size={16} /> GitHub
-              </a>
-            </div>
-          </div>
-        </div>
       </section>
 
       <FAQ />
       <section id="contact" className="tech-band mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 lg:py-14">
         <div className="cyber-panel relative overflow-hidden rounded-xl bg-[linear-gradient(120deg,rgba(12,52,71,0.75),rgba(12,21,34,0.96)_58%,rgba(55,28,43,0.55)] p-6 sm:p-10 lg:p-12">
           <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-cyan-200/55 to-transparent" aria-hidden="true" />
-          <div className="relative grid gap-10 lg:grid-cols-[minmax(0,1fr)_19rem] lg:items-end">
+          <div className="relative">
             <div className="max-w-3xl">
               <p className="eyebrow">Start a conversation</p>
               <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">Ready to review your workflow?</h2>
               <p className="mt-5 max-w-2xl text-base leading-7 text-slate-300">Book a short discovery call so we can identify bottlenecks, automation opportunities, and the best next step for your operation.</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <a href="https://cal.com/jette-aries-portilla/discovery-call" target="_blank" rel="noopener noreferrer" className="button-primary w-full sm:w-auto">
+                <a href="https://cal.com/jette-aries-portilla/discovery-call" data-booking aria-haspopup="dialog" className="button-primary w-full sm:w-auto">
                   Book a Discovery Call <ArrowUpRight size={16} />
                 </a>
                 <WorkflowIntakeDialog />
               </div>
             </div>
 
-            <address className="not-italic">
-              <p className="font-mono text-xs uppercase text-cyan-100/75">Other ways to connect</p>
-              <div className="mt-4 space-y-3 border-t border-white/10 pt-4">
-                <a href="mailto:jette.portilla@gmail.com" className="flex items-center gap-3 text-sm text-slate-200 transition hover:text-cyan-200">
-                  <Mail size={16} className="shrink-0 text-cyan-200" />
-                  <span className="break-all">jette.portilla@gmail.com</span>
-                </a>
-                <a href="https://www.linkedin.com/in/jettearies/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-slate-200 transition hover:text-cyan-200">
-                  <ArrowUpRight size={16} className="shrink-0 text-cyan-200" />
-                  <span>LinkedIn</span>
-                </a>
-                <a href="https://github.com/jette-sketch" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-slate-200 transition hover:text-cyan-200">
-                  <ArrowUpRight size={16} className="shrink-0 text-cyan-200" />
-                  <span>GitHub</span>
-                </a>
-              </div>
-            </address>
+
           </div>
         </div>
       </section>

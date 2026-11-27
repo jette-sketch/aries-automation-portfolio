@@ -40,6 +40,7 @@ export function BookingCalendar() {
     body.overflow = lock.bodyOverflow;
     body.paddingRight = lock.bodyPaddingRight;
     html.overflow = lock.htmlOverflow;
+    window.scrollTo({ left: lock.x, top: lock.y, behavior: 'auto' });
     const target = previousFocus.current;
     const rect = target?.getBoundingClientRect();
     // Do not return focus to a stale hero link after an automatic prompt.
@@ -48,7 +49,7 @@ export function BookingCalendar() {
     } else {
       floatingButtonRef.current?.focus({ preventScroll: true });
     }
-    window.scrollTo({ left: lock.x, top: lock.y, behavior: 'instant' });
+    window.scrollTo({ left: lock.x, top: lock.y, behavior: 'auto' });
     html.scrollBehavior = lock.htmlScrollBehavior;
     restoreFrame.current = window.requestAnimationFrame(() => {
       restoreFrame.current = 0;

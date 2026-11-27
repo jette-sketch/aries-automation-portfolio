@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowUpRight, Check, CircleDot, ShieldCheck } from 'lucide-r
 
 import { projects } from '@/data/projects';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { ProjectRoadmap } from '@/components/ProjectRoadmap';
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -83,6 +84,10 @@ export default async function ProjectDetailPage({
             </div>
           </div>}
         </header>
+
+        <section className="border-b border-cyan-100/15 px-5 py-6 sm:px-8 lg:px-12" aria-label="Development roadmap">
+          <ProjectRoadmap slug={project.slug} />
+        </section>
 
         <section className="border-b border-cyan-100/15 px-5 py-6 sm:px-8 lg:px-12" aria-labelledby="workflow-diagram-title">
           <div className="mb-4 flex items-center justify-between gap-3">

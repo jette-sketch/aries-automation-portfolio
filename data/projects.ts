@@ -6,8 +6,8 @@ export const projects = [
     summary: 'DentalFlow is an evolving multi-tenant clinic operations platform that began as workflow automation and is being hardened into a database-backed SaaS architecture with explicit tenant isolation, authorization, reliability controls, and human-supervised AI.',
     stack: ['Supabase/PostgreSQL', 'n8n', 'Google integrations', 'External APIs'],
     pattern: 'Multi-tenant SaaS architecture with database-enforced rules and workflow orchestration',
-    status: 'Active flagship development with staging and deployment hardening in progress.',
-    credibilityNote: 'Production verification is not yet claimed.',
+    status: 'Flagship development: bounded offline reliability and recovery checks completed for the current scope; native integration and production qualification remain open.',
+    credibilityNote: 'Offline evidence does not establish native database acceptance, hosted CI, or production readiness. Production verification is not claimed.',
     highlights: [
       'Supabase/PostgreSQL as the authoritative operational data layer',
       'Tenant isolation and role-based authorization',
@@ -60,7 +60,8 @@ export const projects = [
         'Rollback behavior verified for failed protected operations',
         'Concurrent mutation and invariant protection tested',
         'Audit events used for successful state-changing operations',
-        'Staging orchestration state survived restart, validating persistence'
+        'Staging orchestration state survived restart, validating persistence',
+        'Latest offline reliability qualification includes archive integrity checks and rejection of deliberately corrupted evidence; native integration verification remains open'
       ],
       loop: ['Requirement', 'Acceptance Criteria', 'Architecture', 'Codex-Assisted Implementation', 'Automated / Targeted Testing', 'Evidence Review', 'Root-Cause Fix', 'Regression Test', 'Staging / Deployment Verification'],
       lessons: [
@@ -73,7 +74,7 @@ export const projects = [
         { label: 'Designed', detail: 'Substantial architecture complete' },
         { label: 'Built', detail: 'Substantial implementation exists' },
         { label: 'Tested', detail: 'Core security and reliability paths have verified evidence; broader testing continues' },
-        { label: 'Staging', detail: 'Active staging and deployment hardening' },
+        { label: 'Staging', detail: 'Offline readiness checks completed for a bounded scope; native integration, hosted CI, and deployment qualification remain open' },
         { label: 'Production verified', detail: 'No' }
       ]
     },

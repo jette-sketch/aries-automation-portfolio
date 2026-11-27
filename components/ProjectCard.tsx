@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ProjectRoadmap } from '@/components/ProjectRoadmap';
+import { ProjectWorkflowCanvas } from '@/components/ProjectWorkflowCanvas';
 import { ArrowUpRight, ChevronDown, FolderClosed } from 'lucide-react';
 
 export type Project = {
@@ -48,6 +49,7 @@ export function ProjectCard({ project }: { project: Project }) {
           <span>WORKFLOW DIAGRAM <span>VIEW DETAILS ↗</span></span>
         </Link>
         <div className="project-drawer-roadmap"><ProjectRoadmap slug={project.slug} /></div>
+        <div className="project-drawer-roadmap"><ProjectWorkflowCanvas slug={project.slug} /></div>
       </div>
     </details>
   );

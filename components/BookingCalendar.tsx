@@ -164,13 +164,15 @@ export function BookingCalendar() {
     <dialog ref={dialogRef} aria-labelledby="booking-calendar-title" aria-describedby="booking-calendar-description"
       onClose={restorePage}
       onClick={event => { if (event.target === dialogRef.current) dialogRef.current?.close(); }}
-      className="cyber-panel booking-calendar-dialog overflow-y-auto overscroll-contain rounded-xl p-0 text-white shadow-2xl">
-      <div className="flex items-start justify-between gap-2 border-b border-cyan-100/15 p-3 sm:p-4">
+      className="cyber-panel booking-calendar-dialog overflow-hidden overscroll-contain rounded-xl p-0 text-white shadow-2xl">
+      <div className="booking-calendar-header flex shrink-0 items-start justify-between gap-2 border-b border-cyan-100/15 p-3 sm:p-4">
         <div><p className="eyebrow">Let&apos;s talk</p><h2 id="booking-calendar-title" className="mt-1 text-xl font-semibold">Book a discovery call</h2><p id="booking-calendar-description" className="mt-1 text-xs leading-5 text-slate-300">Choose an available time to discuss your workflow and automation opportunities.</p></div>
-        <button type="button" autoFocus onClick={() => dialogRef.current?.close()} aria-label="Close booking calendar" className="rounded-md p-2 text-slate-300 hover:text-white"><X size={24} /></button>
+        <button type="button" autoFocus onClick={() => dialogRef.current?.close()} aria-label="Close booking calendar" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-slate-300 hover:bg-white/10 hover:text-white"><X size={24} /></button>
       </div>
-      <div id="portfolio-booking-calendar" ref={calendarRef} className="min-h-[20rem] w-full min-w-0 overflow-auto p-2" />
-      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-cyan-100/15 p-3">
+      <div className="booking-calendar-body">
+        <div id="portfolio-booking-calendar" ref={calendarRef} className="min-h-[20rem] w-full min-w-0 p-2" />
+      </div>
+      <div className="booking-calendar-footer flex shrink-0 flex-wrap items-center justify-between gap-2 border-t border-cyan-100/15 p-3">
         <label className="flex items-center gap-2 text-xs text-slate-300"><input type="checkbox" onChange={event => { muted.current = event.target.checked; }} /> Don&apos;t show automatically again this visit</label>
         <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="button-secondary">Open calendar in a new tab <ArrowUpRight size={16} aria-hidden="true" /></a>
       </div>

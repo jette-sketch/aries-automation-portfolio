@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowUpRight, Check, CircleDot, ShieldCheck } from 'lucide-react';
 
 import { projects } from '@/data/projects';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -45,7 +46,7 @@ export default async function ProjectDetailPage({
         <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 transition hover:text-emerald-200">
           <ArrowLeft size={16} /> Back to portfolio
         </Link>
-        <span className="hidden font-mono text-xs uppercase tracking-wider text-slate-500 sm:inline">Case study / System design</span>
+        <div className="nav-actions"><span className="hidden font-mono text-xs uppercase tracking-wider text-slate-500 sm:inline">Case study / System design</span><ThemeToggle /></div>
       </div>
 
       <article className="card cyber-panel overflow-hidden rounded-xl">

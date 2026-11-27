@@ -489,3 +489,34 @@ dialog.booking-calendar-dialog::backdrop {
     max-height: 82dvh;
   }
 }
+
+
+/* Only the embedded calendar region scrolls; keep close and fallback controls visible. */
+dialog.booking-calendar-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.booking-calendar-header,
+.booking-calendar-footer {
+  flex: 0 0 auto;
+}
+.booking-calendar-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+@media (max-height: 500px) {
+  .booking-calendar-header #booking-calendar-description {
+    display: none;
+  }
+  .booking-calendar-footer {
+    padding-block: 0.35rem;
+  }
+  .booking-calendar-footer .button-secondary {
+    min-height: 2rem;
+    padding: 0.35rem 0.65rem;
+  }
+}

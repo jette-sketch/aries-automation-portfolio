@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { BookingCalendar } from '@/components/BookingCalendar';
 
 export const metadata: Metadata = {
   title: 'Jette Aries Portilla | AI Automation Portfolio',
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>{children}<BookingCalendar /></body>
     </html>
   );
 }

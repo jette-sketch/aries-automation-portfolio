@@ -463,3 +463,29 @@ body { background: #050c12; background-image: radial-gradient(circle at 18% 16%,
 @media (max-width: 520px) { .simulation-scenarios { grid-template-columns: 1fr; } .simulation-intro { align-items: start; flex-direction: column; } .simulation-hint { width: 100%; margin-left: 0; } .simulation-track { grid-template-columns: repeat(2,minmax(0,1fr)); } .simulation-canvas { margin: 0 .75rem; padding: .8rem; } .simulation-scenarios { padding: 0 1rem; } .simulation-intro, .simulation-toolbar { padding-left: 1rem; padding-right: 1rem; } }
 @media (prefers-reduced-motion: reduce) { .simulation-scenario, .simulation-node { transition: none; } .simulation-scenario:hover, .simulation-node:hover:not(:disabled) { transform: none; } }
 
+
+
+/* Compact left-side booking calendar; retain native modal focus and scroll guards. */
+dialog.booking-calendar-dialog {
+  position: fixed;
+  inset: auto auto max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+  margin: 0;
+  width: min(30rem, calc(100vw - 2rem));
+  max-width: none;
+  max-height: min(78dvh, calc(100dvh - 2rem));
+  overscroll-behavior: contain;
+}
+
+dialog.booking-calendar-dialog::backdrop {
+  background: rgba(2, 6, 12, 0.22);
+  backdrop-filter: none;
+}
+
+@media (max-width: 640px) {
+  dialog.booking-calendar-dialog {
+    left: max(0.5rem, env(safe-area-inset-left));
+    bottom: max(0.5rem, env(safe-area-inset-bottom));
+    width: calc(100vw - max(0.5rem, env(safe-area-inset-left)) - max(0.5rem, env(safe-area-inset-right)));
+    max-height: 82dvh;
+  }
+}

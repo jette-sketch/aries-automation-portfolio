@@ -10,6 +10,7 @@ import { ClinicShowcase } from '@/components/ClinicShowcase';
 import { BuildingWithCodex } from '@/components/BuildingWithCodex';
 import { WorkflowIntakeDialog } from '@/components/WorkflowIntakeDialog';
 import { SystemsExplorer } from '@/components/SystemsExplorer';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const stackGroups = [
   { name: 'Automation', tools: ['n8n', 'Make.com', 'GoHighLevel', 'Zapier'] },
@@ -38,7 +39,7 @@ export default function Home() {
       <nav className="portfolio-nav" aria-label="Portfolio navigation">
         <a href="#top" className="nav-brand"><span className="brand-mark">AP</span><span>Jette Aries Portilla</span></a>
         <div className="nav-links"><a href="#capabilities">Capabilities</a><a href="#tools">Tools</a><a href="#projects">Work</a><a href="#building-with-codex">Codex</a><a href="#process">Process</a><a href="#builder">About</a></div>
-        <a href="https://cal.com/jette-aries-portilla/discovery-call" data-booking className="nav-cta">Let&apos;s talk <ArrowUpRight size={14} /></a>
+        <div className="nav-actions"><ThemeToggle /><a href="https://cal.com/jette-aries-portilla/discovery-call" data-booking className="nav-cta">Let&apos;s talk <ArrowUpRight size={14} /></a></div>
       </nav>
       <section id="top" className="reference-hero reference-hero-with-builder">
         <div className="hero-copy min-w-0">

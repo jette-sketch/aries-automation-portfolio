@@ -120,7 +120,7 @@ export function BookingCalendar() {
     }
     document.addEventListener('click', onBookingClick);
 
-    // Count completed top-level homepage sections; never re-prompt on reverse scroll.
+    // Prompt every three completed top-level homepage sections; never re-prompt on reverse scroll.
     // A fast jump across several sections produces at most one prompt.
     let highestPair = 0;
     let frame = 0;
@@ -128,7 +128,7 @@ export function BookingCalendar() {
     const countPairs = () => {
       const sections = Array.from(document.querySelectorAll<HTMLElement>('main[data-booking-sections] > section'));
       const completed = sections.filter(section => section.getBoundingClientRect().bottom <= window.innerHeight * 0.45).length;
-      return Math.floor(completed / 2);
+      return Math.floor(completed / 3);
     };
     highestPair = countPairs();
     function onScroll() {

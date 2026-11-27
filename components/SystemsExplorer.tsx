@@ -1,6 +1,6 @@
 'use client';
 
-import { useId, useState } from 'react';
+import { useEffect, useId, useState, type CSSProperties } from 'react';
 import { Workflow, Network, DatabaseZap } from 'lucide-react';
 
 const systems = {
@@ -19,14 +19,81 @@ const particles = Array.from({ length: 36 }, (_, index) => {
   return { x: 210 + Math.cos(angle) * radius, y: 210 + Math.sin(angle) * radius, r: index % 7 === 0 ? 1.7 : .8 };
 });
 
+type TransitionPhase = 'idle' | 'disintegrate' | 'integrate';
+const DISSOLVE_MS = 480;
+const REASSEMBLE_MS = 680;
+
+// Deterministic particle origins sample the sphere and its concentric HUD rings.
+const fragments = Array.from({ length: 112 }, (_, index) => {
+  const angle = index * 137.508 * Math.PI / 180;
+  const radius = index < 76 ? 86 * Math.sqrt((index + .5) / 76) : 100 + (index % 4) * 13;
+  const spread = 146 + (index * 29 % 49);
+  const swirl = angle + (index % 2 === 0 ? .48 : -.48);
+  const x = Math.cos(angle) * radius;
+  const y = Math.sin(angle) * radius;
+  return {
+    x: 210 + x, y: 210 + y,
+    r: index % 11 === 0 ? 2.2 : index % 3 === 0 ? 1.4 : .85,
+    dx: Math.cos(swirl) * spread - x,
+    dy: Math.sin(swirl) * spread - y,
+    opacity: .5 + (index % 6) * .09,
+  };
+});
+
 export function SystemsExplorer() {
   const [active, setActive] = useState<System>('connected');
   const [paused, setPaused] = useState(false);
+  const [phase, setPhase] = useState<TransitionPhase>('idle');
+  const [target, setTarget] = useState<System>('connected');
+
+  function selectSystem(node: System) {
+    if (node === active || phase !== 'idle') return;
+    setTarget(node);
+    if (paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setActive(node);
+      return;
+    }
+    setPhase('disintegrate');
+  }
+
+  useEffect(() => {
+    if (phase === 'idle') return;
+    const timer = window.setTimeout(() => {
+      if (phase === 'disintegrate') {
+        setActive(target);
+        setPhase('integrate');
+      } else {
+        setPhase('idle');
+      }
+    }, phase === 'disintegrate' ? DISSOLVE_MS : REASSEMBLE_MS);
+    return () => window.clearTimeout(timer);
+  }, [phase, target]);
+
+  useEffect(() => {
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function onMotionChange(event: MediaQueryListEvent) {
+      if (event.matches && phase !== 'idle') {
+        setActive(target);
+        setPhase('idle');
+      }
+    }
+    preference.addEventListener('change', onMotionChange);
+    return () => preference.removeEventListener('change', onMotionChange);
+  }, [phase, target]);
+
+  function toggleMotion() {
+    if (!paused && phase !== 'idle') {
+      setActive(target);
+      setPhase('idle');
+    }
+    setPaused(value => !value);
+  }
   const id = useId();
   const selected = systems[active];
   const CoreIcon = selected.icon;
   return (
-    <div className="hero-visual systems-explorer lucifer-explorer" data-core={active} data-paused={paused}>
+    <div className="hero-visual systems-explorer lucifer-explorer" data-core={active} data-paused={paused} data-phase={phase}
+      style={{ '--dissolve-duration': DISSOLVE_MS + 'ms', '--integrate-duration': REASSEMBLE_MS + 'ms' } as CSSProperties}>
       <div className="systems-graphic lucifer-graphic">
         <svg className="lucifer-reactor" viewBox="0 0 420 420" aria-hidden="true" focusable="false">
           <defs>
@@ -46,6 +113,7 @@ export function SystemsExplorer() {
           <g className="lucifer-particles">
             {particles.map((particle, index) => <circle key={index} cx={particle.x} cy={particle.y} r={particle.r} fill="currentColor" opacity={index % 3 === 0 ? .7 : .25} />)}
           </g>
+          <g className="lucifer-structure">
           <g className="lucifer-reticle" fill="none" stroke="currentColor">
             <circle cx="210" cy="210" r="197" strokeOpacity=".13" />
             <circle cx="210" cy="210" r="183" strokeOpacity=".25" strokeDasharray="1 8" strokeWidth="2" />
@@ -79,6 +147,15 @@ export function SystemsExplorer() {
             <circle cx="210" cy="210" r="52" fill="none" stroke="currentColor" strokeOpacity=".4" />
             <path d="M210 120v14 M210 286v14 M120 210h14 M286 210h14" stroke="var(--core-light)" strokeWidth="2" />
           </g>
+          </g>
+          {phase !== 'idle' && (
+            <g className="lucifer-fragments" aria-hidden="true">
+              {fragments.map((particle, index) => (
+                <circle key={index} className="lucifer-fragment" cx={particle.x} cy={particle.y} r={particle.r}
+                  fill="var(--core-light)" style={{ '--fragment-x': particle.dx + 'px', '--fragment-y': particle.dy + 'px', '--fragment-opacity': particle.opacity } as CSSProperties} />
+              ))}
+            </g>
+          )}
         </svg>
         <div className="lucifer-core-label" aria-hidden="true">
           <CoreIcon size={35} strokeWidth={1.6} />
@@ -88,13 +165,13 @@ export function SystemsExplorer() {
       </div>
       <div className="lucifer-node-controls" role="group" aria-label="Explore connected systems">
         {nodeOrder.map(node => (
-          <button key={node} type="button" className="lucifer-node" aria-pressed={active === node} onClick={() => setActive(node)}>
+          <button key={node} type="button" className="lucifer-node" aria-pressed={active === node} aria-disabled={phase !== 'idle'} onClick={() => selectSystem(node)}>
             {systems[node].label}
           </button>
         ))}
       </div>
       <div className="hero-caption" aria-live="polite" aria-atomic="true"><span>{selected.label}</span><strong>{selected.heading}</strong><p>{selected.detail}</p></div>
-      <button type="button" className="lucifer-motion-control" aria-pressed={paused} onClick={() => setPaused(value => !value)}>{paused ? 'Resume animation' : 'Pause animation'}</button>
+      <button type="button" className="lucifer-motion-control" aria-pressed={paused} onClick={toggleMotion}>{paused ? 'Resume animation' : 'Pause animation'}</button>
     </div>
   );
 }

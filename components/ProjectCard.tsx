@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, FolderClosed } from 'lucide-react';
 
 export type Project = {
   slug: string;
@@ -24,20 +24,29 @@ export type Project = {
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <article id={project.slug} className="project-feature">
-      <div className="project-feature-copy">
-        <p className="eyebrow">{project.maturity}</p>
-        <h3>{project.title}</h3>
-        <p>{project.summary}</p>
-        <div className="project-context"><p><strong>Problem:</strong> {project.businessProblem}</p><p><strong>Approach:</strong> {project.solutionOverview}</p></div>
-        <p className="project-status"><strong>Current state:</strong> {project.status} {project.credibilityNote}</p>
-        <div className="project-tools">{project.stack.map((tool) => <span key={tool}>{tool}</span>)}</div>
-        <Link href={`/projects/${project.slug}`} className="button-secondary">Open case study <ArrowUpRight size={16} /></Link>
+    <details id={project.slug} name="portfolio-projects" className="project-drawer">
+      <summary className="project-drawer-trigger">
+        <FolderClosed size={21} className="project-drawer-icon" aria-hidden="true" />
+        <span className="project-drawer-title">{project.title}</span>
+        <span className="project-drawer-maturity">{project.maturity}</span>
+        <ChevronDown size={19} className="project-drawer-chevron" aria-hidden="true" />
+      </summary>
+      <div className="project-drawer-content">
+        <div className="project-drawer-copy">
+          <p>{project.summary}</p>
+          <div className="project-context">
+            <p><strong>Problem:</strong> {project.businessProblem}</p>
+            <p><strong>Approach:</strong> {project.solutionOverview}</p>
+          </div>
+          <p className="project-drawer-status"><strong>Current state:</strong> {project.status} {project.credibilityNote}</p>
+          <div className="project-tools">{project.stack.map(tool => <span key={tool}>{tool}</span>)}</div>
+          <Link href={`/projects/${project.slug}`} className="button-secondary">Open full case study <ArrowUpRight size={16} aria-hidden="true" /></Link>
+        </div>
+        <Link href={`/projects/${project.slug}`} className="project-visual project-drawer-visual" aria-label={`View ${project.title} case study`}>
+          <div className="diagram-frame"><img src={`/diagrams/${project.diagram}`} alt={`${project.title} workflow diagram`} loading="lazy" decoding="async" /></div>
+          <span>WORKFLOW DIAGRAM <span>VIEW DETAILS ↗</span></span>
+        </Link>
       </div>
-      <Link href={`/projects/${project.slug}`} className="project-visual" aria-label={`View ${project.title} case study`}>
-        <div className="diagram-frame"><img src={`/diagrams/${project.diagram}`} alt={`${project.title} workflow diagram`} /></div>
-        <span>WORKFLOW DIAGRAM <span>VIEW DETAILS ↗</span></span>
-      </Link>
-    </article>
+    </details>
   );
 }

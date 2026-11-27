@@ -120,30 +120,26 @@ export function BookingCalendar() {
     }
     document.addEventListener('click', onBookingClick);
 
-    // Prompt every three completed top-level homepage sections; never re-prompt on reverse scroll.
-    // A fast jump across several sections produces at most one prompt.
-    let highestPair = 0;
+    // Exactly two automatic prompts, tied to the actual homepage headings.
+    // Progress is monotonic: reaching the final demonstration never re-arms Project proof.
+    const promptHeadings = ['#projects h2', '#workflow-demo h2'] as const;
+    let lastPromptIndex = -1;
     let frame = 0;
-    let lastPath = window.location.pathname;
-    const countPairs = () => {
-      const sections = Array.from(document.querySelectorAll<HTMLElement>('main[data-booking-sections] > section'));
-      const completed = sections.filter(section => section.getBoundingClientRect().bottom <= window.innerHeight * 0.45).length;
-      return Math.floor(completed / 3);
-    };
-    highestPair = countPairs();
     function onScroll() {
-      if (frame || scrollLock.current || restoringScroll.current) return;
+      if (frame || scrollLock.current || restoringScroll.current || muted.current) return;
       frame = window.requestAnimationFrame(() => {
         frame = 0;
-        if (scrollLock.current || restoringScroll.current) return;
-        if (lastPath !== window.location.pathname) {
-          lastPath = window.location.pathname;
-          highestPair = 0;
-        }
-        const pair = countPairs();
-        if (pair <= highestPair) return;
-        highestPair = pair;
-        if (!muted.current && !document.querySelector('dialog[open]')) openCalendar();
+        if (scrollLock.current || restoringScroll.current || muted.current || document.querySelector('dialog[open]')) return;
+        let visibleIndex = -1;
+        promptHeadings.forEach((selector, index) => {
+          const heading = document.querySelector<HTMLElement>('main[data-booking-sections] ' + selector);
+          if (!heading) return;
+          const rect = heading.getBoundingClientRect();
+          if (rect.bottom > 0 && rect.top <= window.innerHeight * 0.75) visibleIndex = index;
+        });
+        if (visibleIndex <= lastPromptIndex) return;
+        openCalendar();
+        if (dialogRef.current?.open) lastPromptIndex = visibleIndex;
       });
     }
     window.addEventListener('scroll', onScroll, { passive: true });

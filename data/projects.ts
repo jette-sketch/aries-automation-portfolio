@@ -135,7 +135,7 @@ export const projects = [
   },
   {
     "slug": "ai-autopilot-supervisor",
-    "title": "AI Autopilot Supervisor",
+    "title": "Autopilot Supervisor",
     "maturity": "offline proof of concept",
     "summary": "An isolated repair-supervision experiment that reserves bounded attempts, validates candidate changes against synthetic tests, records evidence and controls termination.",
     "stack": [
@@ -327,7 +327,7 @@ export const projects = [
   },
   {
     slug: 'ai-procurement-approval-system',
-    title: 'AI Procurement & Approval System',
+    title: 'Procurement & Approval System',
     maturity: 'production-style build',
     summary: 'Production-style procurement workflow design for validating requests, producing AI-assisted risk recommendations, routing human approvals, recording decisions in Supabase, and preparing spend reports.',
     stack: [
@@ -391,7 +391,7 @@ export const projects = [
   },
   {
     slug: 'ai-booking-agent',
-    title: 'AI Booking Agent',
+    title: 'Booking Agent',
     maturity: 'portfolio implementation',
     summary: 'Portfolio design for a conversational booking assistant that extracts request details, checks Cal.com availability, confirms booking intent, and stores session state in Supabase.',
     stack: ['Make.com', 'OpenAI', 'Cal.com', 'Supabase', 'Telegram', 'Gmail'],
@@ -447,7 +447,7 @@ export const projects = [
   },
   {
     slug: 'ai-content-operations-approval-pipeline',
-    title: 'AI Content Operations & Approval Pipeline',
+    title: 'Content Operations & Approval Pipeline',
     maturity: 'portfolio implementation',
     summary: 'Portfolio design for a human-reviewed content workflow that tracks briefs in Notion, uses Gemini for structured drafts, routes review through Slack, and archives approved documents in Google Drive.',
     stack: ['Notion', 'Gemini', 'Make.com', 'Slack', 'Google Docs', 'Google Drive'],
@@ -503,7 +503,7 @@ export const projects = [
   },
   {
     slug: 'ai-inbox-triage-assistant',
-    title: 'AI Inbox Triage Assistant',
+    title: 'Inbox Triage Assistant',
     maturity: 'portfolio implementation',
     summary: 'Portfolio design for Gmail triage that classifies message intent, urgency, and reply need, records a review queue in Airtable, and prepares draft replies with Cal.com links for relevant meeting requests.',
     stack: ['Make.com', 'Gmail', 'OpenAI', 'Airtable', 'Cal.com'],

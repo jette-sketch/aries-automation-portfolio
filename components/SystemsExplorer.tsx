@@ -119,8 +119,15 @@ export function SystemsExplorer() {
             <circle cx="210" cy="210" r="183" strokeOpacity=".25" strokeDasharray="1 8" strokeWidth="2" />
             <circle cx="210" cy="210" r="167" strokeOpacity=".26" strokeDasharray="28 7 3 7" />
             <circle cx="210" cy="210" r="147" strokeOpacity=".16" />
-            <ellipse cx="210" cy="210" rx="188" ry="85" transform="rotate(-33 210 210)" strokeOpacity=".22" />
-            <ellipse cx="210" cy="210" rx="188" ry="85" transform="rotate(33 210 210)" strokeOpacity=".22" />
+          </g>
+          <g className="lucifer-atomic-orbits">
+            {[0, 60, 120].map((angle, index) => (
+              <g key={angle} transform={'rotate(' + angle + ' 210 210)'}>
+                <ellipse cx="210" cy="210" rx="188" ry="85" fill="none" stroke="currentColor" strokeWidth="1.4" strokeOpacity=".36" />
+                <circle className={'lucifer-atomic-dot lucifer-atomic-dot-' + index}
+                  cx="210" cy="210" r="3.8" fill="var(--core-light)" />
+              </g>
+            ))}
           </g>
           <g className="lucifer-orbit lucifer-orbit-outer" fill="none" stroke="currentColor">
             <circle cx="210" cy="210" r="183" strokeWidth="2" strokeOpacity=".7" strokeDasharray="100 1049" strokeLinecap="round" />

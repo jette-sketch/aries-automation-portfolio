@@ -10,19 +10,77 @@ const origin = 'https://app.cal.com';
 type CalApi = ((...args: unknown[]) => void) & { q: unknown[][]; ns: Record<string, unknown>; loaded: boolean };
 type CalWindow = Window & { Cal?: CalApi };
 
+type ScrollLock = {
+  x: number; y: number; bodyPosition: string; bodyTop: string; bodyLeft: string;
+  bodyWidth: string; bodyOverflow: string; bodyPaddingRight: string; htmlOverflow: string; htmlScrollBehavior: string;
+};
+
 export function BookingCalendar() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
   const previousFocus = useRef<HTMLElement | null>(null);
+  const floatingButtonRef = useRef<HTMLAnchorElement>(null);
+  const scrollLock = useRef<ScrollLock | null>(null);
+  const restoringScroll = useRef(false);
+  const restoreFrame = useRef(0);
   const initialized = useRef(false);
   const muted = useRef(false);
+
+  const restorePage = useCallback(() => {
+    const lock = scrollLock.current;
+    if (!lock) return;
+    scrollLock.current = null;
+    restoringScroll.current = true;
+    const body = document.body.style;
+    const html = document.documentElement.style;
+    body.position = lock.bodyPosition;
+    body.top = lock.bodyTop;
+    body.left = lock.bodyLeft;
+    body.width = lock.bodyWidth;
+    body.overflow = lock.bodyOverflow;
+    body.paddingRight = lock.bodyPaddingRight;
+    html.overflow = lock.htmlOverflow;
+    const target = previousFocus.current;
+    const rect = target?.getBoundingClientRect();
+    // Do not return focus to a stale hero link after an automatic prompt.
+    if (target?.isConnected && rect && rect.bottom > 0 && rect.top < window.innerHeight) {
+      target.focus({ preventScroll: true });
+    } else {
+      floatingButtonRef.current?.focus({ preventScroll: true });
+    }
+    window.scrollTo({ left: lock.x, top: lock.y, behavior: 'instant' });
+    html.scrollBehavior = lock.htmlScrollBehavior;
+    restoreFrame.current = window.requestAnimationFrame(() => {
+      restoreFrame.current = 0;
+      restoringScroll.current = false;
+    });
+  }, []);
 
   const openCalendar = useCallback(() => {
     const dialog = dialogRef.current;
     if (!dialog || dialog.open) return;
     if (document.querySelector('dialog[open]')) return;
     previousFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    dialog.showModal();
+    const body = document.body.style;
+    const html = document.documentElement.style;
+    const x = window.scrollX;
+    const y = window.scrollY;
+    const scrollbar = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
+    const padding = parseFloat(getComputedStyle(document.body).paddingRight) || 0;
+    scrollLock.current = { x, y, bodyPosition: body.position, bodyTop: body.top, bodyLeft: body.left,
+      bodyWidth: body.width, bodyOverflow: body.overflow, bodyPaddingRight: body.paddingRight,
+      htmlOverflow: html.overflow, htmlScrollBehavior: html.scrollBehavior };
+    html.scrollBehavior = 'auto';
+    html.overflow = 'hidden';
+    body.position = 'fixed';
+    body.top = '-' + y + 'px';
+    body.left = '-' + x + 'px';
+    body.width = '100%';
+    body.overflow = 'hidden';
+    if (scrollbar) body.paddingRight = (padding + scrollbar) + 'px';
+    // Native dialog focus restoration must target a visible, fixed element.
+    floatingButtonRef.current?.focus({ preventScroll: true });
+    try { dialog.showModal(); } catch { restorePage(); return; }
 
     if (initialized.current || !calendarRef.current) return;
     initialized.current = true;
@@ -46,7 +104,7 @@ export function BookingCalendar() {
       config: { layout: 'month_view', theme: 'dark' },
     });
     win.Cal('on', { action: 'bookingSuccessfulV2', callback: () => { muted.current = true; } });
-  }, []);
+  }, [restorePage]);
 
   useEffect(() => {
     // All booking CTAs retain their real URL when JavaScript is unavailable.
@@ -73,9 +131,10 @@ export function BookingCalendar() {
     };
     highestPair = countPairs();
     function onScroll() {
-      if (frame) return;
+      if (frame || scrollLock.current || restoringScroll.current) return;
       frame = window.requestAnimationFrame(() => {
         frame = 0;
+        if (scrollLock.current || restoringScroll.current) return;
         if (lastPath !== window.location.pathname) {
           lastPath = window.location.pathname;
           highestPair = 0;
@@ -91,17 +150,20 @@ export function BookingCalendar() {
       document.removeEventListener('click', onBookingClick);
       window.removeEventListener('scroll', onScroll);
       if (frame) window.cancelAnimationFrame(frame);
+      restorePage();
+      if (restoreFrame.current) window.cancelAnimationFrame(restoreFrame.current);
+      restoringScroll.current = false;
     };
-  }, [openCalendar]);
+  }, [openCalendar, restorePage]);
 
   return <>
-    <a href={bookingUrl} data-booking className="button-primary fixed bottom-4 right-4 z-50 rounded-full shadow-xl sm:bottom-6 sm:right-6" aria-haspopup="dialog">
+    <a ref={floatingButtonRef} href={bookingUrl} data-booking className="button-primary fixed bottom-4 right-4 z-50 rounded-full shadow-xl sm:bottom-6 sm:right-6" aria-haspopup="dialog">
       <CalendarDays size={18} aria-hidden="true" /> Book a Call
     </a>
     <dialog ref={dialogRef} aria-labelledby="booking-calendar-title" aria-describedby="booking-calendar-description"
-      onClose={() => { if (previousFocus.current?.isConnected) previousFocus.current.focus({ preventScroll: true }); }}
+      onClose={restorePage}
       onClick={event => { if (event.target === dialogRef.current) dialogRef.current?.close(); }}
-      className="cyber-panel m-auto max-h-[calc(100dvh-1rem)] w-[calc(100%-1rem)] max-w-5xl overflow-y-auto rounded-xl p-0 text-white shadow-2xl">
+      className="cyber-panel m-auto max-h-[calc(100dvh-1rem)] w-[calc(100%-1rem)] max-w-5xl overflow-y-auto overscroll-contain rounded-xl p-0 text-white shadow-2xl">
       <div className="flex items-start justify-between gap-4 border-b border-cyan-100/15 p-4 sm:p-6">
         <div><p className="eyebrow">Let&apos;s talk</p><h2 id="booking-calendar-title" className="mt-2 text-2xl font-semibold">Book a discovery call</h2><p id="booking-calendar-description" className="mt-2 text-sm text-slate-300">Choose an available time to discuss your workflow and automation opportunities.</p></div>
         <button type="button" autoFocus onClick={() => dialogRef.current?.close()} aria-label="Close booking calendar" className="rounded-md p-2 text-slate-300 hover:text-white"><X size={24} /></button>

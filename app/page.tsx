@@ -72,22 +72,28 @@ export default function Home() {
         </div>
         <div className="hero-explorer-column min-w-0">
           <SystemsExplorer />
-          <div className="hero-builder-details">
-            <h2 className="text-xl font-semibold leading-tight text-white sm:text-2xl">Operations-first thinking, built into every workflow.</h2>
-            <p className="mt-3 text-sm leading-7 text-slate-300">More than six years of customer support and operations experience inform how I map handoffs, data rules, and exception paths before choosing an automation.</p>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <div className="detail-panel rounded-lg p-3">
-                <p className="font-mono text-xs uppercase text-cyan-100/70">01 / Approach</p>
-                <p className="mt-2 text-sm leading-6 text-slate-200">Translate operational requirements into workflows with explicit data, rules, and human review.</p>
-              </div>
-              <div className="detail-panel rounded-lg p-3">
-                <p className="font-mono text-xs uppercase text-rose-200/80">02 / Focus</p>
-                <p className="mt-2 text-sm leading-6 text-slate-200">SaaS and CRM automation, AI decision support, and business-process orchestration.</p>
-              </div>
+        </div>
+        <a className="scroll-cue" href="#operations-first">SCROLL TO EXPLORE <ArrowDown size={14} /></a>
+      </section>
+
+      <section id="operations-first" aria-labelledby="operations-first-heading" className="tech-band border-y border-cyan-100/10 bg-[#0a111a]/90 px-5 py-14 sm:px-8 lg:px-10 lg:py-20">
+        <div className="mx-auto grid max-w-7xl items-start gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-12">
+          <div className="min-w-0">
+            <p className="eyebrow">The way I work</p>
+            <h2 id="operations-first-heading" className="mt-3 max-w-2xl text-3xl font-semibold leading-tight text-white sm:text-4xl">Operations-first thinking, built into every workflow.</h2>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">More than six years of customer support and operations experience inform how I map handoffs, data rules, and exception paths before choosing an automation.</p>
+          </div>
+          <div className="grid min-w-0 gap-3 sm:grid-cols-2">
+            <div className="detail-panel rounded-lg p-5 sm:p-6">
+              <p className="font-mono text-xs uppercase text-cyan-100/70">01 / Approach</p>
+              <p className="mt-3 text-sm leading-7 text-slate-200">Translate operational requirements into workflows with explicit data, rules, and human review.</p>
+            </div>
+            <div className="detail-panel rounded-lg p-5 sm:p-6">
+              <p className="font-mono text-xs uppercase text-rose-200/80">02 / Focus</p>
+              <p className="mt-3 text-sm leading-7 text-slate-200">SaaS and CRM automation, AI decision support, and business-process orchestration.</p>
             </div>
           </div>
         </div>
-        <a className="scroll-cue" href="#pain-points">SCROLL TO EXPLORE <ArrowDown size={14} /></a>
       </section>
 
       <ProblemExplorer />

@@ -520,3 +520,38 @@ dialog.booking-calendar-dialog[open] {
     padding: 0.35rem 0.65rem;
   }
 }
+
+
+/* Integrated hero identity and interactive systems explorer. */
+.reference-hero-with-builder {
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  padding-bottom: 5rem;
+}
+.reference-hero-with-builder .hero-copy h1 {
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+}
+.hero-builder {
+  display: grid;
+  grid-template-columns: minmax(0, 8rem) minmax(0, 1fr);
+  align-items: center;
+  gap: 1.15rem;
+  margin-top: 1.1rem;
+}
+.hero-profile { width: 100%; max-width: 160px; }
+.hero-builder .eyebrow { font-size: .66rem; }
+.hero-explorer-column { display: grid; gap: 1.4rem; }
+.hero-explorer-column .systems-graphic { width: min(100%, 360px); }
+.hero-builder-details { border-top: 1px solid rgba(127, 213, 239, .2); padding-top: 1.1rem; }
+.hero-codex-link { display: inline-flex; align-items: center; gap: .5rem; color: #a5f3fc; font-size: .8rem; padding: .65rem .15rem; }
+.hero-codex-link:hover { color: white; }
+@media (max-width: 800px) {
+  .reference-hero-with-builder { grid-template-columns: minmax(0, 1fr); gap: 2rem; padding: 8rem 1.25rem 3rem; }
+  .reference-hero-with-builder .hero-copy { max-width: none; }
+  .hero-explorer-column .systems-graphic { width: min(100%, 360px); }
+}
+@media (max-width: 480px) {
+  .hero-builder { grid-template-columns: minmax(0, 6.5rem) minmax(0, 1fr); gap: .8rem; }
+  .hero-builder .eyebrow { letter-spacing: .06em; }
+  .hero-actions .button-primary, .hero-actions .button-secondary { width: 100%; }
+}

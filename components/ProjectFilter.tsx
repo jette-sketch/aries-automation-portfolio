@@ -3,12 +3,13 @@
 import { useState } from 'react';
 import { ProjectCard, type Project } from '@/components/ProjectCard';
 
-type Category = 'All' | 'SaaS & operations' | 'AI & content' | 'CRM & leads';
-const categories: Category[] = ['All', 'SaaS & operations', 'AI & content', 'CRM & leads'];
+type Category = 'All' | 'SaaS & operations' | 'AI & content' | 'CRM & leads' | 'Engineering utilities';
+const categories: Category[] = ['All', 'SaaS & operations', 'AI & content', 'CRM & leads', 'Engineering utilities'];
 const groups: Record<Exclude<Category, 'All'>, string[]> = {
   'SaaS & operations': ['dentalflow-saas', 'clinicflow-operations-prototype', 'ai-procurement-approval-system', 'ai-booking-agent'],
   'AI & content': ['social-presence-automation', 'ai-content-operations-approval-pipeline', 'ai-inbox-triage-assistant', 'ai-booking-agent'],
   'CRM & leads': ['roofing-lead-sales-automation', 'autonomous-multi-agent-crm'],
+  'Engineering utilities': ['webhook-payload-validator', 'ai-autopilot-supervisor'],
 };
 
 export function ProjectFilter({ projects }: { projects: readonly Project[] }) {

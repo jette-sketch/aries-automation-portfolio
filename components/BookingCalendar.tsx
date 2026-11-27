@@ -28,7 +28,7 @@ export function BookingCalendar() {
     initialized.current = true;
     const win = window as CalWindow;
     if (!win.Cal) {
-      const queue = ((...args: unknown[]) => queue.q.push(args)) as CalApi;
+      const queue = ((...args: unknown[]) => { queue.q.push(args); }) as CalApi;
       queue.q = [];
       queue.ns = {};
       queue.loaded = true;
@@ -38,6 +38,7 @@ export function BookingCalendar() {
       script.async = true;
       document.head.appendChild(script);
     }
+    if (!win.Cal) return;
     win.Cal('init', { origin });
     win.Cal('inline', {
       elementOrSelector: '#portfolio-booking-calendar',
@@ -102,12 +103,12 @@ export function BookingCalendar() {
       onClick={event => { if (event.target === dialogRef.current) dialogRef.current?.close(); }}
       className="cyber-panel m-auto max-h-[calc(100dvh-1rem)] w-[calc(100%-1rem)] max-w-5xl overflow-y-auto rounded-xl p-0 text-white shadow-2xl">
       <div className="flex items-start justify-between gap-4 border-b border-cyan-100/15 p-4 sm:p-6">
-        <div><p className="eyebrow">Let's talk</p><h2 id="booking-calendar-title" className="mt-2 text-2xl font-semibold">Book a discovery call</h2><p id="booking-calendar-description" className="mt-2 text-sm text-slate-300">Choose an available time to discuss your workflow and automation opportunities.</p></div>
+        <div><p className="eyebrow">Let&apos;s talk</p><h2 id="booking-calendar-title" className="mt-2 text-2xl font-semibold">Book a discovery call</h2><p id="booking-calendar-description" className="mt-2 text-sm text-slate-300">Choose an available time to discuss your workflow and automation opportunities.</p></div>
         <button type="button" autoFocus onClick={() => dialogRef.current?.close()} aria-label="Close booking calendar" className="rounded-md p-2 text-slate-300 hover:text-white"><X size={24} /></button>
       </div>
       <div id="portfolio-booking-calendar" ref={calendarRef} className="min-h-[22rem] w-full overflow-auto p-2 sm:p-4" />
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-cyan-100/15 p-4">
-        <label className="flex items-center gap-2 text-sm text-slate-300"><input type="checkbox" onChange={event => { muted.current = event.target.checked; }} /> Don't show automatically again this visit</label>
+        <label className="flex items-center gap-2 text-sm text-slate-300"><input type="checkbox" onChange={event => { muted.current = event.target.checked; }} /> Don&apos;t show automatically again this visit</label>
         <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="button-secondary">Open calendar in a new tab <ArrowUpRight size={16} aria-hidden="true" /></a>
       </div>
     </dialog>

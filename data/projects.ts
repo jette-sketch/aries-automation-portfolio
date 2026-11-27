@@ -6,7 +6,7 @@ export const projects = [
     summary: 'DentalFlow is an evolving multi-tenant clinic operations platform that began as workflow automation and is being hardened into a database-backed SaaS architecture with explicit tenant isolation, authorization, reliability controls, and human-supervised AI.',
     stack: ['Supabase/PostgreSQL', 'n8n', 'Google integrations', 'External APIs'],
     pattern: 'Multi-tenant SaaS architecture with database-enforced rules and workflow orchestration',
-    status: 'Flagship development: bounded offline reliability and recovery checks completed for the current scope; native integration and production qualification remain open.',
+    status: 'Flagship development: offline archive integrity review and security remediation proposals documented; native database acceptance and broader release qualification remain open.',
     credibilityNote: 'Offline evidence does not establish native database acceptance, hosted CI, or production readiness. Production verification is not claimed.',
     highlights: [
       'Supabase/PostgreSQL as the authoritative operational data layer',
@@ -37,7 +37,7 @@ export const projects = [
       'Reliability controls address failures, retries, and state integrity.'
     ],
     nextImprovements: [
-      'Continue broader security and reliability testing.',
+      'Resolve open security findings and verify remediation on an isolated native database before release qualification.',
       'Harden environment separation, migration readiness, monitoring, and recovery.',
       'Verify production operational behavior before claiming production readiness.'
     ],
@@ -61,7 +61,7 @@ export const projects = [
         'Concurrent mutation and invariant protection tested',
         'Audit events used for successful state-changing operations',
         'Staging orchestration state survived restart, validating persistence',
-        'Latest offline reliability qualification includes archive integrity checks and rejection of deliberately corrupted evidence; native integration verification remains open'
+        'November 24 checkpoint documents independently checked archive integrity and reviewed security remediation drafts; native execution and acceptance remain open'
       ],
       loop: ['Requirement', 'Acceptance Criteria', 'Architecture', 'Codex-Assisted Implementation', 'Automated / Targeted Testing', 'Evidence Review', 'Root-Cause Fix', 'Regression Test', 'Staging / Deployment Verification'],
       lessons: [
@@ -74,11 +74,118 @@ export const projects = [
         { label: 'Designed', detail: 'Substantial architecture complete' },
         { label: 'Built', detail: 'Substantial implementation exists' },
         { label: 'Tested', detail: 'Core security and reliability paths have verified evidence; broader testing continues' },
-        { label: 'Staging', detail: 'Offline readiness checks completed for a bounded scope; native integration, hosted CI, and deployment qualification remain open' },
+        { label: 'Staging', detail: 'Offline artifact review has advanced; security findings, native acceptance and deployment qualification remain open' },
         { label: 'Production verified', detail: 'No' }
       ]
     },
     diagram: 'dentalflow-saas.svg'
+  },
+  {
+    "slug": "webhook-payload-validator",
+    "title": "Webhook Payload Validator",
+    "maturity": "tested utility",
+    "summary": "A reusable JavaScript validation utility for incoming webhook events, with deterministic field checks, event allowlisting, timestamp validation and duplicate warnings.",
+    "stack": [
+      "JavaScript",
+      "Node.js",
+      "Built-in modules"
+    ],
+    "pattern": "Deterministic ingress validation",
+    "status": "Implemented utility with a passing test suite reported in the project handoff. Production integration is not verified.",
+    "credibilityNote": "Duplicate detection is process-local and advisory; signature verification and durable idempotency are not implemented.",
+    "highlights": [
+      "Nested required-field checks",
+      "Event-type allowlisting",
+      "Timestamp freshness and clock-skew checks",
+      "Structured errors and duplicate warnings"
+    ],
+    "businessProblem": "Malformed, stale or repeated webhook events can trigger incorrect downstream operations if accepted without validation.",
+    "solutionOverview": "Validate incoming event structure and configured rules before passing data to downstream automation. A process-local cache flags repeated event identities; persistent deduplication and authentication belong at a separate production boundary.",
+    "workflowSequence": [
+      "Receive a webhook payload",
+      "Check payload shape and required fields",
+      "Validate event type and timestamp",
+      "Check process-local duplicate cache",
+      "Return structured errors, warnings or validation result"
+    ],
+    "keyAutomations": [
+      "Validate nested required fields",
+      "Reject unsupported event types and invalid timestamps",
+      "Detect duplicates within a configurable process-local window",
+      "Return structured validation results"
+    ],
+    "aiUsage": [],
+    "safetyNotes": [
+      "This utility does not authenticate webhook senders or verify signatures.",
+      "Duplicate warnings are not an atomic idempotency guarantee and do not survive restart.",
+      "Downstream authorization and durable deduplication remain separate responsibilities."
+    ],
+    "nextImprovements": [
+      "Add provider-specific signature verification with appropriate replay protection.",
+      "Introduce atomic persistent event deduplication and test restart/concurrency behavior.",
+      "Validate integration behavior in an isolated environment before production use."
+    ],
+    "implementationNotes": [
+      "The project handoff reports successful validation, rejection, timestamp, cache and response-format tests; the portfolio does not independently reproduce them.",
+      "No external runtime dependencies are required for the documented utility."
+    ],
+    "diagram": "webhook-payload-validator.svg"
+  },
+  {
+    "slug": "ai-autopilot-supervisor",
+    "title": "AI Autopilot Supervisor",
+    "maturity": "offline proof of concept",
+    "summary": "An isolated repair-supervision experiment that reserves bounded attempts, validates candidate changes against synthetic tests, records evidence and controls termination.",
+    "stack": [
+      "PowerShell",
+      "JavaScript",
+      "Node.js",
+      "Windows Sandbox"
+    ],
+    "pattern": "Bounded repair and evidence-driven supervision",
+    "status": "Synthetic repair and controlled resume reported successful in the project handoff. Independent artifact and lifecycle qualification remain open.",
+    "credibilityNote": "Not a production agent or proof of general autonomous software development. No live repository execution or production use is claimed.",
+    "highlights": [
+      "Bounded attempt reservation",
+      "Synthetic failure detection and retesting",
+      "Controlled resume and evidence preservation",
+      "Explicit terminal outcomes"
+    ],
+    "businessProblem": "AI-assisted repair loops can repeat attempts, lose state after interruption or incorrectly report success when execution evidence is incomplete.",
+    "solutionOverview": "Separate repair attempts from validation and recorded outcomes. Run synthetic candidate code inside an isolated test environment, reserve bounded attempts, retest, preserve artifacts and stop or fail closed when evidence is insufficient.",
+    "workflowSequence": [
+      "Detect a synthetic failure",
+      "Reserve a bounded attempt",
+      "Obtain or simulate a repair candidate",
+      "Run isolated deterministic tests",
+      "Record outcome and evidence",
+      "Stop or resume only within the allowed budget"
+    ],
+    "keyAutomations": [
+      "Attempt tracking and reservation",
+      "Synthetic repair retesting",
+      "Controlled resume within a bounded test scenario",
+      "Evidence and terminal-status recording"
+    ],
+    "aiUsage": [
+      "A historical experiment used an AI-assisted candidate repair; offline qualification uses synthetic fixtures and deterministic validation.",
+      "Model output cannot establish correctness, authorize real repository changes or replace execution evidence."
+    ],
+    "safetyNotes": [
+      "Qualification is limited to synthetic disposable workloads.",
+      "Independent artifact review, unexpected interruption recovery and sandbox lifecycle proof remain open.",
+      "Live provider execution and real repository integration require separate qualification."
+    ],
+    "nextImprovements": [
+      "Reconcile source and runtime artifact identities independently.",
+      "Qualify interruption recovery, duplicate supervisors and failure exhaustion.",
+      "Verify isolation and lifecycle termination before any expanded use."
+    ],
+    "implementationNotes": [
+      "The handoff reports successful bounded repair and controlled resume. Later qualification gates remain unverified.",
+      "The diagram describes the intended supervisor boundary, not a certification of every illustrated behavior."
+    ],
+    "diagram": "ai-autopilot-supervisor.svg"
   },
   {
     slug: 'social-presence-automation',

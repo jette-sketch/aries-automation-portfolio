@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
+import { siteUrl } from '@/data/site';
 import './globals.css';
 import { BookingCalendar } from '@/components/BookingCalendar';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: 'Jette Aries Portilla | AI Automation Portfolio',
   description: 'AI automation, CRM automation, workflow orchestration, and business process automation portfolio.',
 };
